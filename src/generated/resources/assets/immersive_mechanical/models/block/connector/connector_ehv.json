@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "neoforge:obj",
+  "model": "immersive_mechanical:models/block/connector/connector_ehv.obj",
+  "textures": {
+    "particle": "immersive_mechanical:block/connector/connector_ehv",
+    "texture": "immersive_mechanical:block/connector/connector_ehv"
+  }
+}

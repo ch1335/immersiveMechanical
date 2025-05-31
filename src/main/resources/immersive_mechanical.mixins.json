@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.chen1335.immersiveMechanical.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EnergyConnectorBlockEntityAccessor"
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}

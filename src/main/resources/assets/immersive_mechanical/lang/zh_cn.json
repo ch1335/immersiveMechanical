@@ -1,0 +1,11 @@
+{
+  "itemGroup.immersive_mechanical": "沉浸机械",
+  "block.immersive_mechanical.large_battery": "大型蓄电池",
+  "block.immersive_mechanical.connector_ehv": "超高压接线器",
+  "block.immersive_mechanical.connector_ehv_relay": "超高压续电器",
+  "block.immersive_mechanical.large_battery_core_block": "大型蓄电池核心",
+  "item.immersive_mechanical.ehv_wire_coil": "超高压线圈",
+  "item.immersive_mechanical.uhv_wire_coil": "特高压线圈",
+
+  "desc.immersive_mechanical.info.LargeBattery": "你不能直接从这个方块中存取能量，请将其放置在大型蓄电池中央来使用。"
+}
