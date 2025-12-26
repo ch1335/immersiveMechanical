@@ -16,8 +16,31 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
+repositories.clear()
 repositories {
     mavenLocal()
+    maven {
+
+        url = "https://libraries.minecraft.net/"
+    }
+
+    maven {
+        url = "https://neoforged.forgecdn.net/releases"
+    }
+
+    maven {
+        url = "https://neoforged.forgecdn.net/mojang-meta"
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://cursemaven.com"
+            }
+        }
+        filter {
+            includeGroup "curse.maven"
+        }
+    }
 }
 
 base {
@@ -37,7 +60,7 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -102,7 +125,9 @@ neoForge {
 
 sourceSets {
     main {
-        resources { srcDir 'src/generated/resources' }
+        resources {
+            srcDir 'src/generated/resources'
+        }
     }
 }
 
@@ -117,6 +142,7 @@ configurations {
 
 dependencies {
     implementation fileTree("libs")
+    implementation "curse.maven:immersive-engineering-231951:6733669"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -162,6 +188,14 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.register("buildWithoutDataGen") {
+    group "build"
+    dependsOn build
+    jar {
+        exclude "com/chen1335/data"
+    }
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

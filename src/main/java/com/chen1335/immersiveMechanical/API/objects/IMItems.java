@@ -22,5 +22,6 @@ public class IMItems {
     public static final DeferredHolder<Item, BlockItem> CONNECTOR_EHV_RELAY = ITEM_DEFERRED_REGISTER.register("connector_ehv_relay", () -> new BlockItemIE(IMBlocks.CONNECTOR_EHV_RELAY.get(), new Item.Properties()));
     public static final DeferredHolder<Item, BlockItem> LARGE_BATTERY_CORE_BLOCK = ITEM_DEFERRED_REGISTER.register("large_battery_core_block", () -> new LargeBatteryBlockItem(IMBlocks.LARGE_BATTERY_CORE_BLOCK.get(), new Item.Properties()));
 
+    public static final DeferredHolder<Item, BlockItem> LASER_TURRET = ITEM_DEFERRED_REGISTER.register("laser_turret", () -> new BlockItemIE(IMBlocks.TURRET_LASER.get(), new Item.Properties()));
 
 }

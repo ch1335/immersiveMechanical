@@ -3,9 +3,10 @@
   "package": "com.chen1335.immersiveMechanical.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EnergyConnectorBlockEntityAccessor"
+    "EnergyConnectorBlockEntityAccessor", "EnergyStorageMixin"
   ],
   "client": [
+
   ],
   "minVersion": "0.8"
 }

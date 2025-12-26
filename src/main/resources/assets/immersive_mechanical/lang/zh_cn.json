@@ -1,6 +1,8 @@
 {
   "itemGroup.immersive_mechanical": "沉浸机械",
   "block.immersive_mechanical.large_battery": "大型蓄电池",
+  "block.immersive_mechanical.green_house": "温室",
+
   "block.immersive_mechanical.connector_ehv": "超高压接线器",
   "block.immersive_mechanical.connector_ehv_relay": "超高压续电器",
   "block.immersive_mechanical.large_battery_core_block": "大型蓄电池核心",

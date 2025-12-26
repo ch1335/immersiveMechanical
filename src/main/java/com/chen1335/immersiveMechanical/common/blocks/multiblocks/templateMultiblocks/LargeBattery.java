@@ -1,4 +1,4 @@
-package com.chen1335.immersiveMechanical.common.blocks.multiblocks;
+package com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks;
 
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;

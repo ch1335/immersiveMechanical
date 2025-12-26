@@ -3,6 +3,8 @@ package com.chen1335.immersiveMechanical;
 import com.chen1335.immersiveMechanical.API.objects.IMBlockEntityTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
 import com.chen1335.immersiveMechanical.API.objects.IMItems;
+import com.chen1335.immersiveMechanical.API.objects.IMSounds;
+import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
 import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
@@ -13,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -36,14 +39,21 @@ public class ImmersiveMechanical {
                 }
             }).build());
 
-    public ImmersiveMechanical(IEventBus modEventBus, ModContainer modContainer) {
+    public ImmersiveMechanical(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         CREATIVE_MODE_TABS.register(modEventBus);
         IMBlocks.BLOCK_DEFERRED_REGISTER.register(modEventBus);
         IMBlockEntityTypes.BLOCK_ENTITY_TYPE_DEFERRED_REGISTER.register(modEventBus);
         IMItems.ITEM_DEFERRED_REGISTER.register(modEventBus);
+        IMSounds.REGISTER.register(modEventBus);
         IMMultiblockLogic.init(modEventBus);
         modEventBus.addListener(this::commonSetup);
         IMMultiblocks.init();
+
+        if (dist.isClient()) {
+            IMClient.init();
+        }
+
+
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
@@ -52,5 +62,9 @@ public class ImmersiveMechanical {
 
     public static ResourceLocation id(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
+
+    public static ResourceLocation guiId(String path) {
+        return ImmersiveMechanical.id("textures/gui/" + "green_house" + ".png");
     }
 }

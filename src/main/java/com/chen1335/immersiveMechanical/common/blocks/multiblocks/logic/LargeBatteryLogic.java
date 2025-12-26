@@ -47,10 +47,6 @@ public class LargeBatteryLogic implements IMultiblockLogic<LargeBatteryLogic.Sta
         }
     }
 
-    @Override
-    public void onRemoved(IMultiblockContext<State> context) {
-
-    }
 
     @Override
     public State createInitialState(IInitialMultiblockContext<State> iInitialMultiblockContext) {
