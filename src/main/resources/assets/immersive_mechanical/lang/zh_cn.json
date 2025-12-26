@@ -4,6 +4,8 @@
   "block.immersive_mechanical.green_house": "温室",
 
   "block.immersive_mechanical.connector_ehv": "超高压接线器",
+  "block.immersive_mechanical.turret_laser": "高能激光炮塔",
+
   "block.immersive_mechanical.connector_ehv_relay": "超高压续电器",
   "block.immersive_mechanical.large_battery_core_block": "大型蓄电池核心",
   "item.immersive_mechanical.ehv_wire_coil": "超高压线圈",

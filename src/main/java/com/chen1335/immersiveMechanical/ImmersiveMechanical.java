@@ -65,6 +65,6 @@ public class ImmersiveMechanical {
     }
 
     public static ResourceLocation guiId(String path) {
-        return ImmersiveMechanical.id("textures/gui/" + "green_house" + ".png");
+        return ImmersiveMechanical.id("textures/gui/" + path + ".png");
     }
 }

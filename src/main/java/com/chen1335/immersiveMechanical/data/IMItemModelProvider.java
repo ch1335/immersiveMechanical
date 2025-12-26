@@ -1,8 +1,8 @@
 package com.chen1335.immersiveMechanical.data;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.data.ItemModels;
 import blusunrize.immersiveengineering.data.blockstates.MultiblockStates;
+import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
 import com.chen1335.immersiveMechanical.API.objects.IMItems;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
@@ -21,6 +21,8 @@ public class IMItemModelProvider extends ItemModels {
         this.obj(IMMultiblockLogic.LARGE_BATTERY.blockItem().get(), ImmersiveMechanical.id("block/metal_multiblock/large_battery.obj")).transforms(ImmersiveMechanical.id("item/large_battery"));
 
         this.obj(IMMultiblockLogic.GREEN_HOUSE.blockItem().get(), ImmersiveMechanical.id("block/metal_multiblock/green_house.obj.ie")).transforms(ImmersiveMechanical.id("item/green_house")).renderType(RenderType.translucent().name);
+
+        this.obj(IMItems.LASER_TURRET.get(), ImmersiveMechanical.id("block/metal_device/turret_laser_inv.obj")).transforms(ImmersiveMechanical.id("item/turret"));
 
     }
 

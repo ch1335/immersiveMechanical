@@ -173,17 +173,6 @@ public class TurretLaserBlockEntity extends TurretBlockEntity<TurretLaserBlockEn
             }
 
             entityClip.ifPresent(vec3 -> beamLength = (float) turret.distanceTo(vec3));
-
-            this.level
-                    .addParticle(
-                            ParticleTypes.SOUL,
-                            location.x,
-                            location.y,
-                            location.z,
-                            0,
-                            0,
-                            0
-                    );
         }
 
     }

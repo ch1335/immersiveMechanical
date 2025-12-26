@@ -15,6 +15,6 @@ public class IMBlockStateProvider extends BlockStates {
     protected void registerStatesAndModels() {
         simpleBlock(IMBlocks.LARGE_BATTERY_CORE_BLOCK.value());
 
-        turret(IMBlocks.TURRET_LASER, "block/metal_device/gun_turret.obj.ie");
+        turret(IMBlocks.TURRET_LASER, "block/metal_device/turret_laser.obj.ie");
     }
 }

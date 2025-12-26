@@ -17,7 +17,7 @@ public class IMDynamicModels extends DynamicModels {
     protected void registerModels() {
         getBuilder(ImmersiveMechanical.id("laser_turret").toString())
                 .customLoader(IEOBJBuilder::begin)
-                .modelLocation(ImmersiveMechanical.id("models/block/metal_device/gun_turret.obj.ie"))
+                .modelLocation(ImmersiveMechanical.id("models/block/metal_device/turret_laser.obj.ie"))
                 .callback(DynamicSubmodelCallbacks.INSTANCE)
                 .end();
     }

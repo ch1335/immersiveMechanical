@@ -63,8 +63,8 @@ public class LaserTurretRender extends IEBlockEntityRenderer<TurretLaserBlockEnt
         ResourceLocation laser = ImmersiveMechanical.id("textures/misc/laser.png");
         if (tile.isActive) {
             poseStack.mulPose(new Quaternionf().rotateX(-90 * Mth.DEG_TO_RAD));
-            poseStack.translate(-.5, .5, .4);
-            renderBeam(poseStack, bufferSource, laser, partialTick, 0.7F, tile.getLevel().getGameTime(), 0, tile.beamLength, Color.WHITE.getRGB(), 0.2F, 0.1F);
+            poseStack.translate(-.5, .75, .35);
+            renderBeam(poseStack, bufferSource, laser, partialTick, 0.7F, tile.getLevel().getGameTime(), 0, tile.beamLength-0.3f, Color.WHITE.getRGB(), 0.2F, 0.1F);
 
         }
 
