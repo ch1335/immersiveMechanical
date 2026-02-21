@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:rods/steel"
+    },
+    "B": {
+      "item": "immersive_mechanical:aluminum_conductor_steel_reinforced"
+    }
+  },
+  "pattern": [
+    " B ",
+    "BAB",
+    " B "
+  ],
+  "result": {
+    "count": 4,
+    "id": "immersive_mechanical:ehv_wire_coil"
+  },
+  "show_notification": false
+}

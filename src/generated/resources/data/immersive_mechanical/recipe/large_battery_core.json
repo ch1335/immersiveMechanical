@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:sheetmetals/steel"
+    },
+    "B": {
+      "item": "immersiveengineering:capacitor_hv"
+    },
+    "C": {
+      "item": "immersiveengineering:light_engineering"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersive_mechanical:large_battery_core"
+  },
+  "show_notification": false
+}

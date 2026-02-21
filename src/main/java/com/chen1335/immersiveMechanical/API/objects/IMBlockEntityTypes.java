@@ -24,11 +24,11 @@ import java.util.function.Supplier;
 public class IMBlockEntityTypes {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPE_DEFERRED_REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, ImmersiveMechanical.MODID);
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnergyConnectorBlockEntity>> CONNECTOR_EHV = register("connector_ehv", "EHV", false, 0.75F, 4096 * 4);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnergyConnectorBlockEntity>> CONNECTOR_EHV = register("connector_ehv", "EHV", false, 0.6875F, 4096 * 4);
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnergyConnectorBlockEntity>> CONNECTOR_EHV_RELAY = register("connector_ehv_relay", "EHV", true, 0.75F, 4096 * 4);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnergyConnectorBlockEntity>> CONNECTOR_EHV_RELAY = register("connector_ehv_relay", "EHV", true, 0.6875F, 4096 * 4);
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LargeBatteryCoreTile>> LARGE_BATTERY_CORE_TILE = BLOCK_ENTITY_TYPE_DEFERRED_REGISTER.register("large_battery_core_tile", () -> new BlockEntityType<>(LargeBatteryCoreTile::new, ImmutableSet.of(IMBlocks.LARGE_BATTERY_CORE_BLOCK.get()), null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LargeBatteryCoreTile>> LARGE_BATTERY_CORE_TILE = BLOCK_ENTITY_TYPE_DEFERRED_REGISTER.register("large_battery_core_tile", () -> new BlockEntityType<>(LargeBatteryCoreTile::new, ImmutableSet.of(IMBlocks.LARGE_BATTERY_CORE.get()), null));
 
     public static final MultiblockBEType<TurretLaserBlockEntity> TURRET_LASER = makeMultiblock(
             "turret_laser", TurretLaserBlockEntity::new, IMBlocks.TURRET_LASER

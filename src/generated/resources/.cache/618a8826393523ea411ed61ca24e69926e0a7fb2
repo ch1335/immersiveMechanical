@@ -1,0 +1,6 @@
+// 1.21.1	2026-01-20T00:47:23.5864174	Block States: immersive_mechanical
+0d265e8236bba0e6e42a6ecf29948daae866194f assets/immersive_mechanical/blockstates/large_battery_core.json
+54487de19cba7e3bbfadcbe9e2065e37c9435049 assets/immersive_mechanical/blockstates/turret_laser.json
+ac46309413358f274ccd5730d56d892e3992fa2b assets/immersive_mechanical/models/block/large_battery_core.json
+6024039abbd73e83014b6a2bdf81327960b0c1c6 assets/immersive_mechanical/models/block/metal_device/turret_laser.json
+f961d94bd48edc06259ddacc6164b62f47202a50 assets/immersive_mechanical/models/block/turret_laser_top.json

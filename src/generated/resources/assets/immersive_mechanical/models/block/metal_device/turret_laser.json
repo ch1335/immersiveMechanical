@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/block",
+  "callbacks": "immersiveengineering:turret",
+  "loader": "immersiveengineering:ie_obj",
+  "model": "immersive_mechanical:models/block/metal_device/turret_laser.obj.ie",
+  "textures": {
+    "particle": "immersive_mechanical:block/metal_device/turret_laser"
+  }
+}

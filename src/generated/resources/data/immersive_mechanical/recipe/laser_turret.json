@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "immersiveengineering:capacitor_hv"
+    },
+    "B": {
+      "item": "immersiveengineering:turntable"
+    },
+    "C": {
+      "item": "immersiveengineering:rs_engineering"
+    },
+    "D": {
+      "item": "immersiveengineering:component_electronic_adv"
+    },
+    "E": {
+      "item": "immersiveengineering:tesla_coil"
+    },
+    "F": {
+      "item": "immersiveengineering:toolupgrade_railgun_scope"
+    }
+  },
+  "pattern": [
+    " F ",
+    " ED",
+    "ABC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersive_mechanical:laser_turret"
+  },
+  "show_notification": false
+}

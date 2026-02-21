@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:wires/steel"
+    },
+    "B": {
+      "tag": "c:wires/aluminum"
+    }
+  },
+  "pattern": [
+    "   ",
+    "BAB",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersive_mechanical:aluminum_conductor_steel_reinforced"
+  },
+  "show_notification": false
+}

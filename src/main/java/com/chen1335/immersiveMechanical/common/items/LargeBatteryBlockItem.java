@@ -1,6 +1,7 @@
 package com.chen1335.immersiveMechanical.common.items;
 
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
+import blusunrize.immersiveengineering.common.register.IEDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

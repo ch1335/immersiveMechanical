@@ -39,7 +39,7 @@ public class IMLootTableProvider extends LootTableProvider {
         @Override
         public void generate(@NotNull BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
             this.output = output;
-            dropTile(IMBlocks.LARGE_BATTERY_CORE_BLOCK);
+            dropTile(IMBlocks.LARGE_BATTERY_CORE);
             dropSelf(IMBlocks.CONNECTOR_EHV);
             dropSelf(IMBlocks.CONNECTOR_EHV_RELAY);
         }

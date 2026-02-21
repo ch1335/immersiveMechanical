@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-30T00:09:24.0839806	Loot Tables
+// 1.21.1	2026-01-20T00:47:23.5830236	Loot Tables
 e1b5907514d6a6a1d376c7832216b8e218864d06 data/immersive_mechanical/loot_table/blocks/connector_ehv.json
 841a223aa61db7694d126f58f2214a1c3ced11d7 data/immersive_mechanical/loot_table/blocks/connector_ehv_relay.json
-a47f5958f86d53e9cc10d4e38e8a751dbea7e84f data/immersive_mechanical/loot_table/blocks/large_battery_core_block.json
+ac9398a3c274d3aee9eb69dfd1f864ada3204a9e data/immersive_mechanical/loot_table/blocks/large_battery_core.json

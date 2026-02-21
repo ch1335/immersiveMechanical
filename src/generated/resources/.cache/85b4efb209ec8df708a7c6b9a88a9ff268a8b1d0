@@ -1,5 +1,8 @@
-// 1.21.1	2025-12-27T00:40:42.3663874	Item models
+// 1.21.1	2026-01-27T22:48:44.7189404	Item models
+292203441da615e9fc6fca03b346ddd065c4aed0 assets/immersive_mechanical/models/item/aluminum_conductor_steel_reinforced.json
 10ed7d6eb320bfaa61f4cd436d0e43d5de89d774 assets/immersive_mechanical/models/item/connector_ehv.json
+2619901ff48b5fc70311f23cff1889bb25427561 assets/immersive_mechanical/models/item/connector_ehv_relay.json
+0ea0b77b7c4c1c1e43f2cbc4581aa6436ce86f5e assets/immersive_mechanical/models/item/ehv_wire_coil.json
 2b984bd83e48491d09bab4e42c15943d72a91855 assets/immersive_mechanical/models/item/green_house.json
 b63d2fd67df6a37029c6bb91b27bbd0fab718a09 assets/immersive_mechanical/models/item/large_battery.json
 0ca3c5935d2c4f151dc7342d2b420ea5369bc86d assets/immersive_mechanical/models/item/laser_turret.json

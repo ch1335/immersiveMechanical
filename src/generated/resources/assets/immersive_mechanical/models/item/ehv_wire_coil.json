@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "immersive_mechanical:item/ehv_wire_coil"
+  }
+}

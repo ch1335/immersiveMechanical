@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "immersive_mechanical:block/large_battery_core"
+  }
+}

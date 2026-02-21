@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "immersive_mechanical:block/connector/connector_ehv_relay"
+    },
+    "facing=east": {
+      "model": "immersive_mechanical:block/connector/connector_ehv_relay",
+      "x": 90,
+      "y": 270
+    },
+    "facing=north": {
+      "model": "immersive_mechanical:block/connector/connector_ehv_relay",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south": {
+      "model": "immersive_mechanical:block/connector/connector_ehv_relay",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "immersive_mechanical:block/connector/connector_ehv_relay",
+      "x": 180
+    },
+    "facing=west": {
+      "model": "immersive_mechanical:block/connector/connector_ehv_relay",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

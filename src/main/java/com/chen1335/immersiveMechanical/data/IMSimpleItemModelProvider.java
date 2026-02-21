@@ -13,6 +13,6 @@ public class IMSimpleItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleBlockItem(IMBlocks.LARGE_BATTERY_CORE_BLOCK.value());
+        simpleBlockItem(IMBlocks.LARGE_BATTERY_CORE.value());
     }
 }

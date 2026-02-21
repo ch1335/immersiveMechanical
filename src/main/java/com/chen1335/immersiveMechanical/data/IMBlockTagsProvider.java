@@ -20,7 +20,7 @@ public class IMBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-                IMBlocks.LARGE_BATTERY_CORE_BLOCK.value()
+                IMBlocks.LARGE_BATTERY_CORE.value()
         );
     }
 }

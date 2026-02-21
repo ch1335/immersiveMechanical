@@ -1,0 +1,6 @@
+{
+  "start": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:multiblocks/large_battery"
+  }
+}

@@ -36,11 +36,13 @@ public class DataMain {
         generator.addProvider(event.includeServer(), new IMConnectorBlockStates(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new IMLootTableProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider()));
         generator.addProvider(event.includeServer(), new IMItemModelProvider(generator.getPackOutput(), event.getExistingFileHelper(), multiblockStates));
+
         generator.addProvider(event.includeServer(), new IMDynamicModels(multiblockStates, generator.getPackOutput(), event.getExistingFileHelper()));
 
         generator.addProvider(event.includeServer(), new IMSoundDefinitionsProvider(generator.getPackOutput(), ImmersiveMechanical.MODID, event.getExistingFileHelper()));
-        generator.addProvider(event.includeServer(), new IMDamageTypeTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(),event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new IMDamageTypeTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), event.getExistingFileHelper()));
 
+        generator.addProvider(event.includeServer(), new IMRecipeProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider()));
 
     }
 

@@ -26,7 +26,7 @@ public class IMBlocks {
     public static final DeferredHolder<Block, BasicConnectorBlock<EnergyConnectorBlockEntity>> CONNECTOR_EHV = BLOCK_DEFERRED_REGISTER.register("connector_ehv", () -> new BasicConnectorBlock<>(ConnectorBlock.PROPERTIES.get(), IMBlockEntityTypes.CONNECTOR_EHV));
 
     public static final DeferredHolder<Block, BasicConnectorBlock<EnergyConnectorBlockEntity>> CONNECTOR_EHV_RELAY = BLOCK_DEFERRED_REGISTER.register("connector_ehv_relay", () -> new BasicConnectorBlock<>(ConnectorBlock.PROPERTIES.get(), IMBlockEntityTypes.CONNECTOR_EHV_RELAY));
-    public static final DeferredHolder<Block, Block> LARGE_BATTERY_CORE_BLOCK = BLOCK_DEFERRED_REGISTER.register("large_battery_core_block", () -> new LargeBatteryBlock(BlockBehaviour.Properties.of()
+    public static final DeferredHolder<Block, Block> LARGE_BATTERY_CORE = BLOCK_DEFERRED_REGISTER.register("large_battery_core", () -> new LargeBatteryBlock(BlockBehaviour.Properties.of()
             .strength(5.0F, 6.0F)
             .requiresCorrectToolForDrops()
             .mapColor(MapColor.METAL)

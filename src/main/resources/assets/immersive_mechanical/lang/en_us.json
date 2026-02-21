@@ -1,3 +1,14 @@
-{  "itemGroup.immersive_mechanical": "Immersive Mechanical"
+{
+  "itemGroup.immersive_mechanical": "Immersive Mechanical",
+  "block.immersive_mechanical.large_battery": "Large Battery",
+  "block.immersive_mechanical.connector_ehv": "EHV Connector",
+  "block.immersive_mechanical.turret_laser": "High-energy laser turret",
+  "block.immersive_mechanical.green_house": "Green House",
+  "block.immersive_mechanical.connector_ehv_relay": "EHV Wire Relay",
+  "block.immersive_mechanical.large_battery_core": "Large Battery Core",
+  "item.immersive_mechanical.ehv_wire_coil": "EHV Wire Coil",
+  "item.immersive_mechanical.aluminum_conductor_steel_reinforced": "Aluminum Conductor Steel Reinforced",
 
+  "item.immersive_mechanical.uhv_wire_coil": "UHV Wire Coil",
+  "desc.immersive_mechanical.info.LargeBattery": "You cannot access energy directly from this block, please place it in the center of a large battery to use it."
 }

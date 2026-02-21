@@ -1,7 +1,12 @@
 {
   "heavy_machinery": {
     "entry_list": [
-      "green_house"
+      "im_green_house"
+    ]
+  },
+  "electrical_grids": {
+    "entry_list": [
+      "im_large_battery"
     ]
   }
 }

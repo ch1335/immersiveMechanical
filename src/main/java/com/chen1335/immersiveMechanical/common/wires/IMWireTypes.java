@@ -1,28 +1,33 @@
 package com.chen1335.immersiveMechanical.common.wires;
 
+import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.wires.Connection;
-import blusunrize.immersiveengineering.api.wires.WireApi;
 import blusunrize.immersiveengineering.api.wires.WireType;
 import blusunrize.immersiveengineering.api.wires.localhandlers.EnergyTransferHandler;
 import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
 import com.chen1335.immersiveMechanical.API.objects.IMItems;
-import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import static blusunrize.immersiveengineering.api.wires.WireApi.registerFeedthroughForWiretype;
+
 public class IMWireTypes {
     public static WireType EHV = new IMEnergyWire(Tier.EHV);
-    public static WireType UHV = new IMEnergyWire(Tier.UHV);
+//    public static WireType UHV = new IMEnergyWire(Tier.UHV);
 
     public static void setup() {
-        WireApi.registerFeedthroughForWiretype(EHV, ImmersiveMechanical.id("block/connector/connector_ehv"), new double[]{0.0, 4.0, 8.0, 12.0}, 0.75, IMBlocks.CONNECTOR_EHV.get().defaultBlockState());
+
+        registerFeedthroughForWiretype(EHV, IEApi.ieLoc("block/connector/connector_hv"),
+                new double[]{0, 4, 8, 12}, 0.6875F,
+                IMBlocks.CONNECTOR_EHV.get().defaultBlockState());
+
     }
 
     private enum Tier {
-        EHV("EHV", 131072, 0.0002, 64, 1.003, 0Xcae1ed, IMItems.EHV_WIRE_COIL),
-        UHV("UHV", 2097152, 0.00004, 1024, 1.001, 0X9badb7, IMItems.UHV_WIRE_COIL);
+        EHV("EHV", 131072, 0.0002, 64, 1.003, 0Xcae1ed, IMItems.EHV_WIRE_COIL);
+        //        UHV("UHV", 2097152, 0.00004, 1024, 1.001, 0X9badb7, IMItems.UHV_WIRE_COIL);
         public final String name;
         public final int transferRate;
         public final double basicLossRate;

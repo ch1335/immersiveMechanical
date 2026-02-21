@@ -1,0 +1,6 @@
+{
+  "parent": "immersive_mechanical:block/ie_empty",
+  "textures": {
+    "particle": "immersive_mechanical:block/metal_device/turret_laser"
+  }
+}

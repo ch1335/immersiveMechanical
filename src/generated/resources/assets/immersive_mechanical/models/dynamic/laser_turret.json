@@ -1,0 +1,5 @@
+{
+  "callbacks": "immersiveengineering:submodel",
+  "loader": "immersiveengineering:ie_obj",
+  "model": "immersive_mechanical:models/block/metal_device/turret_laser.obj.ie"
+}

@@ -43,7 +43,7 @@ public class ImmersiveMechanical {
         CREATIVE_MODE_TABS.register(modEventBus);
         IMBlocks.BLOCK_DEFERRED_REGISTER.register(modEventBus);
         IMBlockEntityTypes.BLOCK_ENTITY_TYPE_DEFERRED_REGISTER.register(modEventBus);
-        IMItems.ITEM_DEFERRED_REGISTER.register(modEventBus);
+        IMItems.register(modEventBus);
         IMSounds.REGISTER.register(modEventBus);
         IMMultiblockLogic.init(modEventBus);
         modEventBus.addListener(this::commonSetup);
@@ -65,6 +65,6 @@ public class ImmersiveMechanical {
     }
 
     public static ResourceLocation guiId(String path) {
-        return ImmersiveMechanical.id("textures/gui/" + path + ".png");
+        return ImmersiveMechanical.id("textures/gui/%s.png".formatted(path));
     }
 }

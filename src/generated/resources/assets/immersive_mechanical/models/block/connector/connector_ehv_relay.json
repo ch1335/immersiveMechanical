@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "automatic_culling": false,
+  "flip_v": true,
+  "loader": "neoforge:obj",
+  "model": "immersive_mechanical:models/block/connector/connector_ehv_relay.obj",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "immersive_mechanical:block/connector/connector_ehv_relay"
+  }
+}
