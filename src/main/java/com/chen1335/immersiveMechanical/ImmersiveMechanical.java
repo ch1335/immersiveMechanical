@@ -42,7 +42,7 @@ public class ImmersiveMechanical {
     public ImmersiveMechanical(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         CREATIVE_MODE_TABS.register(modEventBus);
         IMBlocks.BLOCK_DEFERRED_REGISTER.register(modEventBus);
-        IMBlockEntityTypes.BLOCK_ENTITY_TYPE_DEFERRED_REGISTER.register(modEventBus);
+        IMBlockEntityTypes.BLOCKS.register(modEventBus);
         IMItems.register(modEventBus);
         IMSounds.REGISTER.register(modEventBus);
         IMMultiblockLogic.init(modEventBus);

@@ -9,9 +9,8 @@ import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import com.chen1335.immersiveMechanical.API.objects.IMDamageTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMMenuTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMSounds;
-import com.chen1335.immersiveMechanical.mixinsAPI.IEnergyStorageMixin;
+import com.chen1335.immersiveMechanical.mixinsAPI.IEnergyStorageExtension;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -44,7 +43,7 @@ public class TurretLaserBlockEntity extends TurretBlockEntity<TurretLaserBlockEn
 
     public TurretLaserBlockEntity(BlockEntityType<TurretLaserBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        ((IEnergyStorageMixin) energyStorage).im$setNewCap(ENERGY_CAPACITY);
+        ((IEnergyStorageExtension) energyStorage).im$setNewCap(ENERGY_CAPACITY);
     }
 
     @Override

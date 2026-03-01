@@ -2,11 +2,9 @@
   "required": true,
   "package": "com.chen1335.immersiveMechanical.mixins",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "EnergyConnectorBlockEntityAccessor", "EnergyStorageMixin"
-  ],
+  "plugin": "com.chen1335.immersiveMechanical.mixins.MainMixinPlugin",
+  "mixins": ["immersive_mechanical.EnergyConnectorBlockEntityAccessor", "immersive_mechanical.EnergyStorageMixin"],
   "client": [
-
   ],
   "minVersion": "0.8"
 }
