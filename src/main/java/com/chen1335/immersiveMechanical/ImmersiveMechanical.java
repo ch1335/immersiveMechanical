@@ -1,10 +1,9 @@
 package com.chen1335.immersiveMechanical;
 
-import com.chen1335.immersiveMechanical.API.objects.IMBlockEntityTypes;
-import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
-import com.chen1335.immersiveMechanical.API.objects.IMItems;
-import com.chen1335.immersiveMechanical.API.objects.IMSounds;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
+import com.chen1335.immersiveMechanical.API.objects.*;
 import com.chen1335.immersiveMechanical.client.IMClient;
+import com.chen1335.immersiveMechanical.common.IMStructureSource;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
 import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
@@ -34,7 +33,7 @@ public class ImmersiveMechanical {
             .title(Component.translatable("itemGroup.immersive_mechanical")) //The language key for the title of your CreativeModeTab
             .icon(Items.IRON_INGOT::getDefaultInstance)
             .displayItems((parameters, output) -> {
-                for (DeferredHolder<Item, ? extends Item> entry : IMItems.ITEM_DEFERRED_REGISTER.getEntries()) {
+                for (DeferredHolder<Item, ? extends Item> entry : IMItems.ITEMS.getEntries()) {
                     output.accept(entry.value().getDefaultInstance());
                 }
             }).build());
@@ -44,16 +43,18 @@ public class ImmersiveMechanical {
         IMBlocks.BLOCK_DEFERRED_REGISTER.register(modEventBus);
         IMBlockEntityTypes.BLOCKS.register(modEventBus);
         IMItems.register(modEventBus);
+        IMRecipe.register(modEventBus);
         IMSounds.REGISTER.register(modEventBus);
         IMMultiblockLogic.init(modEventBus);
         modEventBus.addListener(this::commonSetup);
-        IMMultiblocks.init();
 
         if (dist.isClient()) {
             IMClient.init();
         }
 
-
+        IMStructureSource.COILS.put(IEBlocks.MetalDecoration.MV_COIL, id("mv_coil"));
+        IMStructureSource.COILS.put(IEBlocks.MetalDecoration.HV_COIL, id("hv_coil"));
+        IMMultiblocks.init();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

@@ -28,5 +28,11 @@ public class IMItemModelProvider extends ItemModels {
 
         this.addItemModels("", IMItems.ACSR.get());
         this.addItemModels("", IMItems.EHV_WIRE_COIL.get());
+
+        IMItems.Metals.METALS.forEach((metals, metalTypesDeferredItemMap) -> {
+            metalTypesDeferredItemMap.forEach((metalTypes, itemDeferredItem) -> {
+                this.addItemModels("", itemDeferredItem);
+            });
+        });
     }
 }

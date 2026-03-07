@@ -13,7 +13,7 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = ImmersiveMechanical.MODID)
+@EventBusSubscriber(modid = ImmersiveMechanical.MODID)
 public class IMBlockCapabilityRegistration {
     @SubscribeEvent
     public static void registerBlockCapabilities(RegisterCapabilitiesEvent event) {

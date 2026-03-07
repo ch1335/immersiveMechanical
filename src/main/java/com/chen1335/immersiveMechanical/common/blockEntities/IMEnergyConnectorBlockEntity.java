@@ -10,7 +10,6 @@ import java.util.Map;
 
 public class IMEnergyConnectorBlockEntity extends EnergyConnectorBlockEntity {
 
-
     public IMEnergyConnectorBlockEntity(String voltage, boolean relay, BlockPos pos, BlockState state) {
         super(voltage, relay, pos, state);
     }

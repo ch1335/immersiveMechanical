@@ -13,7 +13,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import java.util.Map;
 import java.util.Set;
 
-@EventBusSubscriber(modid = ImmersiveMechanical.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ImmersiveMechanical.MODID)
 public class DataMain {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
@@ -32,7 +32,10 @@ public class DataMain {
         IMMultiblockStates multiblockStates = generator.addProvider(event.includeServer(), new IMMultiblockStates(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new IMBlockStateProvider(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new IMSimpleItemModelProvider(generator.getPackOutput(), event.getExistingFileHelper()));
-        generator.addProvider(event.includeServer(), new IMBlockTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), event.getExistingFileHelper()));
+        IMBlockTagsProvider imBlockTagsProvider = generator.addProvider(event.includeServer(), new IMBlockTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), event.getExistingFileHelper()));
+
+        generator.addProvider(event.includeServer(), new IMItemTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), imBlockTagsProvider.contentsGetter()));
+
         generator.addProvider(event.includeServer(), new IMConnectorBlockStates(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new IMLootTableProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider()));
         generator.addProvider(event.includeServer(), new IMItemModelProvider(generator.getPackOutput(), event.getExistingFileHelper(), multiblockStates));

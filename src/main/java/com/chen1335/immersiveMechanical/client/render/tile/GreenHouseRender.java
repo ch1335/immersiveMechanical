@@ -37,6 +37,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Quaternionf;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -59,14 +60,24 @@ public class GreenHouseRender extends IEMultiblockRenderer<GreenHouseLogic.State
             blockState = blockState.setValue(IEProperties.ACTIVE, true);
         }
         matrixStack.pushPose();
-        matrixStack.translate(0, 3.98, 0);
 
+        matrixStack.translate(0.5, 0, 0.5);
+        Direction facing = ctx.getLevel().getOrientation().front();
+        float dir = facing == Direction.SOUTH ? Mth.PI : facing == Direction.NORTH ? 0 : facing == Direction.EAST ? -Mth.HALF_PI : Mth.HALF_PI;
+        matrixStack.mulPose(new Quaternionf().rotateY(dir));
+        matrixStack.translate(-0.5, 0, -0.5);
+
+        matrixStack.pushPose();
+        matrixStack.translate(0, 3.98, 0);
         blockRenderer.renderSingleBlock(blockState, matrixStack, bufferIn, combinedLightIn, combinedOverlayIn, ModelData.EMPTY, RenderType.solid());
+
         matrixStack.popPose();
+
         for (int i = 0; i < state.processUnits.size(); i++) {
             GreenHouseLogic.ProcessUnit processUnit = state.processUnits.get(i);
             renderSoilAndCrop(ctx, processUnit, matrixStack, bufferIn, blockRenderer, combinedLightIn, combinedOverlayIn);
         }
+        matrixStack.popPose();
     }
 
     private static void renderSoilAndCrop(IMultiblockContext<GreenHouseLogic.State> ctx, GreenHouseLogic.ProcessUnit processUnit, PoseStack matrixStack, MultiBufferSource bufferIn, BlockRenderDispatcher blockRenderer, int combinedLightIn, int combinedOverlayIn) {

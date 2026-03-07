@@ -4,6 +4,7 @@ import com.chen1335.immersiveMechanical.API.objects.IMBlockEntityTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMMenuTypes;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.client.gui.GreenHouseScreen;
+import com.chen1335.immersiveMechanical.client.gui.IndustrialFurnacesScreen;
 import com.chen1335.immersiveMechanical.client.gui.LaserTurretScreen;
 import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
 import com.chen1335.immersiveMechanical.client.render.tile.LaserTurretRender;
@@ -20,12 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientEventHandler {
-    @EventBusSubscriber(value = {Dist.CLIENT}, modid = ImmersiveMechanical.MODID, bus = EventBusSubscriber.Bus.MOD)
+
+    @EventBusSubscriber(value = {Dist.CLIENT}, modid = ImmersiveMechanical.MODID)
     public static class MOD {
         @SubscribeEvent
         public static void RegisterMenuScreens(RegisterMenuScreensEvent event) {
             event.register(IMMenuTypes.GREEN_HOUSE.getType(), GreenHouseScreen::new);
             event.register(IMMenuTypes.LASER_TURRET.getType(), LaserTurretScreen::new);
+            event.register(IMMenuTypes.INDUSTRIAL_FURNACES.getType(), IndustrialFurnacesScreen::new);
         }
 
         @SubscribeEvent

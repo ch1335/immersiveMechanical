@@ -2,16 +2,23 @@ package com.chen1335.immersiveMechanical.data;
 
 import blusunrize.immersiveengineering.api.EnumMetals;
 import blusunrize.immersiveengineering.api.IETags;
+import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.common.items.upgrades.ToolUpgrade;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEItems;
+import blusunrize.immersiveengineering.data.recipes.builder.ArcFurnaceRecipeBuilder;
 import com.chen1335.immersiveMechanical.API.objects.IMItems;
+import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.data.recipeBuilders.IndustrialFurnaceRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -67,6 +74,26 @@ public class IMRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_acsr", has(IMItems.EHV_WIRE_COIL.get()))
                 .showNotification(false)
                 .save(recipeOutput);
+
+        ArcFurnaceRecipeBuilder.builder()
+                .output(IMItems.Metals.getTag(IMItems.Metals.NICHROME, IMItems.Metals.MetalTypes.INGOTS), 5)
+                .input(IETags.getTagsFor(EnumMetals.NICKEL).ingot, 4)
+                .additive(IMItems.Metals.getTag(IMItems.Metals.CHROME, IMItems.Metals.MetalTypes.INGOTS))
+                .setTime(600)
+                .setEnergy(204800)
+                .build(recipeOutput, toRL("arcfurnace/ingot_nichrome"));
+
+
+        IndustrialFurnaceRecipeBuilder.builder(
+                Ingredient.of(Items.IRON_INGOT),
+                new TagOutput(IEItems.Metals.INGOTS.get(EnumMetals.STEEL))
+                , 200,
+                5120
+        ).build(recipeOutput);
+    }
+
+    private ResourceLocation toRL(String s) {
+        return ImmersiveMechanical.id(s);
     }
 
 

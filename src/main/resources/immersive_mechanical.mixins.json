@@ -3,8 +3,9 @@
   "package": "com.chen1335.immersiveMechanical.mixins",
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.chen1335.immersiveMechanical.mixins.MainMixinPlugin",
-  "mixins": ["immersive_mechanical.EnergyConnectorBlockEntityAccessor", "immersive_mechanical.EnergyStorageMixin"],
+  "mixins": ["immersive_mechanical.EnergyConnectorBlockEntityAccessor", "immersive_mechanical.EnergyStorageMixin", "immersive_mechanical.GenericDataSerializersMixin", "immersive_mechanical.RecipeManagerMixin", "immersive_mechanical.StructureTemplateManagerMixin"],
   "client": [
+    "immersive_mechanical.BlockModelShaperMixin", "immersive_mechanical.BlockStateModelLoaderMixin", "immersive_mechanical.RegistryAwareItemModelShaperMixin"
   ],
   "minVersion": "0.8"
 }
