@@ -1,0 +1,16 @@
+// 1.21.1	2026-03-04T16:47:35.6197632	Tags for minecraft:item mod id vanilla
+3a7cae3696d55fa41bd0ff69e1db0fcb4fed246b data/c/tags/item/dusts.json
+4f73b300572af6a16a2b92e3d802e554972e1384 data/c/tags/item/dusts/chrome.json
+517c91281916afe377447a94d75aaa3c8a42c331 data/c/tags/item/dusts/nichrome.json
+1729e85714c7bfac74b647d241f8ef398437b1dc data/c/tags/item/ingots.json
+6573677477cb9f68fdb7cf22c7cf46e9c7219abd data/c/tags/item/ingots/chrome.json
+590f34d63713142cb83f6275ba4d28ac130108e9 data/c/tags/item/ingots/nichrome.json
+def08bfcba4c47d3359734a81e336d56af5fc8b6 data/c/tags/item/nuggets.json
+48139018c69fe2111936083799b1355fbfd19afe data/c/tags/item/nuggets/chrome.json
+405c74e265d9dadc8618f0eae0b7c7bea3021c5e data/c/tags/item/nuggets/nichrome.json
+9b511a1093fe1b4e51d190dd3b958cc26273bbbc data/c/tags/item/plates.json
+28ce18cc8b2a4738022cacd1ca692e194823df85 data/c/tags/item/plates/chrome.json
+908f71700f266d408c46db35c0aa10e6bb4dcee2 data/c/tags/item/plates/nichrome.json
+4dcac22ea8023a1ee8ed7b9013be6b7aefbb6173 data/c/tags/item/rods.json
+966b1e7f7717f15ac64604aaa91a9f0faacf9e84 data/c/tags/item/rods/chrome.json
+f6b1830fb6b24c85df420433951ef9c5e3cec366 data/c/tags/item/rods/nichrome.json

@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "immersive_mechanical:block/metal_multiblock/coil_split",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "immersive_mechanical:block/metal_multiblock/coil_split",
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "immersive_mechanical:block/metal_multiblock/coil_split",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "immersive_mechanical:block/metal_multiblock/coil_split",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}
