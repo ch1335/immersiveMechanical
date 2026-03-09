@@ -88,7 +88,11 @@ public class IndustrialFurnacesMenu extends IEContainerMenu {
 
         public static SlotProgress fromCtx(MultiblockProcessInMachine<IndustrialFurnaceRecipe> process, MultiblockMenuContext<IndustrialFurnacesLogic.State> context) {
             int inputSlot = process.getInputSlots()[0];
-            float progress = ((float) process.processTick) / ((float) process.getMaxTicks(context.mbContext().getLevel().getRawLevel()));
+            int maxTicks = process.getMaxTicks(context.mbContext().getLevel().getRawLevel());
+            if (maxTicks == 0) {
+                return new SlotProgress(inputSlot, 0);
+            }
+            float progress = ((float) process.processTick) / ((float) maxTicks);
             return new SlotProgress(inputSlot, progress);
         }
 

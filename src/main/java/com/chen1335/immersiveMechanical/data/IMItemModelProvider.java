@@ -24,6 +24,9 @@ public class IMItemModelProvider extends ItemModels {
 
         this.obj(IMMultiblockLogic.GREEN_HOUSE.blockItem().get(), ImmersiveMechanical.id("block/metal_multiblock/green_house.obj.ie")).transforms(ImmersiveMechanical.id("item/green_house")).renderType(RenderType.translucent().name);
 
+        this.obj(IMMultiblockLogic.INDUSTRIAL_FURNACES.blockItem().get(), ImmersiveMechanical.id("block/metal_multiblock/industrial_furnaces.obj")).transforms(ImmersiveMechanical.id("item/industrial_furnaces")).renderType(RenderType.translucent().name);
+
+
         this.obj(IMItems.LASER_TURRET.get(), ImmersiveMechanical.id("block/metal_device/turret_laser_inv.obj")).transforms(ImmersiveMechanical.id("item/turret"));
 
         this.addItemModels("", IMItems.ACSR.get());

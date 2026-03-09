@@ -19,5 +19,6 @@
   "item.immersive_mechanical.nugget_nichrome": "镍铬合金粒",
   "item.immersive_mechanical.dust_nichrome": "镍铬合金粉",
   "item.immersive_mechanical.plate_nichrome": "镍铬合金板",
-  "item.immersive_mechanical.stick_nichrome": "镍铬合金棒"
+  "item.immersive_mechanical.stick_nichrome": "镍铬合金棒",
+  "block.immersive_mechanical.industrial_furnaces": "工业熔炉"
 }

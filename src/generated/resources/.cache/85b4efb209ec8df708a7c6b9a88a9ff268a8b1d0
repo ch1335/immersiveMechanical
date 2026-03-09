@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-05T01:11:01.8018988	Item models
+// 1.21.1	2026-03-09T17:21:50.3595664	Item models
 292203441da615e9fc6fca03b346ddd065c4aed0 assets/immersive_mechanical/models/item/aluminum_conductor_steel_reinforced.json
 10ed7d6eb320bfaa61f4cd436d0e43d5de89d774 assets/immersive_mechanical/models/item/connector_ehv.json
 2619901ff48b5fc70311f23cff1889bb25427561 assets/immersive_mechanical/models/item/connector_ehv_relay.json
@@ -6,6 +6,7 @@
 b5180bf679a5083509d5d0518a1b6e37d62803fd assets/immersive_mechanical/models/item/dust_nichrome.json
 0ea0b77b7c4c1c1e43f2cbc4581aa6436ce86f5e assets/immersive_mechanical/models/item/ehv_wire_coil.json
 2b984bd83e48491d09bab4e42c15943d72a91855 assets/immersive_mechanical/models/item/green_house.json
+dc19076faf9ff1584e5d68565db072c6c0dc1844 assets/immersive_mechanical/models/item/industrial_furnaces.json
 e7a14ef00eae8954f014cc5f5e524c5459a199cb assets/immersive_mechanical/models/item/ingot_chrome.json
 67ac1714d4b3a788a6fb60d52ed8b9c21482996e assets/immersive_mechanical/models/item/ingot_nichrome.json
 b63d2fd67df6a37029c6bb91b27bbd0fab718a09 assets/immersive_mechanical/models/item/large_battery.json

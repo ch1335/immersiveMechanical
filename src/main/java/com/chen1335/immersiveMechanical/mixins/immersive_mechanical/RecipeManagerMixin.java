@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Mixin(RecipeManager.class)
@@ -32,17 +34,23 @@ public abstract class RecipeManagerMixin extends SimpleJsonResourceReloadListene
     @Unique
     private static HolderLookup.Provider IM$REGISTRIES;
 
+    @Unique
+    private static final Map<Ingredient, Pair<RecipeHolder<IndustrialFurnaceRecipe>, Runnable>> IM$CAPTURED_RECIPE = new HashMap<>();
+
     public RecipeManagerMixin(Gson gson, String directory) {
         super(gson, directory);
     }
 
     @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("HEAD"))
     private void applyHead(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
+
         IM$REGISTRIES = registries;
     }
 
-    @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("RETURN"))
+    @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/ImmutableMultimap$Builder;build()Lcom/google/common/collect/ImmutableMultimap;"))
     private void applyReturn(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
+        IM$CAPTURED_RECIPE.values().forEach(pair -> pair.getSecond().run());
+        IM$CAPTURED_RECIPE.clear();
         IM$REGISTRIES = null;
     }
 
@@ -57,8 +65,20 @@ public abstract class RecipeManagerMixin extends SimpleJsonResourceReloadListene
             IndustrialFurnaceRecipe industrialFurnaceRecipe = IndustrialFurnaceRecipe.fromSmeltingRecipe((AbstractCookingRecipe) carrier, IM$REGISTRIES);
             ResourceLocation resourceLocation = resourcelocation.withPrefix("industrial_furnace/");
             RecipeHolder<IndustrialFurnaceRecipe> recipeHolder = new RecipeHolder<>(resourceLocation, industrialFurnaceRecipe);
-            builder.put(IMRecipe.Types.INDUSTRIAL_FURNACE.get(), recipeHolder);
-            builder1.put(resourceLocation, recipeHolder);
+
+            Pair<RecipeHolder<IndustrialFurnaceRecipe>, Runnable> pair = IM$CAPTURED_RECIPE.get(industrialFurnaceRecipe.input());
+            if (pair == null) {
+                IM$CAPTURED_RECIPE.put(industrialFurnaceRecipe.input(), Pair.of(recipeHolder, () -> {
+                    builder.put(IMRecipe.Types.INDUSTRIAL_FURNACE.get(), recipeHolder);
+                    builder1.put(resourceLocation, recipeHolder);
+                }));
+            } else if (pair.getFirst().value().getBaseTime() > industrialFurnaceRecipe.getBaseTime()) {
+                IM$CAPTURED_RECIPE.put(industrialFurnaceRecipe.input(), Pair.of(recipeHolder, () -> {
+                    builder.put(IMRecipe.Types.INDUSTRIAL_FURNACE.get(), recipeHolder);
+                    builder1.put(resourceLocation, recipeHolder);
+                }));
+            }
+
         }
     }
 }

@@ -1,6 +1,7 @@
-@ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package com.chen1335.immersiveMechanical.common.compat.jei;
+@ParametersAreNonnullByDefault
+
+package com.chen1335.immersiveMechanical.compat.jei;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.IMStructureSource;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.CoilLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.CoilTemplate;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.GreenHouse;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.IndustrialFurnaces;
@@ -31,7 +31,7 @@ public class IMMultiblocks {
         INDUSTRIAL_FURNACES = register(new IndustrialFurnaces());
         COIL_TEMPLATE = register(new CoilTemplate(ImmersiveMechanical.id("multiblocks/coil_template"), IMMultiblockLogic.COIL_TEMPLATE));
         IMStructureSource.COILS.forEach((supplier, resourceLocation) -> {
-            COILS.put(resourceLocation, register(new CoilTemplate(resourceLocation, IMMultiblockLogic.coil(new CoilLogic(), resourceLocation.getPath(), supplier).notMirrored().structure(() -> COILS.get(resourceLocation)).build())));
+            COILS.put(resourceLocation, register(new CoilTemplate(resourceLocation, IMMultiblockLogic.coil(new CoilLogic(supplier), resourceLocation.getPath(), supplier).notMirrored().structure(() -> COILS.get(resourceLocation)).build())));
         });
     }
 

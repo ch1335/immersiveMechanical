@@ -1,7 +1,8 @@
 {
   "heavy_machinery": {
     "entry_list": [
-      "im_green_house"
+      "im_green_house",
+      "im_industrial_furnace"
     ]
   },
   "electrical_grids": {

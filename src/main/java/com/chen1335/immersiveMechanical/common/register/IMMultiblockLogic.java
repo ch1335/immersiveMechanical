@@ -12,7 +12,7 @@ import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblockItem;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.IMCoilBlock;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.CoilLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.GreenHouseLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industrialFurnace.IndustrialFurnacesLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.LargeBatteryLogic;
@@ -69,7 +69,7 @@ public class IMMultiblockLogic {
             }, MultiblockItem::new)
             .build();
 
-    public static final MultiblockRegistration<CoilLogic.State> COIL_TEMPLATE = coil(new CoilLogic(), "coil_template", IEBlocks.MetalDecoration.LV_COIL)
+    public static final MultiblockRegistration<CoilLogic.State> COIL_TEMPLATE = coil(new CoilLogic(IEBlocks.MetalDecoration.LV_COIL), "coil_template", IEBlocks.MetalDecoration.LV_COIL)
             .notMirrored()
             .structure(() -> IMMultiblocks.COIL_TEMPLATE)
             .build();

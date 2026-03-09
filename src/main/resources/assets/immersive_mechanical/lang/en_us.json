@@ -4,6 +4,7 @@
   "block.immersive_mechanical.connector_ehv": "EHV Connector",
   "block.immersive_mechanical.turret_laser": "High-energy laser turret",
   "block.immersive_mechanical.green_house": "Green House",
+  "block.immersive_mechanical.industrial_furnaces": "Industrial Furnace",
   "block.immersive_mechanical.connector_ehv_relay": "EHV Wire Relay",
   "block.immersive_mechanical.large_battery_core": "Large Battery Core",
   "item.immersive_mechanical.ehv_wire_coil": "EHV Wire Coil",

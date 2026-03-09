@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 
 public class LargeBatteryLogic implements IMultiblockLogic<LargeBatteryLogic.State>, IServerTickableComponent<LargeBatteryLogic.State> {
     private static final BlockPos CORE = new BlockPos(1, 2, 1);
-    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0, 4, 1, RelativeBlockFace.UP), new CapabilityPosition(0, 4, 1, RelativeBlockFace.LEFT));
+    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(0, 4, 1, RelativeBlockFace.UP), new CapabilityPosition(0, 4, 1, RelativeBlockFace.RIGHT));
 
     @Override
     public void tickServer(IMultiblockContext<State> iMultiblockContext) {
@@ -71,7 +71,7 @@ public class LargeBatteryLogic implements IMultiblockLogic<LargeBatteryLogic.Sta
         public final Set<Supplier<IEnergyStorage>> energyOutputs;
 
         public static final MultiblockFace ENERGY_OUTS_UP = new MultiblockFace(2, 5, 1, RelativeBlockFace.DOWN);
-        public static final MultiblockFace ENERGY_OUTS_RIGHT = new MultiblockFace(3, 4, 1, RelativeBlockFace.LEFT);
+        public static final MultiblockFace ENERGY_OUTS_RIGHT = new MultiblockFace(3, 4, 1, RelativeBlockFace.RIGHT);
 
         public State(IInitialMultiblockContext<State> ctx) {
             this.energyOutputs = Set.of(

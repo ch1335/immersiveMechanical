@@ -1,0 +1,10 @@
+{
+  "industrial_furnaces": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:multiblocks/industrial_furnaces"
+  },
+  "coil": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:multiblocks/coil_template"
+  }
+}

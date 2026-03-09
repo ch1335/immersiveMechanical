@@ -37,8 +37,6 @@ public class ClientEventHandler {
             event.registerBlockEntityRenderer(IMBlockEntityTypes.TURRET_LASER.master(), LaserTurretRender::new);
         }
 
-        private static final List<ModelResourceLocation> MODELS = new ArrayList<>();
-
         @SubscribeEvent
         public static void registerModels(ModelEvent.RegisterAdditional event) {
             event.register(LaserTurretRender.MODEL_RESOURCE_LOCATION);

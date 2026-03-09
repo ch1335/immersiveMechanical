@@ -29,6 +29,7 @@ public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
     public static final CachedRecipeList<IndustrialFurnaceRecipe> RECIPES = new CachedRecipeList<>(IMRecipe.Types.INDUSTRIAL_FURNACE);
 
 
+
     private final Ingredient input;
     private final TagOutput output;
 
@@ -61,7 +62,7 @@ public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
     }
 
     public static IndustrialFurnaceRecipe fromSmeltingRecipe(AbstractCookingRecipe recipe, HolderLookup.Provider registries) {
-        return new IndustrialFurnaceRecipe(recipe.getIngredients().getFirst(), new TagOutput(recipe.getResultItem(registries)), recipe.getCookingTime() / 2, recipe.getCookingTime() * 128);
+        return new IndustrialFurnaceRecipe(recipe.getIngredients().getFirst(), new TagOutput(recipe.getResultItem(registries)), recipe.getCookingTime() / 2, recipe.getCookingTime() * 64);
     }
 
     @Override

@@ -3,8 +3,8 @@ package com.chen1335.immersiveMechanical;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.API.objects.*;
 import com.chen1335.immersiveMechanical.client.IMClient;
-import com.chen1335.immersiveMechanical.common.IMStructureSource;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
 import com.mojang.logging.LogUtils;
@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -52,13 +53,17 @@ public class ImmersiveMechanical {
             IMClient.init();
         }
 
-        IMStructureSource.COILS.put(IEBlocks.MetalDecoration.MV_COIL, id("mv_coil"));
-        IMStructureSource.COILS.put(IEBlocks.MetalDecoration.HV_COIL, id("hv_coil"));
+
+        CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, id("multiblocks/lv_coil"), new CoilInfo(1F, 1F));
+        CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, id("multiblocks/mv_coil"), new CoilInfo(1.3F, 1.15F));
+        CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, id("multiblocks/hv_coil"), new CoilInfo(1.7F, 1.25F));
+
         IMMultiblocks.init();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
         IMWireTypes.setup();
+        CoilInfo.setup();
     }
 
     public static ResourceLocation id(String path) {

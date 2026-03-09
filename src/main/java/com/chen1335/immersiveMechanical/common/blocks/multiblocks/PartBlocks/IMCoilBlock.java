@@ -2,7 +2,7 @@ package com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks;
 
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.CoilLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
