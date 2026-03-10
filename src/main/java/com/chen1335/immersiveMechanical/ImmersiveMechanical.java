@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -41,7 +40,7 @@ public class ImmersiveMechanical {
 
     public ImmersiveMechanical(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         CREATIVE_MODE_TABS.register(modEventBus);
-        IMBlocks.BLOCK_DEFERRED_REGISTER.register(modEventBus);
+        IMBlocks.BLOCKS.register(modEventBus);
         IMBlockEntityTypes.BLOCKS.register(modEventBus);
         IMItems.register(modEventBus);
         IMRecipe.register(modEventBus);
@@ -57,6 +56,7 @@ public class ImmersiveMechanical {
         CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, id("multiblocks/lv_coil"), new CoilInfo(1F, 1F));
         CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, id("multiblocks/mv_coil"), new CoilInfo(1.3F, 1.15F));
         CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, id("multiblocks/hv_coil"), new CoilInfo(1.7F, 1.25F));
+        CoilInfo.register(IMBlocks.COIL_NICHROME, id("multiblocks/coil_nichrome"), new CoilInfo(2.2F, 1.45F));
 
         IMMultiblocks.init();
     }

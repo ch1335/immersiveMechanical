@@ -1,5 +1,4 @@
-// 1.21.1	2026-03-07T19:07:02.6390294	Recipes
-c3a6b7cce3f23a21faec947697b1cba3539828a2 data/immersiveengineering/recipe/industrial_furnace/ingot_steel.json
+// 1.21.1	2026-03-10T22:50:47.5646253	Recipes
 61d7ffc4ce99ebabb13920f6217d0c1f706c95b4 data/immersive_mechanical/advancement/recipes/misc/aluminum_conductor_steel_reinforced.json
 e208fdedc5f1f20d609edf4fba53f7ff4151013b data/immersive_mechanical/advancement/recipes/misc/ehv_wire_coil.json
 51fead9d79342d69240d72d35b7c5066bad2bf1e data/immersive_mechanical/advancement/recipes/misc/large_battery_core.json
@@ -9,3 +8,4 @@ f6fc36a9b913827c15650554cd020c32d59b199e data/immersive_mechanical/recipe/alumin
 892b73c72d66f8f0fa0606e28c9824e2d06e0e84 data/immersive_mechanical/recipe/ehv_wire_coil.json
 55f9a0522815fae935be71cc8c9b42ffceeb5945 data/immersive_mechanical/recipe/large_battery_core.json
 503f2a179da4602065da689887c883da19156a22 data/immersive_mechanical/recipe/laser_turret.json
+f45c729843271464e37e4c0c6da28cdc9e0ee8a9 data/minecraft/recipe/industrial_furnace/barrier.json

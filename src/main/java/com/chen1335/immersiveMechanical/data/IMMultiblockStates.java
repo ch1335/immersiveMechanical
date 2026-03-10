@@ -12,7 +12,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static net.minecraft.client.renderer.RenderType.*;
+import static net.minecraft.client.renderer.RenderType.solid;
+import static net.minecraft.client.renderer.RenderType.translucent;
 
 public class IMMultiblockStates extends MultiblockStates {
     public IMMultiblockStates(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -36,7 +37,7 @@ public class IMMultiblockStates extends MultiblockStates {
         this.im_createDynamicMultiblock(
                 this.ieObjBuilder("block/metal_multiblock/coil.obj.ie", innerModels)
                         .callback(CoilCallbacks.INSTANCE)
-                        .layer(cutout())
+                        .layer(solid())
                         .end(),
                 IMMultiblocks.COIL_TEMPLATE
         );

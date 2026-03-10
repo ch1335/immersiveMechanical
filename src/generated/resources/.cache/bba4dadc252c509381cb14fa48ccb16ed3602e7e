@@ -1,2 +1,3 @@
-// 1.21.1	2026-01-20T00:47:23.5811782	Tags for minecraft:block mod id immersive_mechanical
-6289eb01e974feaab0869735f544d50181ab1864 data/minecraft/tags/block/mineable/pickaxe.json
+// 1.21.1	2026-03-10T20:51:30.3549714	Tags for minecraft:block mod id immersive_mechanical
+ab7644dd44f8fe4b653e90b089992ce589eba668 data/minecraft/tags/block/mineable/pickaxe.json
+ab7644dd44f8fe4b653e90b089992ce589eba668 data/minecraft/tags/block/needs_iron_tool.json

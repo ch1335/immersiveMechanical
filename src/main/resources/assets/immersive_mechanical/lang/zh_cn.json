@@ -6,6 +6,10 @@
   "block.immersive_mechanical.turret_laser": "高能激光炮塔",
   "block.immersive_mechanical.connector_ehv_relay": "超高压续电器",
   "block.immersive_mechanical.large_battery_core": "大型蓄电池核心",
+  "block.immersive_mechanical.chrome_ore": "铬矿",
+  "block.immersive_mechanical.deepslate_chrome_ore": "深层铬矿",
+  "block.immersive_mechanical.coil_nichrome": "镍铬线圈",
+
   "item.immersive_mechanical.ehv_wire_coil": "超高压线圈",
   "item.immersive_mechanical.aluminum_conductor_steel_reinforced": "钢芯铝绞线",
   "item.immersive_mechanical.uhv_wire_coil": "特高压线圈",
@@ -20,5 +24,6 @@
   "item.immersive_mechanical.dust_nichrome": "镍铬合金粉",
   "item.immersive_mechanical.plate_nichrome": "镍铬合金板",
   "item.immersive_mechanical.stick_nichrome": "镍铬合金棒",
-  "block.immersive_mechanical.industrial_furnaces": "工业熔炉"
+  "block.immersive_mechanical.industrial_furnaces": "工业熔炉",
+  "item.immersive_mechanical.raw_chrome": "粗铬"
 }

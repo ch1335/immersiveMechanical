@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "immersive_mechanical:block/metal_decoration/coil_nichrome_top",
+    "side": "immersive_mechanical:block/metal_decoration/coil_nichrome_side",
+    "top": "immersive_mechanical:block/metal_decoration/coil_nichrome_top"
+  }
+}

@@ -1,4 +1,8 @@
-// 1.21.1	2026-01-20T00:47:23.5830236	Loot Tables
-e1b5907514d6a6a1d376c7832216b8e218864d06 data/immersive_mechanical/loot_table/blocks/connector_ehv.json
-841a223aa61db7694d126f58f2214a1c3ced11d7 data/immersive_mechanical/loot_table/blocks/connector_ehv_relay.json
+// 1.21.1	2026-03-10T22:50:47.5488134	Loot Tables
+484e7c4adb70a7ea618b62f19f0146cc651d04b3 data/immersive_mechanical/loot_table/blocks/chrome_ore.json
+02ec4dfb7c9bb9d2b0a4989db8c35d6fa3e98435 data/immersive_mechanical/loot_table/blocks/coil_nichrome.json
+ab53dc622a699f428177daa70c2d8d39e5347fb1 data/immersive_mechanical/loot_table/blocks/connector_ehv.json
+d74da0667bdbf65a4a2e4522f02803af72dc30d0 data/immersive_mechanical/loot_table/blocks/connector_ehv_relay.json
+a7e61ab5ab08cb635e832ebaac54a3807d4009a0 data/immersive_mechanical/loot_table/blocks/deepslate_chrome_ore.json
 ac9398a3c274d3aee9eb69dfd1f864ada3204a9e data/immersive_mechanical/loot_table/blocks/large_battery_core.json
+61fefde66f0747c59dd3843ad9ef7cc2c67029e3 data/immersive_mechanical/loot_table/blocks/turret_laser.json

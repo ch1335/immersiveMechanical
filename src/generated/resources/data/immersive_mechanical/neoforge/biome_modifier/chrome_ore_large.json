@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "immersive_mechanical:chrome_ore_large",
+  "step": "underground_ores"
+}

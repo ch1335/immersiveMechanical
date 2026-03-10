@@ -5,7 +5,7 @@
     "parent": "minecraft:block/block",
     "callbacks": "immersive_mechanical:coil",
     "layers": [
-      "cutout"
+      "solid"
     ],
     "loader": "immersiveengineering:ie_obj",
     "model": "immersive_mechanical:models/block/metal_multiblock/coil.obj.ie",

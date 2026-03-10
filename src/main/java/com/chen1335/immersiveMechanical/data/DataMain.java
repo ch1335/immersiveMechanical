@@ -2,13 +2,17 @@ package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.data.tag.IMDamageTypeTagsProvider;
+import com.chen1335.immersiveMechanical.data.worldgen.IMFeatureUtils;
+import com.chen1335.immersiveMechanical.data.worldgen.IMPlacementUtils;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Map;
 import java.util.Set;
@@ -24,6 +28,10 @@ public class DataMain {
                 event.getLookupProvider(),
                 new RegistrySetBuilder()
                         .add(Registries.DAMAGE_TYPE, IMDamageTypeProvider::bootstrap)
+                        .add(Registries.CONFIGURED_FEATURE, IMFeatureUtils::bootstrap)
+                        .add(Registries.PLACED_FEATURE, IMPlacementUtils::bootstrap)
+                        .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, IMBiomeModifier::bootstrap)
+
                 ,
                 Map.of(),
                 Set.of(ImmersiveMechanical.MODID)

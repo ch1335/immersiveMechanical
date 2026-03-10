@@ -14,5 +14,8 @@ public class IMSimpleItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleBlockItem(IMBlocks.LARGE_BATTERY_CORE.value());
+        simpleBlockItem(IMBlocks.CHROME_ORE.value());
+        simpleBlockItem(IMBlocks.DEEPSLATE_CHROME_ORE.value());
+        simpleBlockItem(IMBlocks.COIL_NICHROME.value());
     }
 }

@@ -23,7 +23,7 @@ public class IMMultiblocks {
     public static IETemplateMultiblock GREEN_HOUSE;
     public static IETemplateMultiblock COIL_TEMPLATE;
     public static IETemplateMultiblock INDUSTRIAL_FURNACES;
-    public static final Map<ResourceLocation, IETemplateMultiblock> COILS = new HashMap<>();
+    public static final Map<ResourceLocation, CoilTemplate> COILS = new HashMap<>();
 
     public static void init() {
         LARGE_BATTERY = register(new LargeBattery());

@@ -1,11 +1,11 @@
 {
   "type": "immersive_mechanical:industrial_furnace",
-  "energy": 5120,
+  "energy": 51200,
   "input": {
-    "item": "minecraft:iron_ingot"
+    "item": "immersive_mechanical:raw_chrome"
   },
   "output": {
-    "id": "immersiveengineering:ingot_steel"
+    "tag": "c:ingots/chrome"
   },
   "time": 200
 }

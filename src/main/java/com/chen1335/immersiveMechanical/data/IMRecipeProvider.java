@@ -17,7 +17,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
@@ -85,10 +84,10 @@ public class IMRecipeProvider extends RecipeProvider {
 
 
         IndustrialFurnaceRecipeBuilder.builder(
-                Ingredient.of(Items.IRON_INGOT),
-                new TagOutput(IEItems.Metals.INGOTS.get(EnumMetals.STEEL))
+                Ingredient.of(IMItems.ROW_CHROME),
+                new TagOutput(IMItems.Metals.getTag(IMItems.Metals.CHROME, IMItems.Metals.MetalTypes.INGOTS))
                 , 200,
-                5120
+                51200
         ).build(recipeOutput);
     }
 

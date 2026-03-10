@@ -38,6 +38,12 @@ public class IMItems {
 
     public static final DeferredItem<Item> ACSR = simple("aluminum_conductor_steel_reinforced");
 
+    public static final DeferredItem<BlockItem> CHROME_ORE = ITEMS.register("chrome_ore", () -> new BlockItemIE(IMBlocks.CHROME_ORE.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> DEEPSLATE_CHROME_ORE = ITEMS.register("deepslate_chrome_ore", () -> new BlockItemIE(IMBlocks.DEEPSLATE_CHROME_ORE.get()));
+
+    public static final DeferredItem<BlockItem> COIL_NICHROME = ITEMS.register("coil_nichrome", () -> new BlockItemIE(IMBlocks.COIL_NICHROME.get()));
+
+    public static final DeferredItem<Item> ROW_CHROME = simple("raw_chrome");
 
     public enum Metals {
         CHROME("chrome"),
@@ -55,11 +61,11 @@ public class IMItems {
             return name;
         }
 
-        public static DeferredItem<Item> getMetal(Metals metals,MetalTypes metalTypes){
+        public static DeferredItem<Item> getMetal(Metals metals, MetalTypes metalTypes) {
             return IMItems.Metals.METALS.get(metals).get(metalTypes);
         }
 
-        public static TagKey<Item> getTag(Metals metals,MetalTypes metalTypes){
+        public static TagKey<Item> getTag(Metals metals, MetalTypes metalTypes) {
             return IMItems.Metals.METAL_TAGS.get(metals).get(metalTypes);
         }
 
