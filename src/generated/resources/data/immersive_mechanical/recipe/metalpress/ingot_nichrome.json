@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "item": "immersive_mechanical:ingot_nichrome"
+  },
+  "mold": "immersiveengineering:mold_wire",
+  "result": {
+    "count": 2,
+    "id": "immersive_mechanical:wire_nichrome"
+  }
+}

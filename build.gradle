@@ -147,6 +147,7 @@ configurations {
 dependencies {
     implementation fileTree("libs")
     implementation "curse.maven:immersive-engineering-231951:6733669"
+    implementation "curse.maven:beyond-dimensions-1222890:7822178"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

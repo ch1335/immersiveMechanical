@@ -25,5 +25,16 @@
   "item.immersive_mechanical.plate_nichrome": "镍铬合金板",
   "item.immersive_mechanical.stick_nichrome": "镍铬合金棒",
   "block.immersive_mechanical.industrial_furnaces": "工业熔炉",
-  "item.immersive_mechanical.raw_chrome": "粗铬"
+  "item.immersive_mechanical.raw_chrome": "粗铬",
+  "immersive_mechanical.Tooltip.coil_formed": "线圈以成型",
+  "immersive_mechanical.tooltip.coil_info_for_industrial_furnaces": "作为工业熔炉线圈使用时:",
+  "immersive_mechanical.tooltip.timeModify": "运行速度:%s",
+  "immersive_mechanical.tooltip.energyModify": "能量消耗:%s",
+  "item.immersive_mechanical.wire_nichrome": "镍铬合金线",
+  "item.immersive_mechanical.nichrome_wire_coil": "镍铬合金线圈",
+  "manual.immersiveengineering.immersive_mechanical": "沉浸机械",
+  "block.immersive_mechanical.small_mining_machine": "小型采矿机",
+
+  "gui.immersiveengineering.config.small_mining_machine.rest": "重置"
+
 }

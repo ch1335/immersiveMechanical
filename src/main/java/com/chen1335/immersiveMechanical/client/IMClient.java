@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class IMClient {
+    public static int TICKED = 0;
 
     public static void init() {
         IEOBJCallbacks.register(rl("green_house"), GreenHouseCallbacks.INSTANCE);

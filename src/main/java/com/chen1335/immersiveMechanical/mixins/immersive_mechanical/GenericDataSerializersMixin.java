@@ -13,7 +13,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GenericDataSerializers.class)
-public abstract class GenericDataSerializersMixin {
+public class GenericDataSerializersMixin {
+
+
     @Shadow
     private static <T> GenericDataSerializers.DataSerializer<T> register(StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
         return null;

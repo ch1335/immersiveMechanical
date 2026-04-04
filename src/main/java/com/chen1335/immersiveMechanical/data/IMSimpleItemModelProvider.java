@@ -1,6 +1,7 @@
 package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
+import com.chen1335.immersiveMechanical.API.objects.IMItems;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -17,5 +18,9 @@ public class IMSimpleItemModelProvider extends ItemModelProvider {
         simpleBlockItem(IMBlocks.CHROME_ORE.value());
         simpleBlockItem(IMBlocks.DEEPSLATE_CHROME_ORE.value());
         simpleBlockItem(IMBlocks.COIL_NICHROME.value());
+
+        handheldItem(IMItems.WIRE_NICHROME.asItem());
+        handheldItem(IMItems.NICHROME_WIRE_COIL.asItem());
+
     }
 }

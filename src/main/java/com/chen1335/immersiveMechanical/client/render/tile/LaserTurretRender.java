@@ -53,9 +53,6 @@ public class LaserTurretRender extends IEBlockEntityRenderer<TurretLaserBlockEnt
         );
 
 
-        TextureAtlasSprite sprite = Minecraft.getInstance().getModelManager().getAtlas(InventoryMenu.BLOCK_ATLAS).getSprite(ImmersiveMechanical.id("misc/laser"));
-
-
         RenderSystem.setShaderTexture(0, ImmersiveMechanical.id("textures/misc/laser.png"));
 
         TurretRenderer.renderModelPart(bufferSource, poseStack, tile.getLevelNonnull(), state, model, tile.getBlockPos(), true, packedLight, "gun");

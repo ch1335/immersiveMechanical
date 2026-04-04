@@ -40,7 +40,7 @@ public class IMBlocks {
 
     public static final DeferredBlock<Block> CHROME_ORE = BLOCKS.register("chrome_ore", () -> new DropExperienceBlock(
             ConstantInt.of(0),
-            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F)
+            BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 3.0F).sound(SoundType.STONE)
     ));
 
     public static final DeferredBlock<Block> DEEPSLATE_CHROME_ORE = BLOCKS.register("deepslate_chrome_ore", () -> new DropExperienceBlock(

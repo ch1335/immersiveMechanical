@@ -1,0 +1,10 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 0,
+  "input": {
+    "tag": "c:ingots/chrome"
+  },
+  "result": {
+    "tag": "c:dusts/chrome"
+  }
+}

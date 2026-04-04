@@ -1,0 +1,11 @@
+{
+  "type": "immersive_mechanical:industrial_furnace",
+  "energy": 51200,
+  "input": {
+    "tag": "c:raw_materials/chrome"
+  },
+  "output": {
+    "tag": "c:ingots/chrome"
+  },
+  "time": 200
+}

@@ -3,9 +3,10 @@
   "package": "com.chen1335.immersiveMechanical.mixins",
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.chen1335.immersiveMechanical.mixins.MainMixinPlugin",
-  "mixins": ["immersive_mechanical.EnergyConnectorBlockEntityAccessor", "immersive_mechanical.EnergyStorageMixin", "immersive_mechanical.GenericDataSerializersMixin", "immersive_mechanical.MultiblockProcessAccessor", "immersive_mechanical.RecipeManagerMixin", "immersive_mechanical.StructureTemplateManagerMixin"],
+  "mixins": ["immersive_mechanical.DrillHeadPermAccessor", "immersive_mechanical.EnergyConnectorBlockEntityAccessor", "immersive_mechanical.EnergyStorageMixin", "immersive_mechanical.GenericDataSerializersMixin", "immersive_mechanical.MultiblockProcessAccessor", "immersive_mechanical.RecipeManagerMixin", "immersive_mechanical.StructureTemplateManagerMixin", "immersive_mechanical.ToolUpgradeItemAccessor"],
   "client": [
-    "immersive_mechanical.BlockModelShaperMixin", "immersive_mechanical.BlockStateModelLoaderMixin", "immersive_mechanical.RegistryAwareItemModelShaperMixin", "immersive_mechanical.client.GameRendererMixin"
+    "immersive_mechanical.BlockModelShaperMixin",
+    "immersive_mechanical.BlockStateModelLoaderMixin", "immersive_mechanical.client.IEOBJItemRendererInvoker"
   ],
   "minVersion": "0.8"
 }

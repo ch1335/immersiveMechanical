@@ -2,5 +2,9 @@
   "start": {
     "type": "multiblock",
     "name": "immersive_mechanical:multiblocks/large_battery"
+  },
+  "large_battery_core": {
+    "type": "crafting",
+    "recipe": "immersive_mechanical:large_battery_core"
   }
 }

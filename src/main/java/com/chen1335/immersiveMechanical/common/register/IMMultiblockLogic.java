@@ -11,11 +11,12 @@ import com.chen1335.immersiveMechanical.API.objects.IMMenuTypes;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblockItem;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.IMCoilBlock;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.IMCoilPartBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.GreenHouseLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industrialFurnace.IndustrialFurnacesLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.LargeBatteryLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.smallMiningMachine.SmallMiningMachineLogic;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -28,8 +29,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Supplier;
-
 public class IMMultiblockLogic {
     public static final DeferredRegister<Block> BLOCK_REGISTER = DeferredRegister.create(BuiltInRegistries.BLOCK, ImmersiveMechanical.MODID);
     private static final DeferredRegister<Item> ITEM_REGISTER = DeferredRegister.create(BuiltInRegistries.ITEM, ImmersiveMechanical.MODID);
@@ -38,6 +37,12 @@ public class IMMultiblockLogic {
     public static final MultiblockRegistration<LargeBatteryLogic.State> LARGE_BATTERY = metal(new LargeBatteryLogic(), "large_battery")
             .notMirrored()
             .structure(() -> IMMultiblocks.LARGE_BATTERY)
+            .build();
+
+    public static final MultiblockRegistration<SmallMiningMachineLogic.State> SMALL_MINING_MACHINE = metal(new SmallMiningMachineLogic(), "small_mining_machine")
+            .notMirrored()
+            .structure(() -> IMMultiblocks.SMALL_MINING_MACHINE)
+            .gui(IMMenuTypes.SMALL_MINING_MACHINE)
             .build();
 
     public static final MultiblockRegistration<IndustrialFurnacesLogic.State> INDUSTRIAL_FURNACES = metal(new IndustrialFurnacesLogic(), "industrial_furnaces")
@@ -69,9 +74,9 @@ public class IMMultiblockLogic {
             }, MultiblockItem::new)
             .build();
 
-    public static final MultiblockRegistration<CoilLogic.State> COIL_TEMPLATE = coil(new CoilLogic(IEBlocks.MetalDecoration.LV_COIL), "coil_template", IEBlocks.MetalDecoration.LV_COIL)
+    public static final MultiblockRegistration<CoilLogic.State> COIL = coil(new CoilLogic(), "coil")
             .notMirrored()
-            .structure(() -> IMMultiblocks.COIL_TEMPLATE)
+            .structure(() -> IMMultiblocks.COIL)
             .build();
 
     public static void init(IEventBus bus) {
@@ -87,10 +92,10 @@ public class IMMultiblockLogic {
                 .defaultBlock(BLOCK_REGISTER, ITEM_REGISTER, IEBlocks.METAL_PROPERTIES_NO_OCCLUSION.get());
     }
 
-    public static IEMultiblockBuilder<CoilLogic.State> coil(IMultiblockLogic<CoilLogic.State> logic, String name, Supplier<? extends Block> blockSupplier) {
+    public static IEMultiblockBuilder<CoilLogic.State> coil(IMultiblockLogic<CoilLogic.State> logic, String name) {
         return new IEMultiblockBuilder<>(logic, name)
                 .defaultBEs(BE_REGISTER)
-                .customBlock(BLOCK_REGISTER, ITEM_REGISTER, reg -> new IMCoilBlock(IEBlocks.METAL_PROPERTIES_NO_OCCLUSION.get(), reg, blockSupplier), IMMultiblockItem::new);
+                .customBlock(BLOCK_REGISTER, ITEM_REGISTER, reg -> new IMCoilPartBlock(IEBlocks.METAL_PROPERTIES_NO_OCCLUSION.get(), reg), IMMultiblockItem::new);
     }
 
     public static <S extends IMultiblockState> IEMultiblockBuilder<S> metalNoDefault(IMultiblockLogic<S> logic, String name) {

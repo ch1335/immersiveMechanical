@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/steel"
+    },
+    "B": {
+      "item": "immersiveengineering:insulating_glass"
+    }
+  },
+  "pattern": [
+    " A ",
+    "BAB",
+    "BAB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersive_mechanical:connector_ehv_relay"
+  },
+  "show_notification": false
+}

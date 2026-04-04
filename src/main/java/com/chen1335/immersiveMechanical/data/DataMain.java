@@ -1,7 +1,9 @@
 package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.data.tag.IMBlockTagsProvider;
 import com.chen1335.immersiveMechanical.data.tag.IMDamageTypeTagsProvider;
+import com.chen1335.immersiveMechanical.data.tag.IMItemTagsProvider;
 import com.chen1335.immersiveMechanical.data.worldgen.IMFeatureUtils;
 import com.chen1335.immersiveMechanical.data.worldgen.IMPlacementUtils;
 import net.minecraft.core.RegistrySetBuilder;
@@ -9,7 +11,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.NeoForgeRenderTypes;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;

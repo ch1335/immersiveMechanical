@@ -1,0 +1,13 @@
+{
+  "type": "immersiveengineering:crusher",
+  "energy": 0,
+  "input": {
+    "tag": "c:ores/chrome"
+  },
+  "result": {
+    "basePredicate": {
+      "tag": "c:dusts/chrome"
+    },
+    "count": 2
+  }
+}

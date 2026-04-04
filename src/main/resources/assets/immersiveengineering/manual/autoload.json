@@ -1,12 +1,9 @@
 {
-  "heavy_machinery": {
+  "immersive_mechanical": {
+    "category_weight": 110,
     "entry_list": [
       "im_green_house",
-      "im_industrial_furnace"
-    ]
-  },
-  "electrical_grids": {
-    "entry_list": [
+      "im_industrial_furnace",
       "im_large_battery"
     ]
   }

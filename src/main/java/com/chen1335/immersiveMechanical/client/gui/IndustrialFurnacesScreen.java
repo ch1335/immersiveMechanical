@@ -65,7 +65,6 @@ public class IndustrialFurnacesScreen extends IEContainerScreen<IndustrialFurnac
     @Override
     protected void init() {
         super.init();
-        super.init();
         distributeButton = new GuiButtonIE(leftPos+78, topPos+17, 16, 16, Component.empty(), DISTRIBUTE,
                 btn -> {
                     if(menu.getCarried().isEmpty())

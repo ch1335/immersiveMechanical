@@ -323,16 +323,16 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
                     for (int i = 0; i < state.products.getSlots(); i++) {
                         ItemStack stack = state.products.getStackInSlot(i);
                         if (!stack.isEmpty()) {
-                            state.products.setStackInSlot(i, ItemHandlerHelper.insertItem(itemHandler, stack, false));
+                            state.products.setStackInSlot(i, ItemHandlerHelper.insertItemStacked(itemHandler, stack, false));
                         }
                     }
 
                     for (ItemStack outputStack : outputs) {
                         ItemStack output = outputStack.copy();
                         if (itemHandler != null) {
-                            output = ItemHandlerHelper.insertItem(itemHandler, output, false);
+                            output = ItemHandlerHelper.insertItemStacked(itemHandler, output, false);
                         }
-                        ItemHandlerHelper.insertItem(state.products, output, false);
+                        ItemHandlerHelper.insertItemStacked(state.products, output, false);
                     }
 
                     reset();

@@ -1,10 +1,12 @@
 package com.chen1335.immersiveMechanical.client.models.callbacks;
 
 import blusunrize.immersiveengineering.api.client.ieobj.BlockCallback;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.ModelUtils;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.IMCoilBlock;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,8 +23,11 @@ public class CoilCallbacks implements BlockCallback<Block> {
 
     @Override
     public Block extractKey(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, BlockEntity blockEntity) {
-        if (state.getBlock() instanceof IMCoilBlock coilBlock) {
-            return coilBlock.getMaterialBlock();
+        if (level.getBlockEntity(pos) instanceof IMultiblockBE<?> be) {
+            IMultiblockState multiblockState = be.getHelper().getState();
+            if (multiblockState instanceof CoilLogic.State coilState) {
+                return coilState.getCoilBlock();
+            }
         }
         return getDefaultKey();
     }

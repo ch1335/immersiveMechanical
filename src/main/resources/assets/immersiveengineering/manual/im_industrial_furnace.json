@@ -5,6 +5,6 @@
   },
   "coil": {
     "type": "multiblock",
-    "name": "immersive_mechanical:multiblocks/coil_template"
+    "name": "immersive_mechanical:multiblocks/coil"
   }
 }

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    },
+    {
+      "tag": "c:nuggets/chrome"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "immersive_mechanical:ingot_chrome"
+  }
+}

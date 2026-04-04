@@ -46,24 +46,23 @@ public class ImmersiveMechanical {
         IMRecipe.register(modEventBus);
         IMSounds.REGISTER.register(modEventBus);
         IMMultiblockLogic.init(modEventBus);
+        IMAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
         if (dist.isClient()) {
             IMClient.init();
         }
 
-
-        CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, id("multiblocks/lv_coil"), new CoilInfo(1F, 1F));
-        CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, id("multiblocks/mv_coil"), new CoilInfo(1.3F, 1.15F));
-        CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, id("multiblocks/hv_coil"), new CoilInfo(1.7F, 1.25F));
-        CoilInfo.register(IMBlocks.COIL_NICHROME, id("multiblocks/coil_nichrome"), new CoilInfo(2.2F, 1.45F));
-
         IMMultiblocks.init();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
         IMWireTypes.setup();
-        CoilInfo.setup();
+        CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, new CoilInfo(1F, 1F));
+        CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, new CoilInfo(1.3F, 1.15F));
+        CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, new CoilInfo(1.7F, 1.25F));
+        CoilInfo.register(IMBlocks.COIL_NICHROME, new CoilInfo(2.2F, 1.45F));
+
     }
 
     public static ResourceLocation id(String path) {

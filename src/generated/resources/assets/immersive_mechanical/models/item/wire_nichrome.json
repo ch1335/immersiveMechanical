@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "immersive_mechanical:item/wire_nichrome"
+  }
+}

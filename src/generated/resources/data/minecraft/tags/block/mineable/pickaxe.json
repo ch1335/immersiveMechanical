@@ -2,6 +2,15 @@
   "values": [
     "immersive_mechanical:large_battery_core",
     "immersive_mechanical:chrome_ore",
-    "immersive_mechanical:deepslate_chrome_ore"
+    "immersive_mechanical:deepslate_chrome_ore",
+    "immersive_mechanical:connector_ehv",
+    "immersive_mechanical:connector_ehv_relay",
+    "immersive_mechanical:turret_laser",
+    "immersive_mechanical:coil_nichrome",
+    "immersive_mechanical:large_battery",
+    "immersive_mechanical:green_house",
+    "immersive_mechanical:industrial_furnaces",
+    "immersive_mechanical:coil",
+    "immersive_mechanical:small_mining_machine"
   ]
 }

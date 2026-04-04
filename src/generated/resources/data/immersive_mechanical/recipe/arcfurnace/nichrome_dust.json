@@ -1,0 +1,14 @@
+{
+  "type": "immersiveengineering:arc_furnace",
+  "additives": [],
+  "energy": 25600,
+  "input": {
+    "item": "immersive_mechanical:dust_nichrome"
+  },
+  "results": [
+    {
+      "tag": "c:ingots/nichrome"
+    }
+  ],
+  "time": 100
+}

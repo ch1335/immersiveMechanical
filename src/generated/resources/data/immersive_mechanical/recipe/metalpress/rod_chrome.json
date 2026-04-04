@@ -1,0 +1,12 @@
+{
+  "type": "immersiveengineering:metal_press",
+  "energy": 2400,
+  "input": {
+    "tag": "c:ingots/chrome"
+  },
+  "mold": "immersiveengineering:mold_rod",
+  "result": {
+    "count": 2,
+    "id": "immersive_mechanical:stick_chrome"
+  }
+}

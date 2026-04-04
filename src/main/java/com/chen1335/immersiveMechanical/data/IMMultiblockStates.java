@@ -26,6 +26,8 @@ public class IMMultiblockStates extends MultiblockStates {
         this.createMultiblock(this.innerObj("block/metal_multiblock/industrial_furnaces.obj"), IMMultiblocks.INDUSTRIAL_FURNACES);
 //        this.createMultiblock(this.innerObj("block/metal_multiblock/green_house.obj.ie").renderType(RenderType.TRANSLUCENT.name), IMMultiblocks.GREEN_HOUSE);
 
+        this.createMultiblock(this.innerObj("block/metal_multiblock/small_mining_machine.obj"), IMMultiblocks.SMALL_MINING_MACHINE);
+
         this.im_createDynamicMultiblock(
                 this.ieObjBuilder("block/metal_multiblock/green_house.obj.ie", innerModels)
                         .callback(GreenHouseCallbacks.INSTANCE)
@@ -39,7 +41,7 @@ public class IMMultiblockStates extends MultiblockStates {
                         .callback(CoilCallbacks.INSTANCE)
                         .layer(solid())
                         .end(),
-                IMMultiblocks.COIL_TEMPLATE
+                IMMultiblocks.COIL
         );
     }
 
