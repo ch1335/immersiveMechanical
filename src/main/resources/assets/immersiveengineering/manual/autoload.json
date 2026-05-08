@@ -4,7 +4,8 @@
     "entry_list": [
       "im_green_house",
       "im_industrial_furnace",
-      "im_large_battery"
+      "im_large_battery",
+      "im_small_mining_machine"
     ]
   }
 }

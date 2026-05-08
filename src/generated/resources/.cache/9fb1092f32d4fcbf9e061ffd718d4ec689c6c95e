@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-25T21:53:28.7945421	Recipes
+// 1.21.1	2026-05-08T14:58:53.0098174	Recipes
 61d7ffc4ce99ebabb13920f6217d0c1f706c95b4 data/immersive_mechanical/advancement/recipes/misc/aluminum_conductor_steel_reinforced.json
 5be4883c866abccb1d2a585676136c953b0b6019 data/immersive_mechanical/advancement/recipes/misc/coil_nichrome.json
 eac4fc9ee0b1f8de48aa89b1ff98fcc2979183e5 data/immersive_mechanical/advancement/recipes/misc/connector_ehv.json
@@ -43,4 +43,4 @@ b95c0309a74546c1ed2b83632849f07eeb44ffa0 data/immersive_mechanical/recipe/metalp
 cb5f1d07c431fc322e962921e45b759bcf17ea18 data/immersive_mechanical/recipe/nugget_nichrome.json
 cbfcdf09f59a7a5ba981e18b3ee2507071626430 data/immersive_mechanical/recipe/plate_chrome.json
 8dc5f13c4e1e2fde0b213db0253bd38f3f94c320 data/immersive_mechanical/recipe/plate_nichrome.json
-4483622b72419ce7cdd34a1d8569aa7e7d362d5f data/immersive_mechanical/recipe/wire_nichrome.json
+ccd1bfe7c780c3ac0a9360f34795557315dfbd87 data/immersive_mechanical/recipe/wire_nichrome.json

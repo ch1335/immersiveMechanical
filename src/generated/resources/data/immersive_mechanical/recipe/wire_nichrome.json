@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/nichrome"
+      "tag": "c:plates/nichrome"
     },
     {
       "item": "immersiveengineering:wirecutter"

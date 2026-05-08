@@ -63,7 +63,6 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
     private static final GameProfile MINER = new GameProfile(UUID.fromString("c870399f-003d-4f94-892d-140bb095f381"), "[SmallMiningMachineMiner]");
     private static final BlockPos CENTER = new BlockPos(1, 0, 1);
 
-    private BooleanSupplier isPlayingSound = () -> false;
 
     @Override
     public void tickClient(IMultiblockContext<State> context) {
@@ -76,8 +75,8 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         }else {
             state.rotate(0);
         }
-        if (!isPlayingSound.getAsBoolean()) {
-            isPlayingSound = MultiblockSound.startSound(
+        if (!state.isPlayingSound.getAsBoolean()) {
+            state.isPlayingSound = MultiblockSound.startSound(
                     () -> state.active, context.isValid(), pos, IESounds.drill_harvest, 0.5f
             );
         }
@@ -211,6 +210,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         public boolean finished = false;
         public BlockPos.MutableBlockPos currentMinedPos = null;
         public final Supplier<IItemHandler> output;
+        private BooleanSupplier isPlayingSound = () -> false;
         public ItemStackHandler inventory = new ItemStackHandler(13) {
             @Override
             public int getSlotLimit(int slot) {

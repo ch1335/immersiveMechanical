@@ -185,7 +185,7 @@ public class IMRecipeProvider extends RecipeProvider {
         }
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, IMItems.WIRE_NICHROME)
-                .requires(IMMetals.NICHROME.getTag(IMMetalTypes.INGOTS))
+                .requires(IMMetals.NICHROME.getTag(IMMetalTypes.PLATES))
                 .requires(IEItems.Tools.WIRECUTTER)
                 .unlockedBy("has_nichrome_ingot", has(IMMetals.NICHROME.getTag(IMMetalTypes.INGOTS)))
                 .save(recipeOutput, toRL(toPath(IMItems.WIRE_NICHROME)));
