@@ -199,7 +199,7 @@ tasks.register("buildWithoutDataGen") {
     group "build"
     dependsOn build
     jar {
-        exclude "com/chen1335/data"
+        exclude "com/chen1335/immersiveMechanical/data"
     }
 }
 
