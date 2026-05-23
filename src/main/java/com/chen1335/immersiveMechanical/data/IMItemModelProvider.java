@@ -2,6 +2,7 @@ package com.chen1335.immersiveMechanical.data;
 
 import blusunrize.immersiveengineering.data.ItemModels;
 import blusunrize.immersiveengineering.data.blockstates.MultiblockStates;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetals;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
@@ -17,9 +18,9 @@ public class IMItemModelProvider extends ItemModels {
 
     @Override
     protected void registerModels() {
-        this.obj(IMItems.CONNECTOR_EHV.get(), ImmersiveMechanical.id("block/connector/connector_ehv.obj")).texture("texture", this.modLoc("block/connector/connector_ehv")).transforms(ImmersiveMechanical.id("item/connector"));
+        this.obj(IMBlocks.CONNECTOR_EHV.get(), ImmersiveMechanical.id("block/connector/connector_ehv.obj")).texture("texture", this.modLoc("block/connector/connector_ehv")).transforms(ImmersiveMechanical.id("item/connector"));
 
-        this.obj(IMItems.CONNECTOR_EHV_RELAY.get(), ImmersiveMechanical.id("block/connector/connector_ehv_relay.obj")).texture("texture", this.modLoc("block/connector/connector_ehv_relay")).transforms(ImmersiveMechanical.id("item/connector"));
+        this.obj(IMBlocks.CONNECTOR_EHV_RELAY.get(), ImmersiveMechanical.id("block/connector/connector_ehv_relay.obj")).texture("texture", this.modLoc("block/connector/connector_ehv_relay")).transforms(ImmersiveMechanical.id("item/connector"));
 
         this.obj(IMMultiblocks.LARGE_BATTERY.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/large_battery.obj")).transforms(ImmersiveMechanical.id("item/large_battery"));
 
@@ -32,16 +33,8 @@ public class IMItemModelProvider extends ItemModels {
         this.obj(IMMultiblocks.SMALL_MINING_MACHINE.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/small_mining_machine.obj")).transforms(ImmersiveMechanical.id("item/small_mining_machine"));
 
 
-        this.obj(IMItems.LASER_TURRET.get(), ImmersiveMechanical.id("block/metal_device/turret_laser_inv.obj")).transforms(ImmersiveMechanical.id("item/turret"));
+        this.obj(IMBlocks.TURRET_LASER.get(), ImmersiveMechanical.id("block/metal_device/turret_laser_inv.obj")).transforms(ImmersiveMechanical.id("item/turret"));
 
-        this.addItemModels("", IMItems.ACSR.get());
-        this.addItemModels("", IMItems.EHV_WIRE_COIL.get());
-        this.addItemModels("", IMItems.ROW_CHROME.get());
-        IMMetals.METALS.forEach((metals, metalTypesDeferredItemMap) -> {
-            metalTypesDeferredItemMap.forEach((metalTypes, itemDeferredItem) -> {
-                this.addItemModels("", itemDeferredItem);
-            });
-        });
 
     }
 }

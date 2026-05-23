@@ -8,6 +8,7 @@ import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.blockEntities.IMEnergyConnectorBlockEntity;
 import com.chen1335.immersiveMechanical.common.blockEntities.LargeBatteryCoreTile;
 import com.chen1335.immersiveMechanical.common.blockEntities.TurretLaserBlockEntity;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.mixins.immersive_mechanical.EnergyConnectorBlockEntityAccessor;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;

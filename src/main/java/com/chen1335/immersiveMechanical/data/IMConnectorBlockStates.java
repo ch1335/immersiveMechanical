@@ -1,7 +1,7 @@
 package com.chen1335.immersiveMechanical.data;
 
 import blusunrize.immersiveengineering.data.blockstates.ConnectorBlockStates;
-import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.client.renderer.RenderType;

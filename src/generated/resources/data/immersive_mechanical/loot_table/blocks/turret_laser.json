@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "immersive_mechanical:laser_turret"
+          "name": "immersive_mechanical:turret_laser"
         }
       ],
       "rolls": 1.0

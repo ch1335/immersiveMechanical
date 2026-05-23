@@ -1,7 +1,7 @@
 package com.chen1335.immersiveMechanical.data.tag;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
-import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.API.tags.IMBlockTags;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import net.minecraft.core.HolderLookup;

@@ -6,21 +6,20 @@ import com.chen1335.immersiveMechanical.API.registrate.IERegistrate;
 import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.mojang.logging.LogUtils;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
@@ -33,19 +32,16 @@ public class ImmersiveMechanical {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("immersive_mechanical", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.immersive_mechanical")) //The language key for the title of your CreativeModeTab
-            .icon(Items.IRON_INGOT::getDefaultInstance)
-            .displayItems((parameters, output) -> {
-                for (DeferredHolder<Item, ? extends Item> entry : IMItems.ITEMS.getEntries()) {
-                    output.accept(entry.value().getDefaultInstance());
-                }
-            }).build());
+    public static RegistryEntry<CreativeModeTab, CreativeModeTab> TAB = REGISTRATE.defaultCreativeTab("immersive_mechanical",
+                    builder -> builder
+                            .icon(() -> IMMultiblocks.GREEN_HOUSE.getBlockItem().getDefaultInstance())
+                            .title(Component.translatable("itemGroup.immersive_mechanical"))
+                            .build())
+            .register();
 
     public ImmersiveMechanical(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         REGISTRATE.registerEventListeners(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
-        IMBlocks.BLOCKS.register(modEventBus);
         IMBlockEntityTypes.BLOCKS.register(modEventBus);
         IMItems.register(modEventBus);
         IMRecipe.register(modEventBus);
@@ -57,6 +53,8 @@ public class ImmersiveMechanical {
             IMClient.init();
         }
         IMMultiblocks.init();
+        IMItems.init();
+        IMBlocks.init();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

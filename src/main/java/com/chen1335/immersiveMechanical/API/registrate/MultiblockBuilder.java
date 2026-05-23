@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.TemplateMultiblock;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockItem;
@@ -12,8 +13,9 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMulti
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes;
+import com.chen1335.immersiveMechanical.API.registrate.data.IMLootHelper;
 import com.google.common.base.Preconditions;
-import com.tterrag.registrate.AbstractRegistrate;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -35,12 +37,30 @@ import java.util.function.Supplier;
 @MethodsReturnNonnullByDefault
 public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblockLogic<S>> {
     private final List<Consumer<MultiblockDefinition<S, L>>> onRegister = new ArrayList<>();
-    private final AbstractRegistrate<?> owner;
+    private final IERegistrate owner;
     private final String name;
     private final Supplier<L> logicSupplier;
     private final IMultiblockFactory multiblockFactory;
-    private final DeferredRegister<Block> multiblockBlocks;
-    private final DeferredRegister<Item> multiblockItems;
+
+    private final MultiblockRegistrationBuilder.RegistrationMethod<Block> blockRegistrationMethod = new MultiblockRegistrationBuilder.RegistrationMethod<Block>() {
+        @Override
+        public <T extends Block> Supplier<T> register(String path, Supplier<T> makeInstance) {
+            return owner.block(path, properties1 -> makeInstance.get())
+                    .blockstate(NonNullBiConsumer.noop())
+                    .loot(IMLootHelper::registerMultiblock)
+                    .register();
+        }
+    };
+
+    private final MultiblockRegistrationBuilder.RegistrationMethod<Item> itemRegistrationMethod = new MultiblockRegistrationBuilder.RegistrationMethod<Item>() {
+        @Override
+        public <T extends Item> Supplier<T> register(String path, Supplier<T> makeInstance) {
+            return owner.item(path, properties1 -> makeInstance.get())
+                    .model(NonNullBiConsumer.noop())
+                    .register();
+        }
+    };
+
     private final DeferredRegister<BlockEntityType<?>> multiblockBes;
     private BlockPos masterFromOrigin;
     private BlockPos triggerFromOrigin;
@@ -59,20 +79,16 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
 
     private Function<Block, Item> makeItem = MultiblockItem::new;
 
-    public MultiblockBuilder(AbstractRegistrate<?> owner,
+    public MultiblockBuilder(IERegistrate owner,
                              String name,
                              Supplier<L> logicSupplier,
                              IMultiblockFactory multiblockFactory,
-                             DeferredRegister<Block> multiblockBlocks,
-                             DeferredRegister<Item> multiblockItems,
                              DeferredRegister<BlockEntityType<?>> multiblockBes
     ) {
         this.owner = owner;
         this.name = name;
         this.logicSupplier = logicSupplier;
         this.multiblockFactory = multiblockFactory;
-        this.multiblockBlocks = multiblockBlocks;
-        this.multiblockItems = multiblockItems;
         this.multiblockBes = multiblockBes;
     }
 
@@ -134,6 +150,7 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         return this;
     }
 
+
     public MultiblockDefinition<S, L> register() {
         Objects.requireNonNull(masterFromOrigin);
         Objects.requireNonNull(triggerFromOrigin);
@@ -143,7 +160,7 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         L logic = logicSupplier.get();
         Mutable<TemplateMultiblock> typeBox = new MutableObject<>();
         IEMultiblockBuilder<S> builder = new IEMultiblockBuilder<>(logic, name)
-                .customBlock(multiblockBlocks, multiblockItems, makeBlock, makeItem)
+                .customBlock(blockRegistrationMethod, itemRegistrationMethod, makeBlock, makeItem)
                 .defaultBEs(multiblockBes)
                 .structure(typeBox::getValue);
 

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "immersive_mechanical:laser_turret"
+        "recipe": "immersive_mechanical:turret_laser"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "immersive_mechanical:laser_turret"
+      "immersive_mechanical:turret_laser"
     ]
   }
 }

@@ -1,6 +1,6 @@
 package com.chen1335.immersiveMechanical.data.worldgen;
 
-import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceKey;

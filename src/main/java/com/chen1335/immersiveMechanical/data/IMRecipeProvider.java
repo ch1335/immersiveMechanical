@@ -9,6 +9,7 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.data.recipes.builder.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.MetalPressRecipeBuilder;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetalTypes;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetals;
@@ -35,7 +36,7 @@ public class IMRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput, HolderLookup.@NotNull Provider holderLookup) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.LARGE_BATTERY_CORE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMBlocks.LARGE_BATTERY_CORE.get())
                 .define('A', IETags.getItemTag(IETags.getTagsFor(EnumMetals.STEEL).sheetmetal))
                 .define('B', IEBlocks.MetalDevices.CAPACITOR_HV)
                 .define('C', IEBlocks.MetalDecoration.ENGINEERING_LIGHT)
@@ -46,7 +47,7 @@ public class IMRecipeProvider extends RecipeProvider {
                 .showNotification(false)
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.LASER_TURRET.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMBlocks.TURRET_LASER.get())
                 .define('A', IEBlocks.MetalDevices.CAPACITOR_HV)
                 .define('B', IEBlocks.WoodenDevices.TURNTABLE)
                 .define('C', IEBlocks.MetalDecoration.ENGINEERING_RS)
@@ -90,7 +91,7 @@ public class IMRecipeProvider extends RecipeProvider {
                 .showNotification(false)
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.COIL_NICHROME.get().getDefaultInstance())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMBlocks.COIL_NICHROME.get())
                 .define('A', IETags.getTagsFor(EnumMetals.STEEL).ingot)
                 .define('B', IMItems.NICHROME_WIRE_COIL.get())
                 .pattern("BBB")
@@ -100,7 +101,7 @@ public class IMRecipeProvider extends RecipeProvider {
                 .showNotification(false)
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.CONNECTOR_EHV.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMBlocks.CONNECTOR_EHV.get())
                 .define('A', IETags.getTagsFor(EnumMetals.STEEL).ingot)
                 .define('B', IETags.connectorInsulator)
                 .pattern(" A ")
@@ -110,7 +111,7 @@ public class IMRecipeProvider extends RecipeProvider {
                 .showNotification(false)
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.CONNECTOR_EHV_RELAY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMBlocks.CONNECTOR_EHV_RELAY.get())
                 .define('A', IETags.getTagsFor(EnumMetals.STEEL).ingot)
                 .define('B', IEBlocks.StoneDecoration.INSULATING_GLASS)
                 .pattern(" A ")

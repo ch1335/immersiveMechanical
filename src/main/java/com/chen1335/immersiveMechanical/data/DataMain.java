@@ -46,7 +46,7 @@ public class DataMain {
         generator.addProvider(event.includeServer(), new IMItemTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), imBlockTagsProvider.contentsGetter()));
 
         generator.addProvider(event.includeServer(), new IMConnectorBlockStates(generator.getPackOutput(), event.getExistingFileHelper()));
-        generator.addProvider(event.includeServer(), new IMLootTableProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider()));
+
         generator.addProvider(event.includeServer(), new IMItemModelProvider(generator.getPackOutput(), event.getExistingFileHelper(), multiblockStates));
 
         generator.addProvider(event.includeServer(), new IMDynamicModels(multiblockStates, generator.getPackOutput(), event.getExistingFileHelper()));

@@ -1,6 +1,6 @@
-// 1.21.1	2026-04-02T18:21:01.9000197	Tags for minecraft:block mod id immersive_mechanical
+// 1.21.1	2026-05-24T02:31:43.6642121	Tags for minecraft:block mod id immersive_mechanical
 e81b8d24fcb6ffcfa74b0ecb055f11270ea25895 data/c/tags/block/ores.json
 fb779b98375989c22a2e3c8026161fb734b25c8c data/c/tags/block/ores/chrome.json
 59b32e0eb1f95ad07fa8f047fdd9badfcd5c21ff data/c/tags/block/ores_in_ground/deepslate.json
-c7df8df2cd6ada5de9f36d331bd79e2bf410293d data/minecraft/tags/block/mineable/pickaxe.json
+d7e661fea9a89e0025f06e753c29e59fd61327f2 data/minecraft/tags/block/mineable/pickaxe.json
 d8dae30ba5880494d2fbf01bcdabdb7cdc6c1ab7 data/minecraft/tags/block/needs_iron_tool.json

@@ -1,5 +1,6 @@
 package com.chen1335.immersiveMechanical.data.tag;
 
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetals;
 import com.chen1335.immersiveMechanical.API.tags.IMItemTags;
@@ -30,8 +31,8 @@ public class IMItemTagsProvider extends ItemTagsProvider {
         });
 
         tag(IMItemTags.ORES_CHROME).add(
-                IMItems.CHROME_ORE.asItem(),
-                IMItems.DEEPSLATE_CHROME_ORE.asItem()
+                IMBlocks.CHROME_ORE.asItem(),
+                IMBlocks.DEEPSLATE_CHROME_ORE.asItem()
         );
 
         tag(IMItemTags.RAW_CHROME).add(

@@ -5,6 +5,8 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.tterrag.registrate.AbstractRegistrate;
+import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.providers.RegistrateProvider;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -36,6 +38,14 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
     }
 
     @Override
+    public <T extends RegistrateProvider> void genData(ProviderType<? extends T> type, T gen) {
+        if (type == ProviderType.LANG) {
+            return;
+        }
+        super.genData(type, gen);
+    }
+
+    @Override
     public IERegistrate registerEventListeners(IEventBus bus) {
         multiblockBlocks.register(bus);
         multiblockItems.register(bus);
@@ -52,7 +62,7 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
     }
 
     public <S extends IMultiblockState, L extends IMultiblockLogic<S>> MultiblockBuilder<S, L> multiblock(String name, Supplier<L> lSupplier, IMultiblockFactory multiblockFactory) {
-        return new MultiblockBuilder<>(this, name, lSupplier, multiblockFactory, multiblockBlocks, multiblockItems, multiblockBes).onRegister(definition -> multiblocks.add(definition.multiblock()));
+        return new MultiblockBuilder<>(this, name, lSupplier, multiblockFactory, multiblockBes).onRegister(definition -> multiblocks.add(definition.multiblock()));
     }
 
     public List<MultiblockHandler.IMultiblock> getMultiblocks() {
