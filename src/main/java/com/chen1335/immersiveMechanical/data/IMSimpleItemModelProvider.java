@@ -1,7 +1,7 @@
 package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
-import com.chen1335.immersiveMechanical.API.objects.IMItems;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;

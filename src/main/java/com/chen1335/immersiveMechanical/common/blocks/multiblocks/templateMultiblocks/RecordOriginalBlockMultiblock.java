@@ -9,15 +9,12 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockS
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBMemorizeStructure;
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
+import com.chen1335.immersiveMechanical.API.registrate.SimpleMultiblock;
 import com.chen1335.immersiveMechanical.attachmentDatas.IMBEAttachmentData;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -32,28 +29,16 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.NotNull;
 
-
-public class CoilTemplate extends IETemplateMultiblock {
-    private final MultiblockRegistration<CoilLogic.State> logic;
+import java.util.List;
 
 
-    public CoilTemplate(ResourceLocation loc, MultiblockRegistration<CoilLogic.State> logic) {
-        super(loc, new BlockPos(1, 0, 2), new BlockPos(1, 0, 2), new BlockPos(3, 1, 3), logic, ImmutableList.of((expected, found, world, pos) -> {
-            if (CoilInfo.COIL_INFO_MAP.containsKey(found.getBlock())) {
-                return BlockMatcher.Result.allow(2);
-            }
-            return BlockMatcher.Result.DEFAULT;
-        }));
+public class RecordOriginalBlockMultiblock extends SimpleMultiblock {
+
+    private final MultiblockRegistration<?> logic;
+
+    public RecordOriginalBlockMultiblock(ResourceLocation loc, BlockPos masterFromOrigin, BlockPos triggerFromOrigin, BlockPos size, MultiblockRegistration<?> logic, List<BlockMatcher.MatcherPredicate> additionalPredicates, float manualScale) {
+        super(loc, masterFromOrigin, triggerFromOrigin, size, logic, additionalPredicates, manualScale);
         this.logic = logic;
-    }
-
-    @Override
-    public float getManualScale() {
-        return 9;
-    }
-
-    public MultiblockRegistration<CoilLogic.State> getLogic() {
-        return logic;
     }
 
     @Override

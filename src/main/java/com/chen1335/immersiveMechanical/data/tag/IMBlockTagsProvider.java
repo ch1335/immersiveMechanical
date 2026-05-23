@@ -16,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks.IM_MULTIBLOCKS;
 
 public class IMBlockTagsProvider extends BlockTagsProvider {
     public IMBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
@@ -59,7 +58,7 @@ public class IMBlockTagsProvider extends BlockTagsProvider {
                 IMBlocks.DEEPSLATE_CHROME_ORE.value()
         );
 
-        Block[] array = IM_MULTIBLOCKS.stream().map(MultiblockHandler.IMultiblock::getBlock).toList().toArray(new Block[0]);
+        Block[] array = ImmersiveMechanical.REGISTRATE.getMultiblocks().stream().map(MultiblockHandler.IMultiblock::getBlock).toList().toArray(new Block[0]);
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
                 array

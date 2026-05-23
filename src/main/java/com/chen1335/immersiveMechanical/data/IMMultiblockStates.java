@@ -5,7 +5,7 @@ import blusunrize.immersiveengineering.data.blockstates.MultiblockStates;
 import blusunrize.immersiveengineering.data.models.NongeneratedModels;
 import com.chen1335.immersiveMechanical.client.models.callbacks.CoilCallbacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -22,18 +22,18 @@ public class IMMultiblockStates extends MultiblockStates {
 
     @Override
     protected void registerStatesAndModels() {
-        this.createMultiblock(this.innerObj("block/metal_multiblock/large_battery.obj"), IMMultiblocks.LARGE_BATTERY);
-        this.createMultiblock(this.innerObj("block/metal_multiblock/industrial_furnaces.obj"), IMMultiblocks.INDUSTRIAL_FURNACES);
+        this.createMultiblock(this.innerObj("block/metal_multiblock/large_battery.obj"), IMMultiblocks.LARGE_BATTERY.multiblock());
+        this.createMultiblock(this.innerObj("block/metal_multiblock/industrial_furnaces.obj"), IMMultiblocks.INDUSTRIAL_FURNACES.multiblock());
 //        this.createMultiblock(this.innerObj("block/metal_multiblock/green_house.obj.ie").renderType(RenderType.TRANSLUCENT.name), IMMultiblocks.GREEN_HOUSE);
 
-        this.createMultiblock(this.innerObj("block/metal_multiblock/small_mining_machine.obj"), IMMultiblocks.SMALL_MINING_MACHINE);
+        this.createMultiblock(this.innerObj("block/metal_multiblock/small_mining_machine.obj"), IMMultiblocks.SMALL_MINING_MACHINE.multiblock());
 
         this.im_createDynamicMultiblock(
                 this.ieObjBuilder("block/metal_multiblock/green_house.obj.ie", innerModels)
                         .callback(GreenHouseCallbacks.INSTANCE)
                         .layer(solid(), translucent())
                         .end(),
-                IMMultiblocks.GREEN_HOUSE
+                IMMultiblocks.GREEN_HOUSE.multiblock()
         );
 
         this.im_createDynamicMultiblock(
@@ -41,7 +41,7 @@ public class IMMultiblockStates extends MultiblockStates {
                         .callback(CoilCallbacks.INSTANCE)
                         .layer(solid())
                         .end(),
-                IMMultiblocks.COIL
+                IMMultiblocks.COIL.multiblock()
         );
     }
 

@@ -43,7 +43,6 @@ public abstract class RecipeManagerMixin extends SimpleJsonResourceReloadListene
 
     @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("HEAD"))
     private void applyHead(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
-
         IM$REGISTRIES = registries;
     }
 

@@ -2,8 +2,8 @@ package com.chen1335.immersiveMechanical.compat.jei.categories;
 
 import blusunrize.immersiveengineering.common.util.Utils;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
-import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
 import com.chen1335.immersiveMechanical.compat.jei.IMJei;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
@@ -34,7 +34,7 @@ public class IndustrialFurnaceCategory implements IRecipeCategory<RecipeHolder<I
     public IndustrialFurnaceCategory(IJeiHelpers jeiHelpers) {
         IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
         this.background = guiHelper.drawableBuilder(ICON, 0, 0, 58, 20).setTextureSize(58, 20).build();
-        this.icon = guiHelper.createDrawableItemStack(IMMultiblockLogic.INDUSTRIAL_FURNACES.iconStack());
+        this.icon = guiHelper.createDrawableItemStack(IMMultiblocks.INDUSTRIAL_FURNACES.registration().iconStack());
     }
 
     @Override

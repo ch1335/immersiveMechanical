@@ -6,7 +6,7 @@ import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.TagOutputList;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
 import com.chen1335.immersiveMechanical.API.objects.IMRecipe;
-import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -27,7 +27,6 @@ import java.util.function.Supplier;
 public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
     public static final Supplier<RecipeMultiplier> MULTIPLIERS = Suppliers.memoize(() -> new RecipeMultiplier(IndustrialFurnaceRecipe::timeModifier, IndustrialFurnaceRecipe::energyModifier));
     public static final CachedRecipeList<IndustrialFurnaceRecipe> RECIPES = new CachedRecipeList<>(IMRecipe.Types.INDUSTRIAL_FURNACE);
-
 
 
     private final Ingredient input;
@@ -118,7 +117,7 @@ public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
 
         @Override
         public ItemStack getIcon() {
-            return IMMultiblockLogic.INDUSTRIAL_FURNACES.iconStack();
+            return IMMultiblocks.INDUSTRIAL_FURNACES.registration().iconStack();
         }
 
         @Override

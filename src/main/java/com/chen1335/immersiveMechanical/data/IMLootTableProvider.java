@@ -5,8 +5,9 @@ import blusunrize.immersiveengineering.common.util.loot.BEDropLootEntry;
 import blusunrize.immersiveengineering.common.util.loot.DropInventoryLootEntry;
 import blusunrize.immersiveengineering.data.loot.LootUtils;
 import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
-import com.chen1335.immersiveMechanical.API.objects.IMItems;
-import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
+import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -49,11 +50,11 @@ public class IMLootTableProvider extends LootTableProvider {
             this.add(IMBlocks.CHROME_ORE.value(), block -> this.createOreDrop(block, IMItems.ROW_CHROME.asItem()));
             this.add(IMBlocks.DEEPSLATE_CHROME_ORE.value(), block -> this.createOreDrop(block, IMItems.ROW_CHROME.asItem()));
 
-            this.registerMultiblock(IMMultiblockLogic.COIL);
-            this.registerMultiblock(IMMultiblockLogic.GREEN_HOUSE);
-            this.registerMultiblock(IMMultiblockLogic.LARGE_BATTERY);
-            this.registerMultiblock(IMMultiblockLogic.INDUSTRIAL_FURNACES);
-            this.registerMultiblock(IMMultiblockLogic.SMALL_MINING_MACHINE);
+            this.registerMultiblock(IMMultiblocks.COIL.registration());
+            this.registerMultiblock(IMMultiblocks.GREEN_HOUSE.registration());
+            this.registerMultiblock(IMMultiblocks.LARGE_BATTERY.registration());
+            this.registerMultiblock(IMMultiblocks.INDUSTRIAL_FURNACES.registration());
+            this.registerMultiblock(IMMultiblocks.SMALL_MINING_MACHINE.registration());
         }
 
         private void dropTile(Block holder) {
@@ -68,9 +69,7 @@ public class IMLootTableProvider extends LootTableProvider {
         protected @NotNull Iterable<Block> getKnownBlocks() {
             ArrayList<Block> blocks = new ArrayList<>();
             IMBlocks.BLOCKS.getEntries().stream().map(Holder::value).forEach(blocks::add);
-            IMMultiblockLogic.BLOCK_REGISTER.getEntries().stream().map(Holder::value).forEach(blocks::add);
-
-
+            ImmersiveMechanical.REGISTRATE.getMultiblockBlocks().getEntries().stream().map(Holder::value).forEach(blocks::add);
             return blocks;
         }
 

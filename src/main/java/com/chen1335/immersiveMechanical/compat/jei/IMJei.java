@@ -3,8 +3,8 @@ package com.chen1335.immersiveMechanical.compat.jei;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIRecipeTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMRecipe;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
-import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
 import com.chen1335.immersiveMechanical.compat.jei.categories.IndustrialFurnaceCategory;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -15,6 +15,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
@@ -37,9 +38,10 @@ public class IMJei implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(IMMultiblockLogic.GREEN_HOUSE.iconStack(), JEIRecipeTypes.CLOCHE);
-        registration.addRecipeCatalyst(IMMultiblockLogic.GREEN_HOUSE.iconStack(), JEIRecipeTypes.CLOCHE_FERTILIZER);
-        registration.addRecipeCatalyst(IMMultiblockLogic.INDUSTRIAL_FURNACES.iconStack(), INDUSTRIAL_FURNACE);
+        ItemStack greenHouseIconStack = IMMultiblocks.GREEN_HOUSE.registration().iconStack();
+        registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE);
+        registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE_FERTILIZER);
+        registration.addRecipeCatalyst(IMMultiblocks.INDUSTRIAL_FURNACES.registration().iconStack(), INDUSTRIAL_FURNACE);
     }
 
     @Override

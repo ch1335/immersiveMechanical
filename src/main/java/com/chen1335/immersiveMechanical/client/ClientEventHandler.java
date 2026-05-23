@@ -11,7 +11,7 @@ import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
 import com.chen1335.immersiveMechanical.client.render.tile.LaserTurretRender;
 import com.chen1335.immersiveMechanical.client.render.tile.SmallMiningMachineRender;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
-import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
@@ -37,9 +37,9 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void RegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(IMMultiblockLogic.GREEN_HOUSE.masterBE().get(), GreenHouseRender::new);
+            event.registerBlockEntityRenderer(IMMultiblocks.GREEN_HOUSE.getMasterBe(), GreenHouseRender::new);
             event.registerBlockEntityRenderer(IMBlockEntityTypes.TURRET_LASER.master(), LaserTurretRender::new);
-            event.registerBlockEntityRenderer(IMMultiblockLogic.SMALL_MINING_MACHINE.masterBE().get(), SmallMiningMachineRender::new);
+            event.registerBlockEntityRenderer(IMMultiblocks.SMALL_MINING_MACHINE.getMasterBe(), SmallMiningMachineRender::new);
         }
 
         @SubscribeEvent

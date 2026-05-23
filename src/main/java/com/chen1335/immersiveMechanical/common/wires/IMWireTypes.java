@@ -5,7 +5,7 @@ import blusunrize.immersiveengineering.api.wires.Connection;
 import blusunrize.immersiveengineering.api.wires.WireType;
 import blusunrize.immersiveengineering.api.wires.localhandlers.EnergyTransferHandler;
 import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
-import com.chen1335.immersiveMechanical.API.objects.IMItems;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

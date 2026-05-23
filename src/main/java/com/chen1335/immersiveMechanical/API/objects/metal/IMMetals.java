@@ -1,6 +1,6 @@
 package com.chen1335.immersiveMechanical.API.objects.metal;
 
-import com.chen1335.immersiveMechanical.API.objects.IMItems;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;

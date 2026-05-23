@@ -16,33 +16,6 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-repositories.clear()
-repositories {
-    mavenLocal()
-    maven {
-
-        url = "https://libraries.minecraft.net/"
-    }
-
-    maven {
-        url = "https://neoforged.forgecdn.net/releases"
-    }
-
-    maven {
-        url = "https://neoforged.forgecdn.net/mojang-meta"
-    }
-    exclusiveContent {
-        forRepository {
-            maven {
-                url "https://cursemaven.com"
-            }
-        }
-        filter {
-            includeGroup "curse.maven"
-        }
-    }
-}
-
 base {
     archivesName = mod_id
 }
@@ -128,6 +101,7 @@ neoForge {
 }
 
 sourceSets {
+
     main {
         resources {
             srcDir 'src/generated/resources'
@@ -144,10 +118,48 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
+repositories.clear()
+repositories {
+    mavenLocal()
+    maven {
+        name "gegyReleases"
+        url "https://maven.gegy.dev/releases"
+    }
+    maven {
+
+        url = "https://libraries.minecraft.net/"
+    }
+
+    maven {
+        url = "https://neoforged.forgecdn.net/releases"
+    }
+
+    maven {
+        url = "https://neoforged.forgecdn.net/mojang-meta"
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://cursemaven.com"
+            }
+        }
+        filter {
+            includeGroup "curse.maven"
+        }
+    }
+}
+
+
 dependencies {
     implementation fileTree("libs")
     implementation "curse.maven:immersive-engineering-231951:6733669"
-    implementation "curse.maven:beyond-dimensions-1222890:7822178"
+    implementation "curse.maven:jei-238222:7420587"
+    implementation "curse.maven:jade-324717:7545219"
+
+    // MC<minecraft_version>-<registrate_version>
+    implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.6"
+    // [MC<minecraft_version>,MC<next_minecraft_version>)
+    jarJar(group: 'com.tterrag.registrate', name: 'Registrate', version: "[MC1.21.1,)")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

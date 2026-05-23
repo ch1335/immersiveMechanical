@@ -2,11 +2,12 @@ package com.chen1335.immersiveMechanical;
 
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.API.objects.*;
+import com.chen1335.immersiveMechanical.API.registrate.IERegistrate;
 import com.chen1335.immersiveMechanical.client.IMClient;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.IMMultiblocks;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
-import com.chen1335.immersiveMechanical.common.register.IMMultiblockLogic;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,9 @@ import org.slf4j.Logger;
 public class ImmersiveMechanical {
     public static final String MODID = "immersive_mechanical";
     public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final IERegistrate REGISTRATE = IERegistrate.create(MODID);
+
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("immersive_mechanical", () -> CreativeModeTab.builder()
@@ -39,20 +43,19 @@ public class ImmersiveMechanical {
             }).build());
 
     public ImmersiveMechanical(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
+        REGISTRATE.registerEventListeners(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         IMBlocks.BLOCKS.register(modEventBus);
         IMBlockEntityTypes.BLOCKS.register(modEventBus);
         IMItems.register(modEventBus);
         IMRecipe.register(modEventBus);
         IMSounds.REGISTER.register(modEventBus);
-        IMMultiblockLogic.init(modEventBus);
         IMAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
 
         if (dist.isClient()) {
             IMClient.init();
         }
-
         IMMultiblocks.init();
     }
 

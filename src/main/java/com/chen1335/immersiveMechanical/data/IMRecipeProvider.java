@@ -9,7 +9,7 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.data.recipes.builder.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.MetalPressRecipeBuilder;
-import com.chen1335.immersiveMechanical.API.objects.IMItems;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetalTypes;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetals;
 import com.chen1335.immersiveMechanical.API.tags.IMItemTags;

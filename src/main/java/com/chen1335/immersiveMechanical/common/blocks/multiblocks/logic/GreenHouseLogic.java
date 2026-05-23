@@ -85,7 +85,6 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
 
     @Override
     public State createInitialState(IInitialMultiblockContext<State> iInitialMultiblockContext) {
-
         return new State(iInitialMultiblockContext);
     }
 

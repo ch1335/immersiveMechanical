@@ -1,17 +1,21 @@
-package com.chen1335.immersiveMechanical.API.objects;
+package com.chen1335.immersiveMechanical.definitions;
 
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.items.IEBaseItem;
 import blusunrize.immersiveengineering.common.items.WireCoilItem;
+import com.chen1335.immersiveMechanical.API.objects.IMBlocks;
 import com.chen1335.immersiveMechanical.API.objects.metal.IMMetals;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.items.LargeBatteryBlockItem;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import static com.chen1335.immersiveMechanical.ImmersiveMechanical.REGISTRATE;
 
 public class IMItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(ImmersiveMechanical.MODID);
@@ -35,11 +39,12 @@ public class IMItems {
 
     public static final DeferredItem<BlockItem> COIL_NICHROME = ITEMS.register("coil_nichrome", () -> new BlockItemIE(IMBlocks.COIL_NICHROME.get()));
 
-    public static final DeferredItem<Item> ROW_CHROME = simple("raw_chrome");
+    public static final ItemEntry<Item> ROW_CHROME = REGISTRATE.item("raw_chrome", Item::new).register();
 
-    public static final DeferredItem<Item> WIRE_NICHROME = simple("wire_nichrome");
+    public static final ItemEntry<Item> WIRE_NICHROME = REGISTRATE.item("wire_nichrome", Item::new).register();
 
-    public static final DeferredItem<Item> NICHROME_WIRE_COIL = simple("nichrome_wire_coil");
+    public static final ItemEntry<Item> NICHROME_WIRE_COIL = REGISTRATE.item("nichrome_wire_coil", Item::new).register();
+
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
         IMMetals.register(modEventBus);
