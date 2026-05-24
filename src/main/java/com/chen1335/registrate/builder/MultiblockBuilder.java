@@ -1,4 +1,4 @@
-package com.chen1335.immersiveMechanical.API.registrate;
+package com.chen1335.registrate.builder;
 
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
@@ -9,20 +9,33 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockL
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockItem;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
+import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes;
-import com.chen1335.immersiveMechanical.API.registrate.data.IMLootHelper;
+import com.chen1335.registrate.IERegistrate;
+import com.chen1335.registrate.IMultiblockFactory;
+import com.chen1335.registrate.MultiblockDefinition;
+import com.chen1335.registrate.data.IMLootHelper;
 import com.google.common.base.Preconditions;
+import com.tterrag.registrate.util.OneTimeEventReceiver;
+import com.tterrag.registrate.util.RegistrateDistExecutor;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.apache.commons.lang3.mutable.Mutable;
 import org.apache.commons.lang3.mutable.MutableObject;
@@ -48,6 +61,7 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
             return owner.block(path, properties1 -> makeInstance.get())
                     .blockstate(NonNullBiConsumer.noop())
                     .loot(IMLootHelper::registerMultiblock)
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .register();
         }
     };
@@ -78,6 +92,8 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
     };
 
     private Function<Block, Item> makeItem = MultiblockItem::new;
+    private NonNullSupplier<NonNullFunction<BlockEntityRendererProvider.Context, IEMultiblockRenderer<S>>> renderer;
+    private MultiblockDefinition<S, L> definition;
 
     public MultiblockBuilder(IERegistrate owner,
                              String name,
@@ -150,6 +166,21 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         return this;
     }
 
+    public MultiblockBuilder<S, L> render(NonNullSupplier<NonNullFunction<BlockEntityRendererProvider.Context, IEMultiblockRenderer<S>>> renderer) {
+        this.renderer = renderer;
+        RegistrateDistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::registerRenderer);
+        return this;
+    }
+
+    private void registerRenderer() {
+        OneTimeEventReceiver.addModListener(owner, FMLClientSetupEvent.class, event -> {
+            var renderer = this.renderer;
+            if (renderer != null) {
+                BlockEntityRenderers.register(definition.getMasterBe(), renderer.get()::apply);
+            }
+        });
+    }
+
 
     public MultiblockDefinition<S, L> register() {
         Objects.requireNonNull(masterFromOrigin);
@@ -187,6 +218,7 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         MultiblockHandler.registerMultiblock(multiblock);
         MultiblockDefinition<S, L> definition = new MultiblockDefinition<>(logicSupplier.get(), multiblock, registration);
         onRegister.forEach(consumer -> consumer.accept(definition));
+        this.definition = definition;
         return definition;
     }
 }

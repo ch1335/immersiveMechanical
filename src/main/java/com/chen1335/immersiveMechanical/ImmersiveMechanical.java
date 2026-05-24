@@ -2,7 +2,8 @@ package com.chen1335.immersiveMechanical;
 
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.API.objects.*;
-import com.chen1335.immersiveMechanical.API.registrate.IERegistrate;
+import com.chen1335.immersiveMechanical.definitions.IMMetals;
+import com.chen1335.registrate.IERegistrate;
 import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
@@ -42,7 +43,6 @@ public class ImmersiveMechanical {
     public ImmersiveMechanical(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
         REGISTRATE.registerEventListeners(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
-        IMBlockEntityTypes.BLOCKS.register(modEventBus);
         IMItems.register(modEventBus);
         IMRecipe.register(modEventBus);
         IMSounds.REGISTER.register(modEventBus);
@@ -52,9 +52,10 @@ public class ImmersiveMechanical {
         if (dist.isClient()) {
             IMClient.init();
         }
-        IMMultiblocks.init();
+        IMMetals.init();
         IMItems.init();
         IMBlocks.init();
+        IMMultiblocks.init();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

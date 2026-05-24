@@ -3,7 +3,7 @@
   "additives": [],
   "energy": 25600,
   "input": {
-    "item": "immersive_mechanical:dust_chrome"
+    "tag": "c:dusts/chrome"
   },
   "results": [
     {

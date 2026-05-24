@@ -1,4 +1,4 @@
-package com.chen1335.immersiveMechanical.API.registrate.data;
+package com.chen1335.registrate.data;
 
 import blusunrize.immersiveengineering.common.util.loot.BEDropLootEntry;
 import blusunrize.immersiveengineering.common.util.loot.DropInventoryLootEntry;

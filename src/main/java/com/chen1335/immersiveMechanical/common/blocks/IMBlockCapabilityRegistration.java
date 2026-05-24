@@ -3,7 +3,7 @@ package com.chen1335.immersiveMechanical.common.blocks;
 import blusunrize.immersiveengineering.common.blocks.BlockCapabilityRegistration;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.blocks.MultiblockBEType;
-import com.chen1335.immersiveMechanical.API.objects.IMBlockEntityTypes;
+import com.chen1335.immersiveMechanical.definitions.IMBlockEntityTypes;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.common.blockEntities.TurretLaserBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;

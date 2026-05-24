@@ -1,7 +1,8 @@
 package com.chen1335.immersiveMechanical.definitions;
 
-import com.chen1335.immersiveMechanical.API.objects.IMMenuTypes;
-import com.chen1335.immersiveMechanical.API.registrate.MultiblockDefinition;
+import com.chen1335.registrate.MultiblockDefinition;
+import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
+import com.chen1335.immersiveMechanical.client.render.tile.SmallMiningMachineRender;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.GreenHousePartBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.GreenHouseLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.LargeBatteryLogic;
@@ -32,6 +33,7 @@ public class IMMultiblocks {
             .triggerFromOrigin(new BlockPos(2, 0, 4))
             .size(new BlockPos(5, 5, 5))
             .manualScale(6)
+            .render(()-> GreenHouseRender::new)
             .register();
 
     public static final MultiblockDefinition<SmallMiningMachineLogic.State, SmallMiningMachineLogic> SMALL_MINING_MACHINE = REGISTRATE.multiblock("small_mining_machine", SmallMiningMachineLogic::new)
@@ -41,6 +43,7 @@ public class IMMultiblocks {
             .triggerFromOrigin(new BlockPos(1, 1, 2))
             .size(new BlockPos(3, 4, 3))
             .manualScale(9)
+            .render(()-> SmallMiningMachineRender::new)
             .register();
 
     public static final MultiblockDefinition<IndustrialFurnacesLogic.State, IndustrialFurnacesLogic> INDUSTRIAL_FURNACES = REGISTRATE.multiblock("industrial_furnaces", IndustrialFurnacesLogic::new)

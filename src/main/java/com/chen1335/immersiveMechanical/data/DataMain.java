@@ -3,7 +3,6 @@ package com.chen1335.immersiveMechanical.data;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.data.tag.IMBlockTagsProvider;
 import com.chen1335.immersiveMechanical.data.tag.IMDamageTypeTagsProvider;
-import com.chen1335.immersiveMechanical.data.tag.IMItemTagsProvider;
 import com.chen1335.immersiveMechanical.data.worldgen.IMFeatureUtils;
 import com.chen1335.immersiveMechanical.data.worldgen.IMPlacementUtils;
 import net.minecraft.core.RegistrySetBuilder;
@@ -43,7 +42,6 @@ public class DataMain {
         generator.addProvider(event.includeServer(), new IMSimpleItemModelProvider(generator.getPackOutput(), event.getExistingFileHelper()));
         IMBlockTagsProvider imBlockTagsProvider = generator.addProvider(event.includeServer(), new IMBlockTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), event.getExistingFileHelper()));
 
-        generator.addProvider(event.includeServer(), new IMItemTagsProvider(generator.getPackOutput(), builtinEntriesProvider.getRegistryProvider(), imBlockTagsProvider.contentsGetter()));
 
         generator.addProvider(event.includeServer(), new IMConnectorBlockStates(generator.getPackOutput(), event.getExistingFileHelper()));
 

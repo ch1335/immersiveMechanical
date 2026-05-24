@@ -9,13 +9,14 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.data.recipes.builder.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.MetalPressRecipeBuilder;
-import com.chen1335.immersiveMechanical.definitions.IMBlocks;
-import com.chen1335.immersiveMechanical.definitions.IMItems;
-import com.chen1335.immersiveMechanical.API.objects.metal.IMMetalTypes;
-import com.chen1335.immersiveMechanical.API.objects.metal.IMMetals;
 import com.chen1335.immersiveMechanical.API.tags.IMItemTags;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.data.recipeBuilders.IndustrialFurnaceRecipeBuilder;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
+import com.chen1335.immersiveMechanical.definitions.IMMetals;
+import com.chen1335.registrate.MetalDefinition;
+import com.chen1335.registrate.MetalTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -125,15 +126,15 @@ public class IMRecipeProvider extends RecipeProvider {
 
 
         ArcFurnaceRecipeBuilder.builder()
-                .output(IMMetals.NICHROME.getTag(IMMetalTypes.INGOTS), 5)
+                .output(IMMetals.NICHROME.getTag(MetalTypes.INGOTS), 5)
                 .input(IETags.getTagsFor(EnumMetals.NICKEL).ingot, 4)
-                .additive(IMMetals.CHROME.getTag(IMMetalTypes.INGOTS))
+                .additive(IMMetals.CHROME.getTag(MetalTypes.INGOTS))
                 .setTime(600)
                 .setEnergy(307200)
                 .build(recipeOutput, toRL("arcfurnace/alloy_nichrome"));
 
         ArcFurnaceRecipeBuilder.builder()
-                .output(IMMetals.CHROME.getTag(IMMetalTypes.INGOTS), 2)
+                .output(IMMetals.CHROME.getTag(MetalTypes.INGOTS), 2)
                 .input(IMItemTags.ORES_CHROME, 1)
                 .slag(IETags.slag, 1)
                 .setTime(200)
@@ -142,8 +143,8 @@ public class IMRecipeProvider extends RecipeProvider {
 
 
         ArcFurnaceRecipeBuilder.builder()
-                .output(IMMetals.CHROME.getTag(IMMetalTypes.INGOTS), 1)
-                .secondary(IMMetals.CHROME.getTag(IMMetalTypes.INGOTS), 0.5F)
+                .output(IMMetals.CHROME.getTag(MetalTypes.INGOTS), 1)
+                .secondary(IMMetals.CHROME.getTag(MetalTypes.INGOTS), 0.5F)
                 .input(IMItemTags.RAW_CHROME, 1)
                 .setTime(100)
                 .setEnergy(25600)
@@ -151,109 +152,109 @@ public class IMRecipeProvider extends RecipeProvider {
 
         IndustrialFurnaceRecipeBuilder.builder(
                 Ingredient.of(IMItemTags.RAW_CHROME),
-                new TagOutput(IMMetals.CHROME.getTag(IMMetalTypes.INGOTS))
+                new TagOutput(IMMetals.CHROME.getTag(MetalTypes.INGOTS))
                 , 200,
                 51200
         ).build(recipeOutput, toRL("industrial_furnace/raw_chrome"));
 
         IndustrialFurnaceRecipeBuilder.builder(
-                Ingredient.of(IMMetals.CHROME.getTag(IMMetalTypes.DUSTS)),
-                new TagOutput(IMMetals.CHROME.getTag(IMMetalTypes.INGOTS))
+                Ingredient.of(IMMetals.CHROME.getTag(MetalTypes.DUSTS)),
+                new TagOutput(IMMetals.CHROME.getTag(MetalTypes.INGOTS))
                 , 100,
                 25600
         ).build(recipeOutput, toRL("industrial_furnace/chrome_dust"));
 
-
-        IMMetals.METALS.forEach((metals, itemMap) -> {
+        for (MetalDefinition metalDefinition : ImmersiveMechanical.REGISTRATE.getMetalDefinitions()) {
             ArcFurnaceRecipeBuilder.builder()
-                    .output(metals.getTag(IMMetalTypes.INGOTS), 1)
-                    .input(itemMap.get(IMMetalTypes.DUSTS), 1)
+                    .output(metalDefinition.getTag(MetalTypes.INGOTS), 1)
+                    .input(metalDefinition.getTag(MetalTypes.DUSTS), 1)
                     .setTime(100)
                     .setEnergy(25600)
-                    .build(recipeOutput, toRL("arcfurnace/%s_dust".formatted(metals.getName())));
-        });
-
-
-        for (IMMetals metals : IMMetals.METAL_TAGS.keySet()) {
-            ingotsToPlateByMetalPress(recipeOutput, metals);
-            ingotsToPlateByHammer(recipeOutput, metals);
-
-            ingotsToRodByMetalPress(recipeOutput, metals);
-
-            ingotsToNuggets(recipeOutput, metals);
-            ingotsToDustByCrusher(recipeOutput, metals);
-            nuggetsToIngots(recipeOutput, metals);
+                    .build(recipeOutput, toRL("arcfurnace/%s_dust".formatted(metalDefinition.getName())));
         }
 
+
+        for (MetalDefinition metalDefinition : ImmersiveMechanical.REGISTRATE.getMetalDefinitions()) {
+            ingotsToPlateByMetalPress(recipeOutput, metalDefinition);
+            ingotsToPlateByHammer(recipeOutput, metalDefinition);
+
+            ingotsToRodByMetalPress(recipeOutput, metalDefinition);
+
+            ingotsToNuggets(recipeOutput, metalDefinition);
+            ingotsToDustByCrusher(recipeOutput, metalDefinition);
+            nuggetsToIngots(recipeOutput, metalDefinition);
+        }
+
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, IMItems.WIRE_NICHROME)
-                .requires(IMMetals.NICHROME.getTag(IMMetalTypes.PLATES))
+                .requires(IMMetals.NICHROME.getTag(MetalTypes.PLATES))
                 .requires(IEItems.Tools.WIRECUTTER)
-                .unlockedBy("has_nichrome_ingot", has(IMMetals.NICHROME.getTag(IMMetalTypes.INGOTS)))
+                .unlockedBy("has_nichrome_ingot", has(IMMetals.NICHROME.getTag(MetalTypes.INGOTS)))
                 .save(recipeOutput, toRL(toPath(IMItems.WIRE_NICHROME)));
 
-        press(recipeOutput, IEItems.Molds.MOLD_WIRE, IMMetals.NICHROME.getMetal(IMMetalTypes.INGOTS), IMItems.WIRE_NICHROME, 2);
+        press(recipeOutput, IEItems.Molds.MOLD_WIRE, IMMetals.NICHROME.getTag(MetalTypes.INGOTS), IMItems.WIRE_NICHROME, 2);
     }
 
-    private static void press(RecipeOutput recipeOutput, ItemLike mold, ItemLike input, ItemLike output, int count) {
+    private static void press(RecipeOutput recipeOutput, ItemLike mold, TagKey<Item> input, ItemLike output, int count) {
         MetalPressRecipeBuilder.builder()
                 .input(input)
                 .mold(mold)
                 .output(output, count)
                 .setEnergy(2400)
-                .build(recipeOutput, toRL("metalpress/%s".formatted(BuiltInRegistries.ITEM.getKey(input.asItem()).getPath())));
+                .build(recipeOutput, toRL("metalpress/%s".formatted(BuiltInRegistries.ITEM.getKey(IMItems.WIRE_NICHROME.asItem()).getPath())));
     }
 
-    private static void ingotsToPlateByHammer(RecipeOutput recipeOutput, IMMetals metals) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metals.getMetal(IMMetalTypes.PLATES))
-                .requires(metals.getTag(IMMetalTypes.INGOTS))
+    private static void ingotsToPlateByHammer(RecipeOutput recipeOutput, MetalDefinition metals) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metals.getItem(MetalTypes.PLATES))
+                .requires(metals.getTag(MetalTypes.INGOTS))
                 .requires(IEItems.Tools.HAMMER)
-                .unlockedBy("has_%s_ingot".formatted(metals.getName()), has(metals.getTag(IMMetalTypes.INGOTS)))
-                .save(recipeOutput, toRL(toPath(metals.getMetal(IMMetalTypes.PLATES))));
+                .unlockedBy("has_%s_ingot".formatted(metals.getName()), has(metals.getTag(MetalTypes.INGOTS)))
+                .save(recipeOutput, toRL(toPath(metals.getItem(MetalTypes.PLATES))));
     }
 
-    private static void ingotsToPlateByMetalPress(RecipeOutput recipeOutput, IMMetals metals) {
+    private static void ingotsToPlateByMetalPress(RecipeOutput recipeOutput, MetalDefinition metals) {
         MetalPressRecipeBuilder.builder()
-                .input(metals.getTag(IMMetalTypes.INGOTS))
+                .input(metals.getTag(MetalTypes.INGOTS))
                 .mold(IEItems.Molds.MOLD_PLATE)
-                .output(metals.getMetal(IMMetalTypes.PLATES), 1)
+                .output(metals.getTag(MetalTypes.PLATES), 1)
                 .setEnergy(2400)
                 .build(recipeOutput, toRL("metalpress/plate_" + metals.getName()));
     }
 
-    private static void ingotsToRodByMetalPress(RecipeOutput recipeOutput, IMMetals metals) {
+    private static void ingotsToRodByMetalPress(RecipeOutput recipeOutput, MetalDefinition metals) {
         MetalPressRecipeBuilder.builder()
-                .input(metals.getTag(IMMetalTypes.INGOTS))
+                .input(metals.getTag(MetalTypes.INGOTS))
                 .mold(IEItems.Molds.MOLD_ROD)
-                .output(metals.getMetal(IMMetalTypes.STICKS), 2)
+                .output(metals.getTag(MetalTypes.STICKS), 2)
                 .setEnergy(2400)
                 .build(recipeOutput, toRL("metalpress/rod_" + metals.getName()));
     }
 
-    private static void nuggetsToIngots(RecipeOutput recipeOutput, IMMetals metals) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metals.getMetal(IMMetalTypes.INGOTS))
-                .requires(Ingredient.of(metals.getTag(IMMetalTypes.NUGGETS)), 9)
-                .unlockedBy("has_" + IMMetalTypes.NUGGETS.format(metals.getName()), has(metals.getMetal(IMMetalTypes.NUGGETS)))
+    private static void nuggetsToIngots(RecipeOutput recipeOutput, MetalDefinition metals) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metals.getItem(MetalTypes.INGOTS))
+                .requires(Ingredient.of(metals.getTag(MetalTypes.NUGGETS)), 9)
+                .unlockedBy("has_" + MetalTypes.NUGGETS.format(metals.getName()), has(metals.getItem(MetalTypes.NUGGETS)))
                 .save(recipeOutput);
     }
 
-    private static void ingotsToNuggets(RecipeOutput recipeOutput, IMMetals metals) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metals.getMetal(IMMetalTypes.NUGGETS), 9)
-                .requires(Ingredient.of(metals.getTag(IMMetalTypes.INGOTS)))
-                .unlockedBy("has_" + IMMetalTypes.INGOTS.format(metals.getName()), has(metals.getMetal(IMMetalTypes.INGOTS)))
+    private static void ingotsToNuggets(RecipeOutput recipeOutput, MetalDefinition metals) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, metals.getItem(MetalTypes.NUGGETS), 9)
+                .requires(Ingredient.of(metals.getTag(MetalTypes.INGOTS)))
+                .unlockedBy("has_" + MetalTypes.INGOTS.format(metals.getName()), has(metals.getItem(MetalTypes.INGOTS)))
                 .save(recipeOutput);
     }
 
-    private static void oreCrusher(RecipeOutput recipeOutput, TagKey<Item> oreTag, IMMetals metals) {
+    private static void oreCrusher(RecipeOutput recipeOutput, TagKey<Item> oreTag, MetalDefinition metals) {
         CrusherRecipeBuilder.builder()
                 .input(Ingredient.of(oreTag))
-                .output(new TagOutput(metals.getTag(IMMetalTypes.DUSTS), 2))
+                .output(new TagOutput(metals.getTag(MetalTypes.DUSTS), 2))
                 .build(recipeOutput, toRL("crusher/ore_" + metals.getName()));
     }
 
-    private static void ingotsToDustByCrusher(RecipeOutput recipeOutput, IMMetals metals) {
+    private static void ingotsToDustByCrusher(RecipeOutput recipeOutput, MetalDefinition metals) {
         CrusherRecipeBuilder.builder()
-                .input(Ingredient.of(metals.getTag(IMMetalTypes.INGOTS)))
-                .output(new TagOutput(metals.getTag(IMMetalTypes.DUSTS)))
+                .input(Ingredient.of(metals.getTag(MetalTypes.INGOTS)))
+                .output(new TagOutput(metals.getTag(MetalTypes.DUSTS)))
                 .build(recipeOutput, toRL("crusher/ingot_" + metals.getName()));
     }
 

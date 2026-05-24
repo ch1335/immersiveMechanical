@@ -4,12 +4,13 @@ import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
 import blusunrize.immersiveengineering.common.blocks.IEBaseBlockEntity;
 import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
 import blusunrize.immersiveengineering.common.register.IEDataComponents;
-import com.chen1335.immersiveMechanical.API.objects.IMBlockEntityTypes;
+import com.chen1335.immersiveMechanical.definitions.IMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import org.jetbrains.annotations.NotNull;
@@ -19,9 +20,10 @@ import java.util.function.Consumer;
 public class LargeBatteryCoreTile extends IEBaseBlockEntity implements IEBlockInterfaces.IBlockEntityDrop {
     public MutableEnergyStorage energy = new MutableEnergyStorage(64000000);
 
-    public LargeBatteryCoreTile(BlockPos pos, BlockState blockState) {
-        super(IMBlockEntityTypes.LARGE_BATTERY_CORE_TILE.get(), pos, blockState);
+    public LargeBatteryCoreTile(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
+
 
     @Override
     public void writeCustomNBT(CompoundTag compoundTag, boolean b, HolderLookup.@NotNull Provider provider) {

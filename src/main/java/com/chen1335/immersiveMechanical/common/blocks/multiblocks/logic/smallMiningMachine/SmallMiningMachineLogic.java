@@ -226,7 +226,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
                 if (slot == 0) {
                     if (stack.getItem() instanceof DrillheadItem drillheadItem) {
                         DrillItem.setHeadStatic(drill, stack);
-                        resize(((DrillHeadPermAccessor) drillheadItem.perms).im$getDrillSize());
+                        resize(((DrillHeadPermAccessor) drillheadItem.perms).IM$getDrillSize());
                     }else {
                         DrillItem.setHeadStatic(drill, ItemStack.EMPTY);
                     }
@@ -297,7 +297,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
             finished = nbt.getBoolean("finished");
             ItemStack drillHead = inventory.getStackInSlot(0);
             if (drillHead.getItem() instanceof DrillheadItem drillheadItem) {
-                resize(((DrillHeadPermAccessor) drillheadItem.perms).im$getDrillSize());
+                resize(((DrillHeadPermAccessor) drillheadItem.perms).IM$getDrillSize());
             }
         }
 

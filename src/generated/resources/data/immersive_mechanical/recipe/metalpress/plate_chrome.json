@@ -6,6 +6,6 @@
   },
   "mold": "immersiveengineering:mold_plate",
   "result": {
-    "id": "immersive_mechanical:plate_chrome"
+    "tag": "c:plates/chrome"
   }
 }

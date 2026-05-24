@@ -1,4 +1,4 @@
-package com.chen1335.immersiveMechanical.API.registrate;
+package com.chen1335.registrate;
 
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;

@@ -7,7 +7,7 @@ import blusunrize.immersiveengineering.common.register.IEMenuTypes;
 import blusunrize.immersiveengineering.common.util.FakePlayerUtil;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import com.chen1335.immersiveMechanical.API.objects.IMDamageTypes;
-import com.chen1335.immersiveMechanical.API.objects.IMMenuTypes;
+import com.chen1335.immersiveMechanical.definitions.IMMenuTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMSounds;
 import com.chen1335.immersiveMechanical.mixinsAPI.IEnergyStorageExtension;
 import net.minecraft.core.BlockPos;

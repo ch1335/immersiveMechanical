@@ -12,7 +12,7 @@ import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBMemorizeStructure;
 import blusunrize.immersiveengineering.common.util.IELogger;
 import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
-import com.chen1335.immersiveMechanical.API.registrate.SimpleMultiblock;
+import com.chen1335.registrate.SimpleMultiblock;
 import com.chen1335.immersiveMechanical.attachmentDatas.IMBEAttachmentData;
 import com.google.common.base.Preconditions;
 import net.minecraft.core.BlockPos;

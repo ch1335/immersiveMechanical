@@ -1,4 +1,4 @@
-package com.chen1335.immersiveMechanical.API.objects.metal;
+package com.chen1335.registrate;
 
 import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.api.utils.TagUtils;
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Function;
 
-public enum IMMetalTypes {
+public enum MetalTypes implements IMetalType {
     INGOTS("ingot_%s", Tags.Items.INGOTS, IETags::getIngot),
     NUGGETS("nugget_%s", Tags.Items.NUGGETS, IETags::getNugget),
     DUSTS("dust_%s", Tags.Items.DUSTS, IETags::getDust),
@@ -21,25 +21,34 @@ public enum IMMetalTypes {
     private final Function<String, ResourceLocation> tagGetter;
 
 
-    IMMetalTypes(String format, TagKey<Item> typTag, Function<String, ResourceLocation> tagGetter) {
+    MetalTypes(String format, TagKey<Item> typTag, Function<String, ResourceLocation> tagGetter) {
         this.format = format;
         this.typTag = typTag;
         this.tagGetter = tagGetter;
     }
 
-    public String format(String name){
+    @Override
+    public String format(String name) {
         return format.formatted(name);
     }
 
+    @Override
     public String getFormat() {
         return format;
     }
 
+    @Override
     public TagKey<Item> getTag(String name) {
         return TagUtils.createItemWrapper(tagGetter.apply(name));
     }
 
+    @Override
     public TagKey<Item> getTypTag() {
         return typTag;
+    }
+
+    @Override
+    public String typeName() {
+        return this.name();
     }
 }

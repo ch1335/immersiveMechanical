@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(DrillheadItem.DrillHeadPerm.class)
 public interface DrillHeadPermAccessor {
     @Accessor("drillSize")
-    int im$getDrillSize();
+    int IM$getDrillSize();
 }

@@ -3,7 +3,7 @@
   "additives": [],
   "energy": 25600,
   "input": {
-    "item": "immersive_mechanical:dust_nichrome"
+    "tag": "c:dusts/nichrome"
   },
   "results": [
     {

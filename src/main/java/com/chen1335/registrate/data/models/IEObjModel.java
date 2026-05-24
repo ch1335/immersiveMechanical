@@ -1,4 +1,4 @@
-package com.chen1335.immersiveMechanical.API.registrate.data.models;
+package com.chen1335.registrate.data.models;
 
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;

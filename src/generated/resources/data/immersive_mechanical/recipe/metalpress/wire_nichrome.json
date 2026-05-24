@@ -2,7 +2,7 @@
   "type": "immersiveengineering:metal_press",
   "energy": 2400,
   "input": {
-    "item": "immersive_mechanical:ingot_nichrome"
+    "tag": "c:ingots/nichrome"
   },
   "mold": "immersiveengineering:mold_wire",
   "result": {
