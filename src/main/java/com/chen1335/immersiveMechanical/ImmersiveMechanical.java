@@ -64,7 +64,6 @@ public class ImmersiveMechanical {
         CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, new CoilInfo(1.3F, 1.15F));
         CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, new CoilInfo(1.7F, 1.25F));
         CoilInfo.register(IMBlocks.COIL_NICHROME, new CoilInfo(2.2F, 1.45F));
-
     }
 
     public static ResourceLocation id(String path) {

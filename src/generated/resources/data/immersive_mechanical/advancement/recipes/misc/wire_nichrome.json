@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chrome_ingot": {
+    "has_nichrome_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "#c:ingots/chrome"
+            "items": "#c:ingots/nichrome"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_chrome_ingot"
+      "has_nichrome_ingot"
     ]
   ],
   "rewards": {

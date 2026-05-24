@@ -511,5 +511,8 @@
       3,
       0
     ]
-  ]
+  ],
+  "textures": {
+    "particle": "immersive_mechanical:block/metal_multiblock/green_house"
+  }
 }

@@ -55,5 +55,8 @@
       0,
       0
     ]
-  ]
+  ],
+  "textures": {
+    "particle": "immersive_mechanical:block/metal_decoration/coil_lv_side"
+  }
 }
