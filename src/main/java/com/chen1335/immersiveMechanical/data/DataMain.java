@@ -27,21 +27,23 @@ import static com.chen1335.immersiveMechanical.ImmersiveMechanical.REGISTRATE;
 public class DataMain {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void gatherData(GatherDataEvent event) {
-        REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, IMBlockTagsProvider::init);
-        REGISTRATE.addDataGenerator(IEProviderTypes.IE_BLOCK_STATE, IMBlockStateProvider::init);
-        REGISTRATE.addDataGenerator(IEProviderTypes.MULTIBLOCK_STATE, IMMultiblockStates::init);
-        REGISTRATE.addDataGenerator(IEProviderTypes.DYNAMIC_MODELS, IMDynamicModels::init);
-        REGISTRATE.addDataGenerator(IEProviderTypes.IE_ITEM_MODEL, IMItemModelProvider::init);
-        REGISTRATE.addDataGenerator(IEProviderTypes.SOUND, IMSoundDefinitionsProvider::init);
-        REGISTRATE.addDataGenerator(ProviderType.RECIPE, IMRecipeProvider::init);
-        REGISTRATE.addDataGenerator(ProviderType.DYNAMIC, provider -> {});
+        if (event.getMods().contains(ImmersiveMechanical.MODID)) {
+            REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, IMBlockTagsProvider::init);
+            REGISTRATE.addDataGenerator(IEProviderTypes.IE_BLOCK_STATE, IMBlockStateProvider::init);
+            REGISTRATE.addDataGenerator(IEProviderTypes.MULTIBLOCK_STATE, IMMultiblockStates::init);
+            REGISTRATE.addDataGenerator(IEProviderTypes.DYNAMIC_MODELS, IMDynamicModels::init);
+            REGISTRATE.addDataGenerator(IEProviderTypes.IE_ITEM_MODEL, IMItemModelProvider::init);
+            REGISTRATE.addDataGenerator(IEProviderTypes.SOUND, IMSoundDefinitionsProvider::init);
+            REGISTRATE.addDataGenerator(ProviderType.RECIPE, IMRecipeProvider::init);
+            REGISTRATE.addDataGenerator(ProviderType.DYNAMIC, provider -> {});
 
-        DataProviderInitializer dataGenInitializer = REGISTRATE.getDataGenInitializer();
-        dataGenInitializer.add(Registries.DAMAGE_TYPE, IMDamageTypeProvider::bootstrap);
-        dataGenInitializer.add(Registries.CONFIGURED_FEATURE, IMFeatureUtils::bootstrap);
-        dataGenInitializer.add(Registries.PLACED_FEATURE, IMPlacementUtils::bootstrap);
-        dataGenInitializer.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, IMBiomeModifier::bootstrap);
-        REGISTRATE.addDataGenerator(IEProviderTypes.DAMAGE_TYPE_TAG, IMDamageTypeTagsProvider::init);
+            DataProviderInitializer dataGenInitializer = REGISTRATE.getDataGenInitializer();
+            dataGenInitializer.add(Registries.DAMAGE_TYPE, IMDamageTypeProvider::bootstrap);
+            dataGenInitializer.add(Registries.CONFIGURED_FEATURE, IMFeatureUtils::bootstrap);
+            dataGenInitializer.add(Registries.PLACED_FEATURE, IMPlacementUtils::bootstrap);
+            dataGenInitializer.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, IMBiomeModifier::bootstrap);
+            REGISTRATE.addDataGenerator(IEProviderTypes.DAMAGE_TYPE_TAG, IMDamageTypeTagsProvider::init);
+        }
     }
 
     public static String modid() {
