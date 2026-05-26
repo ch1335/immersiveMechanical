@@ -1,7 +1,7 @@
 package com.chen1335.immersiveMechanical.compat.jei;
 
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIRecipeTypes;
-import com.chen1335.immersiveMechanical.API.objects.IMRecipe;
+import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.compat.jei.categories.IndustrialFurnaceCategory;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
@@ -23,7 +23,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 public class IMJei implements IModPlugin {
     private static final ResourceLocation ID = ImmersiveMechanical.id("jei");
 
-    public static final RecipeType<RecipeHolder<IndustrialFurnaceRecipe>> INDUSTRIAL_FURNACE = RecipeType.createRecipeHolderType(IMRecipe.Types.INDUSTRIAL_FURNACE.type().getId());
+    public static final RecipeType<RecipeHolder<IndustrialFurnaceRecipe>> INDUSTRIAL_FURNACE = RecipeType.createRecipeHolderType(IMRecipe.INDUSTRIAL_FURNACE.getId());
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -48,7 +48,7 @@ public class IMJei implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         if (Minecraft.getInstance().level != null) {
             RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-            registration.addRecipes(INDUSTRIAL_FURNACE, recipeManager.getAllRecipesFor(IMRecipe.Types.INDUSTRIAL_FURNACE.get()));
+            registration.addRecipes(INDUSTRIAL_FURNACE, recipeManager.getAllRecipesFor(IMRecipe.INDUSTRIAL_FURNACE.get()));
         }
     }
 }

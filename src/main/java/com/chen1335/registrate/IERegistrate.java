@@ -1,6 +1,7 @@
 package com.chen1335.registrate;
 
 import blusunrize.immersiveengineering.api.IEProperties;
+import blusunrize.immersiveengineering.api.crafting.IERecipeSerializer;
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
@@ -16,6 +17,7 @@ import com.chen1335.immersiveMechanical.mixins.immersive_mechanical.EnergyConnec
 import com.chen1335.immersiveMechanical.mixins.immersive_mechanical.MultiblockContainerInvoker;
 import com.chen1335.registrate.builder.MetalBuilder;
 import com.chen1335.registrate.builder.MultiblockBuilder;
+import com.chen1335.registrate.builder.RecipeBuilder;
 import com.mojang.datafixers.util.Pair;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BlockEntityBuilder;
@@ -29,6 +31,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -49,6 +52,7 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
     private final List<MultiblockHandler.IMultiblock> multiblocks = new ArrayList<>();
 
     private final List<MetalDefinition> metalDefinitions = new ArrayList<>();
+
     public static IERegistrate create(String modid) {
         return new IERegistrate(modid);
     }
@@ -129,12 +133,16 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
         return ArgContainerInvoker.IM$create(DeferredHolder.create(menu.getRegistryKey(), menu.register().getId()), container);
     }
 
+    public <T extends Recipe<?>> RecipeBuilder<T> recipeType(String name, Class<T> clazz, Supplier<IERecipeSerializer<T>> supplier) {
+        return entry(name, callBack -> new RecipeBuilder<>(this, this, name, callBack, clazz, supplier));
+    }
+
     public List<MultiblockHandler.IMultiblock> getMultiblocks() {
         return multiblocks;
     }
 
-    public MetalBuilder metal(String name){
-        return new MetalBuilder(this,name);
+    public MetalBuilder metal(String name) {
+        return new MetalBuilder(this, name);
     }
 
     public List<MetalDefinition> getMetalDefinitions() {

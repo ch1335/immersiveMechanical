@@ -1,6 +1,6 @@
 package com.chen1335.immersiveMechanical.mixins.immersive_mechanical;
 
-import com.chen1335.immersiveMechanical.API.objects.IMRecipe;
+import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -68,12 +68,12 @@ public abstract class RecipeManagerMixin extends SimpleJsonResourceReloadListene
             Pair<RecipeHolder<IndustrialFurnaceRecipe>, Runnable> pair = IM$CAPTURED_RECIPE.get(industrialFurnaceRecipe.input());
             if (pair == null) {
                 IM$CAPTURED_RECIPE.put(industrialFurnaceRecipe.input(), Pair.of(recipeHolder, () -> {
-                    builder.put(IMRecipe.Types.INDUSTRIAL_FURNACE.get(), recipeHolder);
+                    builder.put(IMRecipe.INDUSTRIAL_FURNACE.get(), recipeHolder);
                     builder1.put(resourceLocation, recipeHolder);
                 }));
             } else if (pair.getFirst().value().getBaseTime() > industrialFurnaceRecipe.getBaseTime()) {
                 IM$CAPTURED_RECIPE.put(industrialFurnaceRecipe.input(), Pair.of(recipeHolder, () -> {
-                    builder.put(IMRecipe.Types.INDUSTRIAL_FURNACE.get(), recipeHolder);
+                    builder.put(IMRecipe.INDUSTRIAL_FURNACE.get(), recipeHolder);
                     builder1.put(resourceLocation, recipeHolder);
                 }));
             }

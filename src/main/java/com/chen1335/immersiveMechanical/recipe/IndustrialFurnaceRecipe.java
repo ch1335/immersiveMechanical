@@ -5,7 +5,7 @@ import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.TagOutputList;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
-import com.chen1335.immersiveMechanical.API.objects.IMRecipe;
+import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
@@ -26,14 +26,14 @@ import java.util.function.Supplier;
 
 public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
     public static final Supplier<RecipeMultiplier> MULTIPLIERS = Suppliers.memoize(() -> new RecipeMultiplier(IndustrialFurnaceRecipe::timeModifier, IndustrialFurnaceRecipe::energyModifier));
-    public static final CachedRecipeList<IndustrialFurnaceRecipe> RECIPES = new CachedRecipeList<>(IMRecipe.Types.INDUSTRIAL_FURNACE);
+    public static final CachedRecipeList<IndustrialFurnaceRecipe> RECIPES = new CachedRecipeList<>(IMRecipe.INDUSTRIAL_FURNACE.getIEType());
 
 
     private final Ingredient input;
     private final TagOutput output;
 
     public IndustrialFurnaceRecipe(Ingredient input, TagOutput output, int time, int energy) {
-        super(output, IMRecipe.Types.INDUSTRIAL_FURNACE, time, energy, MULTIPLIERS);
+        super(output, IMRecipe.INDUSTRIAL_FURNACE.getIEType(), time, energy, MULTIPLIERS);
         this.input = input;
         this.output = output;
         outputList = new TagOutputList(output);
@@ -66,12 +66,12 @@ public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
 
     @Override
     protected IERecipeSerializer<?> getIESerializer() {
-        return IMRecipe.Serializers.INDUSTRIAL_FURNACE_SERIALIZER.get();
+        return IMRecipe.INDUSTRIAL_FURNACE.getSerializer();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return IMRecipe.Types.INDUSTRIAL_FURNACE.get();
+        return IMRecipe.INDUSTRIAL_FURNACE.get();
     }
 
     public Ingredient input() {

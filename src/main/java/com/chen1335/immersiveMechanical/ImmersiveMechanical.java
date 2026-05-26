@@ -2,14 +2,11 @@ package com.chen1335.immersiveMechanical;
 
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.API.objects.*;
-import com.chen1335.immersiveMechanical.definitions.IMMetals;
+import com.chen1335.immersiveMechanical.definitions.*;
 import com.chen1335.registrate.IERegistrate;
 import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
-import com.chen1335.immersiveMechanical.definitions.IMBlocks;
-import com.chen1335.immersiveMechanical.definitions.IMItems;
-import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.mojang.logging.LogUtils;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.core.registries.Registries;
@@ -44,7 +41,7 @@ public class ImmersiveMechanical {
         REGISTRATE.registerEventListeners(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         IMItems.register(modEventBus);
-        IMRecipe.register(modEventBus);
+        IMRecipe.init();
         IMSounds.REGISTER.register(modEventBus);
         IMAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
