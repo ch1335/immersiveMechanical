@@ -12,7 +12,7 @@ public class EnergyStorageMixin implements IEnergyStorageExtension {
     protected int capacity;
 
     @Unique
-    public void im$setNewCap(int cap) {
+    public void IM$setNewCap(int cap) {
         capacity = cap;
     }
 }

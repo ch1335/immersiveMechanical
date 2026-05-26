@@ -9,8 +9,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(EnergyConnectorBlockEntity.class)
 public interface EnergyConnectorBlockEntityAccessor {
-    @Accessor("voltage")
-    String getVoltage();
 
     @Accessor("LENGTH")
     static Object2FloatMap<Pair<String, Boolean>> IM$getLength() {

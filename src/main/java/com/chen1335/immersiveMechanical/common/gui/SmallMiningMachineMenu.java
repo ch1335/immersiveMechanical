@@ -120,7 +120,7 @@ public class SmallMiningMachineMenu extends IEContainerMenu {
 
 
             if (!stack.isEmpty() && stack.getItem() instanceof ToolUpgradeItem toolUpgradeItem) {
-                ToolUpgrade toolUpgrade = ((ToolUpgradeItemAccessor) toolUpgradeItem).im$getUpgradeType();
+                ToolUpgrade toolUpgrade = ((ToolUpgradeItemAccessor) toolUpgradeItem).IM$getUpgradeType();
                 return toolUpgrade == ToolUpgrade.DRILL_FORTUNE || toolUpgrade == ToolUpgrade.DRILL_DAMAGE || toolUpgrade == ToolUpgrade.DRILL_LUBE;
             }
             return false;

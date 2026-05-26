@@ -53,7 +53,7 @@ public class IndustrialFurnaceProcess extends MultiblockProcessInMachine<Industr
                 recipe1 = recipe.value();
             } else {
                 MultiblockProcessAccessor accessor = (MultiblockProcessAccessor) this;
-                recipe1 = accessor.im$GetRecipe().apply(level, accessor.im$RecipeId());
+                recipe1 = accessor.IM$GetRecipe().apply(level, accessor.IM$RecipeId());
             }
             int maxTicks = (int) (recipe1.getTotalProcessTime() / coil.timeModify());
             int energyPerTick = (int) (((float) recipe1.getTotalProcessEnergy() / maxTicks) / coil.energyModify());

@@ -43,7 +43,7 @@ public class TurretLaserBlockEntity extends TurretBlockEntity<TurretLaserBlockEn
 
     public TurretLaserBlockEntity(BlockEntityType<TurretLaserBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        ((IEnergyStorageExtension) energyStorage).im$setNewCap(ENERGY_CAPACITY);
+        ((IEnergyStorageExtension) energyStorage).IM$setNewCap(ENERGY_CAPACITY);
     }
 
     @Override

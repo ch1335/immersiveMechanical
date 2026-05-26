@@ -13,8 +13,8 @@ import java.util.function.BiFunction;
 @Mixin(MultiblockProcess.class)
 public interface MultiblockProcessAccessor {
     @Accessor("getRecipe")
-    BiFunction<Level, ResourceLocation, MultiblockRecipe> im$GetRecipe();
+    BiFunction<Level, ResourceLocation, MultiblockRecipe> IM$GetRecipe();
 
     @Accessor("recipeId")
-    ResourceLocation im$RecipeId();
+    ResourceLocation IM$RecipeId();
 }
