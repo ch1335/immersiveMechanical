@@ -75,7 +75,7 @@ public class CoilLogic implements MBMemorizeStructure<CoilLogic.State> {
         }
 
         public Block getCoilBlock() {
-            return Objects.requireNonNullElse(structureMemo.get(new BlockPos(1, 0, 2)), IEBlocks.MetalDecoration.LV_COIL.get().defaultBlockState()).getBlock();
+            return Objects.requireNonNullElse(structureMemo.get(new BlockPos(1, 0, 0)), IEBlocks.MetalDecoration.LV_COIL.get().defaultBlockState()).getBlock();
         }
     }
 }

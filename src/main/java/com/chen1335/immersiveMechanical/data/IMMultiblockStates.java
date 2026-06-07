@@ -5,14 +5,14 @@ import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallba
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.registrate.devData.IEMultiblockStatesProvider;
 
-import static net.minecraft.client.renderer.RenderType.solid;
-import static net.minecraft.client.renderer.RenderType.translucent;
+import static net.minecraft.client.renderer.RenderType.*;
 
 public class IMMultiblockStates {
     public static void init(IEMultiblockStatesProvider provider) {
         provider.createMultiblock(provider.innerObj("block/metal_multiblock/large_battery.obj"), IMMultiblocks.LARGE_BATTERY.multiblock());
         provider.createMultiblock(provider.innerObj("block/metal_multiblock/industrial_furnaces.obj"), IMMultiblocks.INDUSTRIAL_FURNACES.multiblock());
         provider.createMultiblock(provider.innerObj("block/metal_multiblock/small_mining_machine.obj"), IMMultiblocks.SMALL_MINING_MACHINE.multiblock());
+        provider.createMultiblock(provider.innerObj("block/metal_multiblock/pyrolyse_oven.obj",cutout()), IMMultiblocks.PYROLYSE_OVEN.multiblock());
 
 
         provider.createDynamicMultiblock(
@@ -29,6 +29,14 @@ public class IMMultiblockStates {
                         .layer(solid())
                         .end(),
                 IMMultiblocks.COIL.multiblock()
+        );
+
+        provider.createDynamicMultiblock(
+                provider.ieObjBuilder("block/metal_multiblock/coil_vertical.obj.ie", provider.innerModels)
+                        .callback(CoilCallbacks.INSTANCE)
+                        .layer(solid())
+                        .end(),
+                IMMultiblocks.COIL_VERTICAL.multiblock()
         );
     }
 

@@ -1,0 +1,206 @@
+{
+  "display": {
+    "firstperson_lefthand": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "firstperson_righthand": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "fixed": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "ground": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "gui": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "head": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "none": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "right_rotation": [
+        -0.0,
+        0.0,
+        -0.0
+      ],
+      "rotation": [
+        20.0,
+        -45.000004,
+        -4.8296733E-6
+      ],
+      "scale": [
+        0.15,
+        0.15000004,
+        0.15
+      ],
+      "translation": [
+        -1.6,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "flip_v": true,
+  "loader": "neoforge:obj",
+  "model": "immersive_mechanical:models/block/metal_multiblock/coil_vertical.obj.ie",
+  "render_type": "minecraft:cutout"
+}

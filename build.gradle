@@ -154,7 +154,6 @@ dependencies {
     implementation "curse.maven:immersive-engineering-231951:6733669"
     implementation "curse.maven:jei-238222:7420587"
     implementation "curse.maven:jade-324717:7545219"
-
     // MC<minecraft_version>-<registrate_version>
     implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.6"
     // [MC<minecraft_version>,MC<next_minecraft_version>)

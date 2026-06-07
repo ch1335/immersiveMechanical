@@ -1,0 +1,5 @@
+# Blender 4.5.3 LTS MTL File: 'pyrolyse_oven.blend'
+# www.blender.org
+
+newmtl Material
+map_Kd immersive_mechanical:block/metal_multiblock/pyrolyse_oven

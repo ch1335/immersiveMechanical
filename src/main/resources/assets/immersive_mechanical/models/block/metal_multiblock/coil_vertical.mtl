@@ -1,0 +1,5 @@
+# Blender 4.5.3 LTS MTL File: 'coil.blend'
+# www.blender.org
+
+newmtl side
+map_Kd immersive_mechanical:block/metal_decoration/coil_lv_side

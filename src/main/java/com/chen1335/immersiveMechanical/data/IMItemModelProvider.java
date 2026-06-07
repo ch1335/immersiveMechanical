@@ -20,9 +20,14 @@ public class IMItemModelProvider {
 
         provider.obj(IMMultiblocks.COIL.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/coil.obj.ie")).transforms(ImmersiveMechanical.id("item/coil")).renderType(RenderType.cutout().name);
 
+        provider.obj(IMMultiblocks.COIL_VERTICAL.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/coil_vertical.obj.ie")).transforms(ImmersiveMechanical.id("item/coil_vertical")).renderType(RenderType.cutout().name);
+
+
         provider.obj(IMMultiblocks.SMALL_MINING_MACHINE.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/small_mining_machine.obj")).transforms(ImmersiveMechanical.id("item/small_mining_machine"));
 
         provider.obj(IMBlocks.TURRET_LASER.get(), ImmersiveMechanical.id("block/metal_device/turret_laser_inv.obj")).transforms(ImmersiveMechanical.id("item/turret"));
+
+        provider.obj(IMMultiblocks.PYROLYSE_OVEN.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/pyrolyse_oven.obj")).transforms(ImmersiveMechanical.id("item/pyrolyse_oven"));
 
     }
 }

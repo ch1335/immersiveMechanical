@@ -7,6 +7,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.PyrolyseOvenShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -34,7 +35,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType) {
-        return blockPos -> Shapes.block();
+        return new PyrolyseOvenShape();
     }
 
     public static class State implements IMultiblockState {

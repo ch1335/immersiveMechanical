@@ -1,5 +1,6 @@
 package com.chen1335.immersiveMechanical.definitions;
 
+import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.generic.ConnectorBlock;
 import blusunrize.immersiveengineering.common.blocks.metal.BasicConnectorBlock;
 import blusunrize.immersiveengineering.common.blocks.metal.EnergyConnectorBlockEntity;
@@ -36,7 +37,7 @@ public class IMBlocks {
     public static final BlockEntry<BasicConnectorBlock<EnergyConnectorBlockEntity>> CONNECTOR_EHV = REGISTRATE.block("connector_ehv", (properties) -> new BasicConnectorBlock<>(ConnectorBlock.PROPERTIES.get(), IMBlockEntityTypes.CONNECTOR_EHV))
             .blockstate(NonNullBiConsumer.noop())
             .loot(RegistrateBlockLootTables::dropSelf)
-            .item()
+            .item(BlockItemIE::new)
             .model(NonNullBiConsumer.noop())
             .build()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -46,7 +47,7 @@ public class IMBlocks {
     public static final BlockEntry<BasicConnectorBlock<EnergyConnectorBlockEntity>> CONNECTOR_EHV_RELAY = REGISTRATE.block("connector_ehv_relay", (properties) -> new BasicConnectorBlock<>(ConnectorBlock.PROPERTIES.get(), IMBlockEntityTypes.CONNECTOR_EHV_RELAY))
             .blockstate(NonNullBiConsumer.noop())
             .loot(RegistrateBlockLootTables::dropSelf)
-            .item()
+            .item(BlockItemIE::new)
             .model(NonNullBiConsumer.noop())
             .build()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -70,7 +71,7 @@ public class IMBlocks {
     public static final BlockEntry<TurretBlock<TurretLaserBlockEntity>> TURRET_LASER = REGISTRATE.block("turret_laser", (properties) -> new TurretBlock<>(IMBlockEntityTypes.TURRET_LASER, METAL_PROPERTIES_DYNAMIC.get()))
             .blockstate(NonNullBiConsumer.noop())
             .loot(RegistrateBlockLootTables::dropSelf)
-            .item()
+            .item(BlockItemIE::new)
             .model(NonNullBiConsumer.noop())
             .build()
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)

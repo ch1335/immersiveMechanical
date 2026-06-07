@@ -1,0 +1,62 @@
+{
+  "parent": "minecraft:block/block",
+  "dynamic": true,
+  "inner_model": {
+    "parent": "minecraft:block/block",
+    "callbacks": "immersive_mechanical:coil",
+    "layers": [
+      "solid"
+    ],
+    "loader": "immersiveengineering:ie_obj",
+    "model": "immersive_mechanical:models/block/metal_multiblock/coil_vertical.obj.ie",
+    "textures": {
+      "particle": "immersive_mechanical:block/metal_decoration/coil_lv_side"
+    }
+  },
+  "loader": "immersiveengineering:basic_split",
+  "split_parts": [
+    [
+      -1,
+      -2,
+      0
+    ],
+    [
+      0,
+      -2,
+      0
+    ],
+    [
+      1,
+      -2,
+      0
+    ],
+    [
+      -1,
+      -1,
+      0
+    ],
+    [
+      1,
+      -1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0
+    ]
+  ],
+  "textures": {
+    "particle": "immersive_mechanical:block/metal_decoration/coil_lv_side"
+  }
+}

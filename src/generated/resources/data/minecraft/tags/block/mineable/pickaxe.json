@@ -11,6 +11,8 @@
     "immersive_mechanical:green_house",
     "immersive_mechanical:small_mining_machine",
     "immersive_mechanical:industrial_furnaces",
-    "immersive_mechanical:coil"
+    "immersive_mechanical:coil",
+    "immersive_mechanical:coil_vertical",
+    "immersive_mechanical:pyrolyse_oven"
   ]
 }

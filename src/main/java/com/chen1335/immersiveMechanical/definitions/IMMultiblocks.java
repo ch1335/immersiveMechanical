@@ -1,5 +1,6 @@
 package com.chen1335.immersiveMechanical.definitions;
 
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven.PyrolyseOvenLogic;
 import com.chen1335.registrate.MultiblockDefinition;
 import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
 import com.chen1335.immersiveMechanical.client.render.tile.SmallMiningMachineRender;
@@ -61,6 +62,23 @@ public class IMMultiblocks {
             .masterFromOrigin(new BlockPos(1, 0, 2))
             .triggerFromOrigin(new BlockPos(1, 0, 2))
             .size(new BlockPos(3, 1, 3))
+            .manualScale(9)
+            .register();
+
+    public static final MultiblockDefinition<CoilLogic.State, CoilLogic> COIL_VERTICAL = REGISTRATE.multiblock("coil_vertical", CoilLogic::new, RecordOriginalBlockMultiblock::new)
+            .notMirrored()
+            .additionalPredicates(List.of(MatcherPredicates::coil))
+            .masterFromOrigin(new BlockPos(1, 2, 0))
+            .triggerFromOrigin(new BlockPos(1, 2, 0))
+            .size(new BlockPos(3, 3, 1))
+            .manualScale(9)
+            .register();
+
+    public static final MultiblockDefinition<PyrolyseOvenLogic.State, PyrolyseOvenLogic> PYROLYSE_OVEN = REGISTRATE.multiblock("pyrolyse_oven", PyrolyseOvenLogic::new)
+            .notMirrored()
+            .masterFromOrigin(new BlockPos(2, 0, 3))
+            .triggerFromOrigin(new BlockPos(1, 2, 5))
+            .size(new BlockPos(5, 4, 6))
             .manualScale(9)
             .register();
 
