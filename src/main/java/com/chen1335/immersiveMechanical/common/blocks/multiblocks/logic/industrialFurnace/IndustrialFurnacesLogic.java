@@ -58,6 +58,7 @@ public class IndustrialFurnacesLogic implements IMultiblockLogic<IndustrialFurna
 
     private static final MultiblockFace MAIN_OUT_POS = new MultiblockFace(3, 0, 1, RelativeBlockFace.LEFT);
 
+
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         IMultiblockLevel level = context.getLevel();
@@ -133,6 +134,9 @@ public class IndustrialFurnacesLogic implements IMultiblockLogic<IndustrialFurna
             RecipeHolder<IndustrialFurnaceRecipe> recipe = IndustrialFurnaceRecipe.findRecipe(level, stack);
             if (recipe == null)
                 continue;
+
+            int[] ints = new int[]{0, 0, 0, 0};
+
             MultiblockProcessInMachine<IndustrialFurnaceRecipe> process = new IndustrialFurnaceProcess(recipe, state, slot);
 
             if (state.processor.addProcessToQueue(process, level, false)) {
@@ -206,12 +210,17 @@ public class IndustrialFurnacesLogic implements IMultiblockLogic<IndustrialFurna
             nbt.put("energy", energy.serializeNBT(provider));
             nbt.put("inventory", inventory.serializeNBT(provider));
             nbt.put("processor", this.processor.toNBT(provider));
+            if (coilInfo != null) {
+                nbt.putFloat("energyModify", coilInfo.energyModify());
+                nbt.putFloat("timeModify", coilInfo.timeModify());
+            }
         }
 
         @Override
         public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
             energy.deserializeNBT(provider, nbt.getCompound("energy"));
             inventory.deserializeNBT(provider, nbt.getCompound("inventory"));
+            coilInfo = new CoilInfo(nbt.getFloat("timeModify"), nbt.getFloat("energyModify"));
             processor.fromNBT(nbt.get("processor"), (getRecipe, data, p) -> new IndustrialFurnaceProcess(getRecipe, this, data), provider);
         }
 

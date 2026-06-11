@@ -12,6 +12,7 @@ public record CoilInfo(float timeModify, float energyModify) {
     public static final CoilInfo DEFAULT = new CoilInfo(1F, 1F);
 
 
+
     public static void register(Supplier<? extends Block> blockSupplier, CoilInfo coilInfo) {
         COIL_INFO_MAP.put(blockSupplier.get(), coilInfo);
     }

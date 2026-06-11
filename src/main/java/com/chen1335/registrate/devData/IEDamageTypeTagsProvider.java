@@ -38,7 +38,7 @@ public class IEDamageTypeTagsProvider extends TagsProvider<DamageType> implement
     }
 
     @Override
-    public @NotNull LogicalSide getSide() {
+    public LogicalSide getSide() {
         return LogicalSide.SERVER;
     }
 }

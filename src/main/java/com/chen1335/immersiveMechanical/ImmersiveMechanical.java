@@ -1,12 +1,16 @@
 package com.chen1335.immersiveMechanical;
 
 import blusunrize.immersiveengineering.common.register.IEBlocks;
-import com.chen1335.immersiveMechanical.API.objects.*;
-import com.chen1335.immersiveMechanical.definitions.*;
-import com.chen1335.registrate.IERegistrate;
+import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
+import com.chen1335.immersiveMechanical.API.objects.IMSounds;
 import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
+import com.chen1335.immersiveMechanical.definitions.*;
+import com.chen1335.immersiveMechanical.recipe.transters.IRecipeTransfer;
+import com.chen1335.immersiveMechanical.recipe.transters.IndustrialFurnaceRecipeTransfer;
+import com.chen1335.immersiveMechanical.recipe.transters.PyrolyseOvenRecipeTransfer;
+import com.chen1335.registrate.IERegistrate;
 import com.mojang.logging.LogUtils;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.core.registries.Registries;
@@ -21,12 +25,19 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 @Mod(ImmersiveMechanical.MODID)
 public class ImmersiveMechanical {
     public static final String MODID = "immersive_mechanical";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final IERegistrate REGISTRATE = IERegistrate.create(MODID);
+
+    private static final List<IRecipeTransfer> RECIPE_TRANSFERS = List.of(
+            IndustrialFurnaceRecipeTransfer.INSTANCE,
+            PyrolyseOvenRecipeTransfer.INSTANCE
+    );
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -69,5 +80,9 @@ public class ImmersiveMechanical {
 
     public static ResourceLocation guiId(String path) {
         return ImmersiveMechanical.id("textures/gui/%s.png".formatted(path));
+    }
+
+    public static List<IRecipeTransfer> getRecipeTransfer() {
+        return RECIPE_TRANSFERS;
     }
 }

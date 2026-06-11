@@ -1,18 +1,13 @@
 package com.chen1335.immersiveMechanical.definitions;
 
 import blusunrize.immersiveengineering.common.register.IEMenuTypes;
-import com.chen1335.immersiveMechanical.client.gui.GreenHouseScreen;
-import com.chen1335.immersiveMechanical.client.gui.IndustrialFurnacesScreen;
-import com.chen1335.immersiveMechanical.client.gui.LaserTurretScreen;
-import com.chen1335.immersiveMechanical.client.gui.SmallMiningMachineScreen;
+import com.chen1335.immersiveMechanical.client.gui.*;
 import com.chen1335.immersiveMechanical.common.blockEntities.TurretLaserBlockEntity;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.GreenHouseLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industrialFurnace.IndustrialFurnacesLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven.PyrolyseOvenLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.smallMiningMachine.SmallMiningMachineLogic;
-import com.chen1335.immersiveMechanical.common.gui.GreenHouseMenu;
-import com.chen1335.immersiveMechanical.common.gui.IndustrialFurnacesMenu;
-import com.chen1335.immersiveMechanical.common.gui.LaserTurretMenu;
-import com.chen1335.immersiveMechanical.common.gui.SmallMiningMachineMenu;
+import com.chen1335.immersiveMechanical.common.gui.*;
 
 import static com.chen1335.immersiveMechanical.ImmersiveMechanical.REGISTRATE;
 
@@ -42,4 +37,9 @@ public class IMMenuTypes {
             () -> SmallMiningMachineScreen::new
     );
 
+    public static IEMenuTypes.MultiblockContainer<PyrolyseOvenLogic.State, PyrolyseOvenMenu> PYROLYSE_OVEN = REGISTRATE.multiblockMenu("pyrolyse_oven",
+            PyrolyseOvenMenu::makeServer,
+            PyrolyseOvenMenu::makeClient,
+            () -> PyrolyseOvenScreen::new
+    );
 }

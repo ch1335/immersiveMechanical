@@ -42,6 +42,8 @@ public class IMJei implements IModPlugin {
         registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE);
         registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE_FERTILIZER);
         registration.addRecipeCatalyst(IMMultiblocks.INDUSTRIAL_FURNACES.registration().iconStack(), INDUSTRIAL_FURNACE);
+
+        registration.addRecipeCatalyst(IMMultiblocks.PYROLYSE_OVEN.registration().iconStack(), JEIRecipeTypes.COKE_OVEN);
     }
 
     @Override

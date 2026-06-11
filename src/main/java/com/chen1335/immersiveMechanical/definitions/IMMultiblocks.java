@@ -76,6 +76,7 @@ public class IMMultiblocks {
 
     public static final MultiblockDefinition<PyrolyseOvenLogic.State, PyrolyseOvenLogic> PYROLYSE_OVEN = REGISTRATE.multiblock("pyrolyse_oven", PyrolyseOvenLogic::new)
             .notMirrored()
+            .gui(IMMenuTypes.PYROLYSE_OVEN)
             .masterFromOrigin(new BlockPos(2, 0, 3))
             .triggerFromOrigin(new BlockPos(1, 2, 5))
             .size(new BlockPos(5, 4, 6))
