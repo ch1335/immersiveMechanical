@@ -30,7 +30,9 @@
   "item.immersive_mechanical.stick_nichrome": "Nichrome Stick",
   "item.immersive_mechanical.wire_nichrome": "Nichrome Wire",
   "item.immersive_mechanical.nichrome_wire_coil": "Nichrome Wire Coil",
-
+  "block.immersive_mechanical.pyrolyse_oven": "Pyrolyse Oven",
+  "block.immersive_mechanical.coil": "Coil",
+  "block.immersive_mechanical.coil_vertical": "Coil(Vertical)",
   "immersive_mechanical.Tooltip.coil_formed": "The coil has been formed",
   "immersive_mechanical.tooltip.coil_info_for_industrial_furnaces": "When used as an industrial furnace coil:",
   "immersive_mechanical.tooltip.timeModify": "Speed Modify:%s",

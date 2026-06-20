@@ -10,6 +10,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockS
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockItem;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
 import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
@@ -43,6 +44,7 @@ import org.apache.commons.lang3.mutable.MutableObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -84,11 +86,11 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
     private BlockBehaviour.Properties properties = IEBlocks.METAL_PROPERTIES_NO_OCCLUSION.get();
     private boolean mirrorable = true;
     private IEMenuTypes.MultiblockContainer<S, ?> menu;
-    private Function<MultiblockRegistration<S>, ? extends MultiblockPartBlock<S>> makeBlock = reg -> {
+    private BiFunction<BlockBehaviour.Properties, MultiblockRegistration<S>, ? extends MultiblockPartBlock<S>> makeBlock = (properties1, reg) -> {
         if (reg.mirrorable())
-            return new MultiblockPartBlock.WithMirrorState<>(properties, reg);
+            return new MultiblockPartBlock.WithMirrorState<>(properties1, reg);
         else
-            return new MultiblockPartBlock<>(properties, reg);
+            return new MultiblockPartBlock<>(properties1, reg);
     };
 
     private Function<Block, Item> makeItem = MultiblockItem::new;
@@ -108,6 +110,10 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         this.multiblockBes = multiblockBes;
     }
 
+    public MultiblockBuilder<S, L> setProperties(BlockBehaviour.Properties properties) {
+        this.properties = properties;
+        return this;
+    }
 
     public MultiblockBuilder<S, L> onRegister(Consumer<MultiblockDefinition<S, L>> consumer) {
         onRegister.add(consumer);
@@ -156,7 +162,7 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         return this;
     }
 
-    public MultiblockBuilder<S, L> customBlock(Function<MultiblockRegistration<S>, ? extends MultiblockPartBlock<S>> makeBlock) {
+    public MultiblockBuilder<S, L> customBlock(BiFunction<BlockBehaviour.Properties, MultiblockRegistration<S>, ? extends MultiblockPartBlock<S>> makeBlock) {
         this.makeBlock = makeBlock;
         return this;
     }
@@ -190,8 +196,8 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
 
         L logic = logicSupplier.get();
         Mutable<TemplateMultiblock> typeBox = new MutableObject<>();
-        IEMultiblockBuilder<S> builder = new IEMultiblockBuilder<>(logic, name)
-                .customBlock(blockRegistrationMethod, itemRegistrationMethod, makeBlock, makeItem)
+        IEMultiblockBuilder<S> builder = new IEMultiblockBuilder<>(logic, ResourceLocation.fromNamespaceAndPath(owner.getModid(),name).toString())
+                .customBlock(blockRegistrationMethod, itemRegistrationMethod, registration -> makeBlock.apply(properties, registration), makeItem)
                 .defaultBEs(multiblockBes)
                 .structure(typeBox::getValue);
 
@@ -213,7 +219,6 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
                 additionalPredicates,
                 manualScale
         );
-
         typeBox.setValue(multiblock);
         MultiblockHandler.registerMultiblock(multiblock);
         MultiblockDefinition<S, L> definition = new MultiblockDefinition<>(logicSupplier.get(), multiblock, registration);

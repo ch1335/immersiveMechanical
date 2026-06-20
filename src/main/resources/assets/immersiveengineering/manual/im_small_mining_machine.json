@@ -1,5 +1,5 @@
 {
-  "start": {
+  "multiblock": {
     "type": "multiblock",
     "name": "immersive_mechanical:multiblocks/small_mining_machine"
   }

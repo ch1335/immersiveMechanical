@@ -11,8 +11,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 
 public class GreenHousePartBlock extends MultiblockPartBlock<GreenHouseLogic.State> {
-    public GreenHousePartBlock(MultiblockRegistration<GreenHouseLogic.State> multiblock) {
-        super(IEBlocks.METAL_PROPERTIES_NO_OCCLUSION.get().lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 15 : 0), multiblock);
+    public GreenHousePartBlock(Properties properties,MultiblockRegistration<GreenHouseLogic.State> multiblock) {
+        super(properties, multiblock);
         registerDefaultState(this.defaultBlockState().setValue(BlockStateProperties.LIT, false));
     }
 

@@ -9,7 +9,8 @@ import snownee.jade.api.WailaPlugin;
 public class IMWailaPlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {
-        registration.registerBlockIcon(new CoilIconProvider(), IMCoilPartBlock.class);
+        registration.registerBlockIcon(CoilIconProvider.INSTANCE, IMCoilPartBlock.class);
+        registration.registerBlockComponent(CoilIconProvider.INSTANCE, IMCoilPartBlock.class);
     }
 
 }

@@ -1,0 +1,14 @@
+{
+  "pyrolyse_oven": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:multiblocks/pyrolyse_oven"
+  },
+  "coil_vertical": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:multiblocks/coil_vertical"
+  },
+  "pyrolyse_oven_demo": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:pyrolyse_oven_demo"
+  }
+}

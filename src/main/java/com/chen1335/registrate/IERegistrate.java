@@ -49,6 +49,8 @@ import java.util.function.Supplier;
 public class IERegistrate extends AbstractRegistrate<IERegistrate> {
     private final DeferredRegister<BlockEntityType<?>> beRegister = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, ImmersiveMechanical.MODID);
 
+    public static final List<MultiblockHandler.IMultiblock> ALL_MULTIBLOCKS = new ArrayList<>();
+
     private final List<MultiblockHandler.IMultiblock> multiblocks = new ArrayList<>();
 
     private final List<MetalDefinition> metalDefinitions = new ArrayList<>();
@@ -81,7 +83,10 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
     }
 
     public <S extends IMultiblockState, L extends IMultiblockLogic<S>> MultiblockBuilder<S, L> multiblock(String name, Supplier<L> lSupplier, IMultiblockFactory multiblockFactory) {
-        return new MultiblockBuilder<>(this, name, lSupplier, multiblockFactory, beRegister).onRegister(definition -> multiblocks.add(definition.multiblock()));
+        return new MultiblockBuilder<>(this, name, lSupplier, multiblockFactory, beRegister).onRegister(definition -> {
+            multiblocks.add(definition.multiblock());
+            ALL_MULTIBLOCKS.add(definition.multiblock());
+        });
     }
 
     public BlockEntityEntry<EnergyConnectorBlockEntity> registerConnector(String name, String cat, boolean relay, float length, int maxTransfer, BlockEntry<BasicConnectorBlock<EnergyConnectorBlockEntity>> availableBlock) {

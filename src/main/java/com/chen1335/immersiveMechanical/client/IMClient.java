@@ -2,6 +2,10 @@ package com.chen1335.immersiveMechanical.client;
 
 import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
+import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
+import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.client.models.callbacks.CoilCallbacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
@@ -16,7 +20,6 @@ public class IMClient {
         IEOBJCallbacks.register(rl("green_house"), GreenHouseCallbacks.INSTANCE);
         IEOBJCallbacks.register(rl("coil"), CoilCallbacks.INSTANCE);
     }
-
 
     static {
         IEApi.renderCacheClearers.add(GreenHouseRender::reset);

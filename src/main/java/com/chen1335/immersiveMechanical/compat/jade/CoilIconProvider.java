@@ -18,9 +18,21 @@ import snownee.jade.api.ui.IElementHelper;
 public class CoilIconProvider implements IBlockComponentProvider {
     public static final ResourceLocation ID = ImmersiveEngineering.rl("coil_icon");
 
+    public static CoilIconProvider INSTANCE = new CoilIconProvider();
+
+    @Override
+    public boolean isRequired() {
+        return true;
+    }
+
     @Override
     public void appendTooltip(ITooltip iTooltip, BlockAccessor blockAccessor, IPluginConfig iPluginConfig) {
-        iTooltip.add(Component.translatable("immersive_mechanical.Tooltip.coil_formed"));
+        BlockEntity blockEntity = blockAccessor.getBlockEntity();
+        if (blockEntity instanceof IMultiblockBE<?> be) {
+            if (be.getHelper().getState() instanceof CoilLogic.State state) {
+                iTooltip.add(state.getCoilBlock().getName());
+            }
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@ public interface IEProviderTypes {
 
     ProviderType<IEMultiblockStatesProvider> MULTIBLOCK_STATE = ProviderType.registerProvider("ie_multiblock_state", c -> new IEMultiblockStatesProvider(c.parent(), c.output(), c.fileHelper()));
 
-    ProviderType<IEDynamicModelProvider> DYNAMIC_MODELS = ProviderType.registerProvider("ie_dynamic_models", c -> new IEDynamicModelProvider(c.parent(), c.output(), c.fileHelper()));
+    ProviderType<IEDynamicModelProvider> DYNAMIC_MODELS = ProviderType.registerProvider("ie_dynamic_models", c -> new IEDynamicModelProvider(c.parent(), c.output(), c.fileHelper(),c.get(MULTIBLOCK_STATE)));
 
     ProviderType<IEItemModelProvider> IE_ITEM_MODEL = ProviderType.registerProvider("ie_item_model", c -> new IEItemModelProvider(c.parent(), c.output(), c.fileHelper(), c.get(MULTIBLOCK_STATE)));
 

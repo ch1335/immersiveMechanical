@@ -8,10 +8,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultib
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockFace;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.api.tool.upgrade.UpgradeEffect;
 import blusunrize.immersiveengineering.common.items.DrillItem;
 import blusunrize.immersiveengineering.common.items.DrillheadItem;
@@ -20,6 +17,7 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import com.chen1335.immersiveMechanical.common.IMItemHandlerHelper;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven.PyrolyseOvenLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.SmallMiningMachineShape;
 import com.chen1335.immersiveMechanical.config.ServerConfig;
 import com.chen1335.immersiveMechanical.mixins.immersive_mechanical.DrillHeadPermAccessor;
@@ -54,6 +52,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.BooleanSupplier;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -184,6 +183,11 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         });
     }
 
+
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop) {
+        MBInventoryUtils.dropItems(state.inventory, drop);
+    }
     @Override
     public State createInitialState(IInitialMultiblockContext<State> context) {
         return new State(context);

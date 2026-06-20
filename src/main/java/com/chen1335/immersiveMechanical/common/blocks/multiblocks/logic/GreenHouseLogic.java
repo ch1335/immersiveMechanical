@@ -9,15 +9,13 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultib
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockFace;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.blockimpl.InitialMultiblockContext;
 import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.smallMiningMachine.SmallMiningMachineLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.GreenHouseShape;
 import com.chen1335.immersiveMechanical.network.GreenHouseGrowsPack;
 import io.netty.util.collection.IntObjectHashMap;
@@ -43,6 +41,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -113,6 +112,14 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
         State state = context.getState();
 
         state.processUnits.values().forEach(ProcessUnit::tickClient);
+    }
+
+
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop) {
+        MBInventoryUtils.dropItems(state.seeds, drop);
+        MBInventoryUtils.dropItems(state.soils, drop);
+        MBInventoryUtils.dropItems(state.products, drop);
     }
 
     public static class State implements IMultiblockState {

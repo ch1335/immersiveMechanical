@@ -6,5 +6,9 @@
   "coil": {
     "type": "multiblock",
     "name": "immersive_mechanical:multiblocks/coil"
+  },
+  "industrial_furnaces_demo": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:industrial_furnaces_demo"
   }
 }

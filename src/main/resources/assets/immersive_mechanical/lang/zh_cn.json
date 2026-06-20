@@ -34,6 +34,9 @@
   "item.immersive_mechanical.nichrome_wire_coil": "镍铬合金线圈",
   "manual.immersiveengineering.immersive_mechanical": "沉浸机械",
   "block.immersive_mechanical.small_mining_machine": "小型采矿机",
+  "block.immersive_mechanical.pyrolyse_oven": "热解炉",
+  "block.immersive_mechanical.coil": "线圈(水平)",
+  "block.immersive_mechanical.coil_vertical": "线圈(竖直)",
 
   "gui.immersiveengineering.config.small_mining_machine.rest": "重置"
 

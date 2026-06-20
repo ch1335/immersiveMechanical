@@ -10,10 +10,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockLev
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockFace;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.*;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.process.ProcessContext;
 import blusunrize.immersiveengineering.common.fluids.ArrayFluidHandler;
 import blusunrize.immersiveengineering.common.util.CachedRecipe;
@@ -43,6 +40,7 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -116,7 +114,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
         }
 
         IFluidHandler fluidHandler = state.fluidOutput.get();
-        if (fluidHandler !=null){
+        if (fluidHandler != null) {
             int fill = fluidHandler.fill(state.tank.getFluid(), IFluidHandler.FluidAction.EXECUTE);
             state.tank.drain(fill, IFluidHandler.FluidAction.EXECUTE);
         }
@@ -202,7 +200,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
                 if (recipeHolder != null) {
                     PyrolyseOvenRecipe value = recipeHolder.value();
                     state.originalProcessMax = value.getBaseTime();
-                    state.processMax = (int) ((int) (state.originalProcessMax / state.coilInfo.timeModify())*0.75);
+                    state.processMax = (int) ((int) (state.originalProcessMax / state.coilInfo.timeModify()) * 0.75);
                     state.process = state.processMax;
                     state.active = true;
                 }
@@ -252,6 +250,10 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
         return true;
     }
 
+    @Override
+    public void dropExtraItems(State state, Consumer<ItemStack> drop) {
+        MBInventoryUtils.dropItems(state.inventory, drop);
+    }
 
     @Override
     public State createInitialState(IInitialMultiblockContext<State> context) {
