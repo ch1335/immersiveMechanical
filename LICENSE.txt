@@ -1,2 +1,2 @@
-This project uses the same LICENSE as Immersive Engineering。
+This project uses the same LICENSE as Immersive Engineering but the holder is merely regarded as ch1335.
 for detail, see https://github.com/BluSunrize/ImmersiveEngineering/blob/1.21.1/LICENSE
