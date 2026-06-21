@@ -1,10 +1,16 @@
 package com.chen1335.immersiveMechanical.compat.jei;
 
+import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
+import blusunrize.immersiveengineering.api.energy.GeneratorFuel;
+import blusunrize.immersiveengineering.api.excavator.MineralMix;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIRecipeTypes;
-import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.compat.jei.categories.GeneratorFuelCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.IndustrialFurnaceCategory;
+import com.chen1335.immersiveMechanical.compat.jei.categories.MineralMixCategory;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
+import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -25,6 +31,10 @@ public class IMJei implements IModPlugin {
 
     public static final RecipeType<RecipeHolder<IndustrialFurnaceRecipe>> INDUSTRIAL_FURNACE = RecipeType.createRecipeHolderType(IMRecipe.INDUSTRIAL_FURNACE.getId());
 
+    public static final RecipeType<RecipeHolder<GeneratorFuel>> GENERATOR_FUEL = RecipeType.createRecipeHolderType(IERecipeTypes.GENERATOR_FUEL.type().getId());
+
+    public static final RecipeType<RecipeHolder<MineralMix>> MINERAL_MIX = RecipeType.createRecipeHolderType(IERecipeTypes.MINERAL_MIX.type().getId());
+
     @Override
     public ResourceLocation getPluginUid() {
         return ID;
@@ -34,6 +44,8 @@ public class IMJei implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IJeiHelpers jeiHelpers = registration.getJeiHelpers();
         registration.addRecipeCategories(new IndustrialFurnaceCategory(jeiHelpers));
+        registration.addRecipeCategories(new GeneratorFuelCategory(jeiHelpers));
+        registration.addRecipeCategories(new MineralMixCategory(jeiHelpers));
     }
 
     @Override
@@ -42,7 +54,7 @@ public class IMJei implements IModPlugin {
         registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE);
         registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE_FERTILIZER);
         registration.addRecipeCatalyst(IMMultiblocks.INDUSTRIAL_FURNACES.registration().iconStack(), INDUSTRIAL_FURNACE);
-
+        registration.addRecipeCatalyst(IEMultiblocks.DIESEL_GENERATOR.getBlock().asItem(), GENERATOR_FUEL);
         registration.addRecipeCatalyst(IMMultiblocks.PYROLYSE_OVEN.registration().iconStack(), JEIRecipeTypes.COKE_OVEN);
     }
 
@@ -51,6 +63,8 @@ public class IMJei implements IModPlugin {
         if (Minecraft.getInstance().level != null) {
             RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
             registration.addRecipes(INDUSTRIAL_FURNACE, recipeManager.getAllRecipesFor(IMRecipe.INDUSTRIAL_FURNACE.get()));
+            registration.addRecipes(GENERATOR_FUEL, recipeManager.getAllRecipesFor(IERecipeTypes.GENERATOR_FUEL.get()));
+            registration.addRecipes(MINERAL_MIX, recipeManager.getAllRecipesFor(IERecipeTypes.MINERAL_MIX.get()));
         }
     }
 }

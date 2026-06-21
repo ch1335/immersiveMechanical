@@ -34,10 +34,21 @@
   "block.immersive_mechanical.coil": "Coil",
   "block.immersive_mechanical.coil_vertical": "Coil(Vertical)",
   "immersive_mechanical.Tooltip.coil_formed": "The coil has been formed",
-  "immersive_mechanical.tooltip.coil_info_for_industrial_furnaces": "When used as an industrial furnace coil:",
+  "immersive_mechanical.tooltip.coil_info_for_device": "When installing onto the device:",
   "immersive_mechanical.tooltip.timeModify": "Speed Modify:%s",
   "immersive_mechanical.tooltip.energyModify": "Energy Modify:%s",
-  "gui.immersiveengineering.config.small_mining_machine.rest": "Reset"
+  "gui.immersiveengineering.config.small_mining_machine.rest": "Reset",
+  "immersive_mechanical.jei.title.generator_fuel": "Generator Fuel",
+  "immersive_mechanical.jei.burm_time": "Burn Time:%s second",
+  "immersive_mechanical.jei.expected_output": "Expected output:%s IF",
+  "immersive_mechanical.jei.title.mineral_mix": "Mineral Deposits",
+  "immersive_mechanical.jei.fail_chance": "Fail Chance:%s%%",
+  "immersive_mechanical.jei.weight": "Weight:%s",
+  "immersive_mechanical.jei.biome_require": "Require:%s",
+  "immersive_mechanical.jei.expected_ore_output": "Expected Ore Output:",
+  "immersive_mechanical.jei.main_ore": "Main Output",
+  "immersive_mechanical.jei.spoils": "Spoils",
+  "immersive_mechanical.jei.available_biome": "Available Biomes:"
 
 }
 

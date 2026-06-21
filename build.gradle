@@ -154,6 +154,7 @@ dependencies {
     implementation "curse.maven:immersive-engineering-231951:6733669"
     implementation "curse.maven:jei-238222:7420587"
     implementation "curse.maven:jade-324717:7545219"
+    implementation "curse.maven:just-enough-immersive-multiblocks-634571:7131196"
     jarJar(implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.6")
 }
 

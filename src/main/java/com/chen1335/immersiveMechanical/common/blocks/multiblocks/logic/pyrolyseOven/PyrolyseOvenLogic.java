@@ -119,6 +119,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
             state.tank.drain(fill, IFluidHandler.FluidAction.EXECUTE);
         }
 
+
         if (state.energyStorage.getEnergyStored() <= 0) return;
 
         if (state.coilInfo == null) return;
@@ -136,7 +137,12 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
                     state.processMax = 0;
                     state.active = false;
                 } else {
-                    state.process--;
+                    int energyCost = (int) (recipe.value().getBaseEnergy() * state.coilInfo.energyModify() / state.processMax);
+                    if (state.energyStorage.getEnergyStored() >= energyCost) {
+                        state.process--;
+                        state.energyStorage.extractEnergy(energyCost, false);
+                    }
+
                 }
 
             }

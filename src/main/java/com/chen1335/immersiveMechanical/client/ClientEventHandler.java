@@ -34,7 +34,7 @@ public class ClientEventHandler {
             Block block = Block.byItem(event.getItemStack().getItem());
             CoilInfo coilInfo = CoilInfo.COIL_INFO_MAP.get(block);
             if (coilInfo != null) {
-                event.getToolTip().add(Component.translatable("immersive_mechanical.tooltip.coil_info_for_industrial_furnaces"));
+                event.getToolTip().add(Component.translatable("immersive_mechanical.tooltip.coil_info_for_device"));
                 event.getToolTip().add(Component.translatable("immersive_mechanical.tooltip.timeModify", "x" + coilInfo.timeModify()));
                 event.getToolTip().add(Component.translatable("immersive_mechanical.tooltip.energyModify", "x" + coilInfo.energyModify()));
             }

@@ -27,7 +27,7 @@
   "block.immersive_mechanical.industrial_furnaces": "工业熔炉",
   "item.immersive_mechanical.raw_chrome": "粗铬",
   "immersive_mechanical.Tooltip.coil_formed": "线圈以成型",
-  "immersive_mechanical.tooltip.coil_info_for_industrial_furnaces": "作为工业熔炉线圈使用时:",
+  "immersive_mechanical.tooltip.coil_info_for_device": "安装到设备时:",
   "immersive_mechanical.tooltip.timeModify": "运行速度:%s",
   "immersive_mechanical.tooltip.energyModify": "能量消耗:%s",
   "item.immersive_mechanical.wire_nichrome": "镍铬合金线",
@@ -38,6 +38,16 @@
   "block.immersive_mechanical.coil": "线圈(水平)",
   "block.immersive_mechanical.coil_vertical": "线圈(竖直)",
 
-  "gui.immersiveengineering.config.small_mining_machine.rest": "重置"
-
+  "gui.immersiveengineering.config.small_mining_machine.rest": "重置",
+  "immersive_mechanical.jei.title.generator_fuel": "发电机燃料",
+  "immersive_mechanical.jei.burm_time": "燃烧时间:%s秒",
+  "immersive_mechanical.jei.expected_output": "期望产出:%sIF",
+  "immersive_mechanical.jei.biome_require": "要求:%s",
+  "immersive_mechanical.jei.title.mineral_mix": "矿床信息",
+  "immersive_mechanical.jei.fail_chance": "失败概率:%s%%",
+  "immersive_mechanical.jei.weight": "权重:%s",
+  "immersive_mechanical.jei.expected_ore_output": "期望产出:",
+  "immersive_mechanical.jei.main_ore": "矿石",
+  "immersive_mechanical.jei.spoils": "废石",
+    "immersive_mechanical.jei.available_biome": "允许的生物群系:"
 }
