@@ -17,7 +17,6 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import com.chen1335.immersiveMechanical.common.IMItemHandlerHelper;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven.PyrolyseOvenLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.SmallMiningMachineShape;
 import com.chen1335.immersiveMechanical.config.ServerConfig;
 import com.chen1335.immersiveMechanical.mixins.immersive_mechanical.DrillHeadPermAccessor;
@@ -71,7 +70,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         if (state.active) {
             state.rotate(20);
             context.getLevel().getRawLevel().playLocalSound(pos.x, pos.y, pos.z, SoundEvents.STONE_HIT, SoundSource.BLOCKS, 0.5F, 1, true);
-        }else {
+        } else {
             state.rotate(0);
         }
         if (!state.isPlayingSound.getAsBoolean()) {
@@ -109,7 +108,10 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
             BlockPos absolute = context.getLevel().toAbsolute(CENTER);
             ChunkAccess chunk = rawLevel.getChunk(absolute);
             state.chunkPos = chunk.getPos();
-            state.currentMinedPos = new BlockPos.MutableBlockPos(state.minX, absolute.getY() - 1, absolute.getZ());
+            if (state.inventory.getStackInSlot(0).getItem() instanceof DrillheadItem drillheadItem) {
+                state.resize(((DrillHeadPermAccessor) drillheadItem.perms).IM$getDrillSize());
+            }
+            state.currentMinedPos = new BlockPos.MutableBlockPos(absolute.getX(), absolute.getY() - 1, absolute.getZ());
             currentMinedPos = state.currentMinedPos;
         }
         if (!state.active) {
@@ -188,6 +190,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
     public void dropExtraItems(State state, Consumer<ItemStack> drop) {
         MBInventoryUtils.dropItems(state.inventory, drop);
     }
+
     @Override
     public State createInitialState(IInitialMultiblockContext<State> context) {
         return new State(context);
@@ -231,7 +234,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
                     if (stack.getItem() instanceof DrillheadItem drillheadItem) {
                         DrillItem.setHeadStatic(drill, stack);
                         resize(((DrillHeadPermAccessor) drillheadItem.perms).IM$getDrillSize());
-                    }else {
+                    } else {
                         DrillItem.setHeadStatic(drill, ItemStack.EMPTY);
                     }
                     syncRunnable.run();
@@ -243,8 +246,6 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
                         ((DrillItem) drill.getItem()).recalculateUpgrades(drill, levelSupplier.get(), null);
                         syncRunnable.run();
                     }
-
-                } else {
 
                 }
             }

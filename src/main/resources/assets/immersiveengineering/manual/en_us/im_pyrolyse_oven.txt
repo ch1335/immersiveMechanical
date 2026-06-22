@@ -1,0 +1,10 @@
+Pyrolyse Oven
+Is This GregTech?
+<&pyrolyse_oven>
+The Pyrolyse Oven is an industrial device that heats organic materials under oxygen-free conditions to decompose them into combustible liquids/gases and solid residues.
+Build the structure as shown above, then right-click the front-left Heavy Engineering Block with a hammer to form it.
+<&coil_vertical>
+Like the Industrial Furnace, you also need to install coils before it can operate. However, this device requires two sets of coils in a vertical configuration, and both coil sets must be of the same type.
+<&pyrolyse_oven_demo>
+Taking copper coils as an example.<np>
+By default, the Pyrolyse Oven has 4x the parallel processing of a Coke Oven under the same conditions, and operates 25% faster than a Coke Oven.

@@ -1,0 +1,9 @@
+Greenhouse
+The "Greenhouse" Effect!
+<&multiblock>The Greenhouse is a large machine capable of rapidly growing crops.
+Build the structure as shown above, then right-click the front Light Engineering Block with a hammer.<np>
+The Greenhouse can handle one fluid type and four different soil types at once, with each soil holding four seeds, for a total of 16 crops.
+Crops in the Greenhouse grow 25% faster than in a Garden Cloche, with 3x fertilizer efficiency and 1.5x fluid efficiency.
+You can input fluids from the left and right sides, input fertilizer from the rear, and all outputs are automatically sent to the container in front.<np>
+Energy must be input through the center block on the top.
+Note that this machine will NOT stop working even if the output buffer is full! All excess outputs will be wasted and resources will continue to be consumed.

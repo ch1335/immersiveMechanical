@@ -1,0 +1,12 @@
+Small Mining Machine
+Geological Disruptor
+<&multiblock>
+
+The Small Mining Machine is a machine that rapidly excavates ores from underground.
+Build the structure as shown above, then right-click the front Steel Scaffolding with a hammer.<np>
+The Small Mining Machine requires a Drill Head to operate. It scans and excavates minerals from its own chunk and surrounding chunks, with the range depending on the drill's mining area.
+
+You can also install some drill-compatible upgrades:
+Rock Melting Acid - increases mineral drops
+Auger - increases mining speed
+Advanced Lubrication System - reduces drill wear

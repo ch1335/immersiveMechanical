@@ -1,0 +1,9 @@
+Large Battery
+Even More Capacity!
+<&multiblock>The Large Battery is used to store vast amounts of energy.
+Build the structure as shown above, then right-click the front bottom Steel Plate Metal with a hammer to create it.<np>
+This multiblock requires a Large Battery Core placed in the center to store and release energy. All energy is stored within the Large Battery Core.
+<&large_battery_core>.
+By default, a Large Battery Core can store 64MFE of energy with no input or output power limits.
+The Large Battery Core retains its energy when broken.
+The Large Battery can only receive energy from the top-left and output from the top-right.

@@ -1,0 +1,11 @@
+Industrial Furnace
+So Hot!
+<&industrial_furnaces>
+The Industrial Furnace is a multiblock machine capable of fast and bulk smelting.
+Build the structure as shown above, then right-click the front bottom Light Engineering Block with a hammer. However, you also need to install coils before it can operate.<np>
+<&coil>
+<&industrial_furnaces_demo>
+Taking copper coils as an example.<np>
+Upgrading the coils reduces total energy consumption and increases processing speed.
+After building the coils, you must right-click the center of any side of the coil with an Engineer's Hammer to form it.
+The Industrial Furnace can process all furnace and blast furnace recipes, as well as some special recipes, but it cannot process food.
