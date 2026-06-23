@@ -5,8 +5,11 @@ import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.crafting.TagOutput;
 import blusunrize.immersiveengineering.api.crafting.TagOutputList;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
+import blusunrize.immersiveengineering.api.utils.SetRestrictedField;
 import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
+import com.chen1335.immersiveMechanical.util.MutableObjectSupplier;
+import com.chen1335.immersiveMechanical.util.RecipeMultiplierHelper;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -19,13 +22,15 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
-    public static final Supplier<RecipeMultiplier> MULTIPLIERS = Suppliers.memoize(() -> new RecipeMultiplier(IndustrialFurnaceRecipe::timeModifier, IndustrialFurnaceRecipe::energyModifier));
+    public static final MutableObjectSupplier<RecipeMultiplier> MULTIPLIERS = new MutableObjectSupplier<>(RecipeMultiplierHelper.EMPTY);
     public static final CachedRecipeList<IndustrialFurnaceRecipe> RECIPES = new CachedRecipeList<>(IMRecipe.INDUSTRIAL_FURNACE.getIEType());
 
 
@@ -50,14 +55,6 @@ public final class IndustrialFurnaceRecipe extends MultiblockRecipe {
         }
 
         return null;
-    }
-
-    public static double timeModifier() {
-        return 1;
-    }
-
-    public static double energyModifier() {
-        return 1;
     }
 
     public static IndustrialFurnaceRecipe fromSmeltingRecipe(AbstractCookingRecipe recipe, HolderLookup.Provider registries) {

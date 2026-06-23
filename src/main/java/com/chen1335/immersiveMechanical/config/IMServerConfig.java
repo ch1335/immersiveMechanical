@@ -1,0 +1,106 @@
+package com.chen1335.immersiveMechanical.config;
+
+import blusunrize.immersiveengineering.ImmersiveEngineering;
+import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
+import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+
+@EventBusSubscriber(modid = ImmersiveMechanical.MODID)
+public class IMServerConfig {
+    @SubscribeEvent
+    public static void onConfigReload(ModConfigEvent.Reloading ev) {
+
+    }
+
+    @SubscribeEvent
+    public static void onConfigLoad(ModConfigEvent.Loading ev) {
+
+    }
+
+    public static final ModConfigSpec CONFIG_SPEC;
+    public static final IMServerConfig.Machines MACHINES;
+
+    static {
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
+        MACHINES = new Machines(builder);
+        CONFIG_SPEC = builder.build();
+    }
+
+
+    public static class Machines {
+        public final ModConfigSpec.IntValue green_house_consumption;
+        public final ModConfigSpec.DoubleValue green_house_fertilizer_efficiency;
+        public final ModConfigSpec.DoubleValue green_house_fluid_efficiency;
+        public final ModConfigSpec.IntValue small_mining_machine_consumption;
+        public final ModConfigSpec.IntValue small_mining_machine_default_speed;
+        public final ModConfigSpec.IntValue small_mining_machine_addition_speed_per_augers;
+        public final ModConfigSpec.IntValue large_battery_core_capa;
+        public final MultiblockRecipe.RecipeMultiplier industrial_furnaces_recipe_multiplier;
+        public final MultiblockRecipe.RecipeMultiplier pyrolyse_oven_recipe_multiplier;
+
+        public Machines(ModConfigSpec.Builder builder) {
+            builder.push("machines");
+            {
+                builder.push("large_battery_core_capa");
+                large_battery_core_capa = addPositive(builder, "storage_capacity", 64000000, "The energy storage capacity of large battery core");
+                builder.pop();
+            }
+            {
+                builder.push("green_house");
+                green_house_consumption = addPositive(builder, "consumption", 12, "The Flux per tick the green house consumes to grow plants per seed slot");
+                green_house_fertilizer_efficiency = builder
+                        .comment("Compared to Cloche's fertilizer efficiency")
+                        .defineInRange("fertilizer_efficiency", 3D, 1D, 100D);
+                green_house_fluid_efficiency = builder
+                        .comment("Compared to Cloche's fluid efficiency")
+                        .defineInRange("fluid_efficiency", 1.5D, 1D, 100D);
+                builder.pop();
+            }
+            {
+                builder.push("small_mining_machine");
+                small_mining_machine_consumption = addPositive(builder, "consumption", 512, "The Flux per tick the small mining machine consumes when active");
+                small_mining_machine_default_speed = addPositive(builder, "default_speed", 5, "Number of scanned blocks per tick without augers");
+                small_mining_machine_addition_speed_per_augers = addPositive(builder, "addition_speed_per_augers", 5, "Additional scanning speed provided by each auger");
+                builder.pop();
+            }
+
+            industrial_furnaces_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "industrial furnaces");
+            pyrolyse_oven_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "pyrolyse oven");
+            builder.pop();
+        }
+
+
+        private MultiblockRecipe.RecipeMultiplier addMachineEnergyTimeModifiers(ModConfigSpec.Builder builder, String machine) {
+            return addMachineEnergyTimeModifiers(builder, machine, true);
+        }
+
+        private MultiblockRecipe.RecipeMultiplier addMachineEnergyTimeModifiers(ModConfigSpec.Builder builder, String machine, boolean popCategory) {
+            builder.push(machine.replace(' ', '_'));
+            ModConfigSpec.DoubleValue energy = builder
+                    .comment("A modifier to apply to the energy costs of every " + machine + " recipe")
+                    .defineInRange("energyModifier", 1, 1e-3, 1e3);
+            ModConfigSpec.DoubleValue time = builder
+                    .comment("A modifier to apply to the time of every " + machine + " recipe")
+                    .defineInRange("timeModifier", 1, 1e-3, 1e3);
+            if (popCategory)
+                builder.pop();
+            return new MultiblockRecipe.RecipeMultiplier(time::get,energy::get);
+        }
+
+        public void populateAPI() {
+            IndustrialFurnaceRecipe.MULTIPLIERS.setValue(industrial_furnaces_recipe_multiplier);
+            PyrolyseOvenRecipe.MULTIPLIERS.setValue(pyrolyse_oven_recipe_multiplier);
+        }
+    }
+
+    private static ModConfigSpec.IntValue addPositive(ModConfigSpec.Builder builder, String name, int defaultVal, String... desc) {
+        return builder
+                .comment(desc)
+                .defineInRange(name, defaultVal, 1, Integer.MAX_VALUE);
+    }
+}

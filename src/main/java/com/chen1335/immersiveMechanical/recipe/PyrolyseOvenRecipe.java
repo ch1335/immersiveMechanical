@@ -2,11 +2,13 @@ package com.chen1335.immersiveMechanical.recipe;
 
 import blusunrize.immersiveengineering.api.crafting.*;
 import blusunrize.immersiveengineering.api.crafting.cache.CachedRecipeList;
+import blusunrize.immersiveengineering.api.utils.SetRestrictedField;
 import blusunrize.immersiveengineering.api.utils.codec.IEDualCodecs;
 import blusunrize.immersiveengineering.common.register.IEFluids;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.immersiveMechanical.definitions.IMRecipe;
-import com.google.common.base.Suppliers;
+import com.chen1335.immersiveMechanical.util.MutableObjectSupplier;
+import com.chen1335.immersiveMechanical.util.RecipeMultiplierHelper;
 import malte0811.dualcodecs.DualCodecs;
 import malte0811.dualcodecs.DualCompositeMapCodecs;
 import malte0811.dualcodecs.DualMapCodec;
@@ -19,22 +21,14 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class PyrolyseOvenRecipe extends MultiblockRecipe {
-    public static final Supplier<RecipeMultiplier> MULTIPLIERS = Suppliers.memoize(() -> new RecipeMultiplier(PyrolyseOvenRecipe::timeModifier, PyrolyseOvenRecipe::energyModifier));
+    public static final MutableObjectSupplier<RecipeMultiplier> MULTIPLIERS = new MutableObjectSupplier<>(RecipeMultiplierHelper.EMPTY);
     private final IngredientWithSize input;
     private final List<StackWithChance> outPutsWithChance;
     private final FluidStack fluidOutput;
     public static final CachedRecipeList<PyrolyseOvenRecipe> RECIPES = new CachedRecipeList<>(IMRecipe.PYROLYSE_OVEN.getIEType());
 
-    private static double energyModifier() {
-        return 1;
-    }
-
-    private static double timeModifier() {
-        return 1;
-    }
 
     public PyrolyseOvenRecipe(IngredientWithSize input,
                               TagOutput main,
@@ -89,13 +83,15 @@ public class PyrolyseOvenRecipe extends MultiblockRecipe {
         return IMRecipe.PYROLYSE_OVEN.getSerializer();
     }
 
-    @Override
-    public int getMultipleProcessTicks() {
-        return 0;
-    }
+
 
     public static PyrolyseOvenRecipe fromCokeOvenRecipe(CokeOvenRecipe recipe) {
         return new PyrolyseOvenRecipe(recipe.input, recipe.output, List.of(), new FluidStack(IEFluids.CREOSOTE.getStill(), recipe.creosoteOutput), recipe.time / 4, 25600);
+    }
+
+    @Override
+    public int getMultipleProcessTicks() {
+        return 0;
     }
 
     public static class Serializer extends IERecipeSerializer<PyrolyseOvenRecipe> implements RecipeSerializer<PyrolyseOvenRecipe> {

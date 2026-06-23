@@ -18,7 +18,7 @@ import blusunrize.immersiveengineering.common.util.IESounds;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import com.chen1335.immersiveMechanical.common.IMItemHandlerHelper;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.SmallMiningMachineShape;
-import com.chen1335.immersiveMechanical.config.ServerConfig;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.mixins.immersive_mechanical.DrillHeadPermAccessor;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
@@ -121,9 +121,11 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         Integer damage = DrillItem.getUpgradesStatic(state.drill).get(UpgradeEffect.DAMAGE);
         FakePlayer fakePlayer = FakePlayerFactory.get((ServerLevel) rawLevel, MINER);
         fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, state.drill);
-        state.energy.extractEnergy(ServerConfig.SmallMiningMachineTickCost, false);
+        state.energy.extractEnergy(IMServerConfig.MACHINES.small_mining_machine_consumption.get(), false);
 
-        for (int i = 0; i < 5 + (damage * 5); i++) {
+        int defaultSpeed = IMServerConfig.MACHINES.small_mining_machine_default_speed.getAsInt();
+        int additionSpeed = IMServerConfig.MACHINES.small_mining_machine_addition_speed_per_augers.getAsInt();
+        for (int i = 0; i < defaultSpeed + (damage * additionSpeed); i++) {
             currentMinedPos.setX(Mth.clamp(currentMinedPos.getX(), state.minX, state.maxX));
             currentMinedPos.setZ(Mth.clamp(currentMinedPos.getZ(), state.minZ, state.maxZ));
             BlockState blockState = rawLevel.getBlockState(currentMinedPos);
@@ -157,7 +159,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
     }
 
     public boolean available(State state) {
-        boolean energyAvailable = state.getEnergy().getEnergyStored() >= ServerConfig.SmallMiningMachineTickCost;
+        boolean energyAvailable = state.getEnergy().getEnergyStored() >= IMServerConfig.MACHINES.small_mining_machine_consumption.get();
         boolean drillHeadAvailable = false;
         ItemStack drillHead = state.inventory.getStackInSlot(0);
         if (drillHead.getItem() instanceof DrillheadItem drillheadItem && drillheadItem.getHeadDamage(drillHead) < drillheadItem.getMaximumHeadDamage(drillHead)) {

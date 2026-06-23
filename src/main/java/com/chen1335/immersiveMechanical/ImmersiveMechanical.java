@@ -1,11 +1,13 @@
 package com.chen1335.immersiveMechanical;
 
+import blusunrize.immersiveengineering.common.config.IEServerConfig;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMSounds;
 import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.definitions.*;
 import com.chen1335.immersiveMechanical.recipe.transters.IRecipeTransfer;
 import com.chen1335.immersiveMechanical.recipe.transters.IndustrialFurnaceRecipeTransfer;
@@ -21,6 +23,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
@@ -64,6 +67,9 @@ public class ImmersiveMechanical {
         IMItems.init();
         IMBlocks.init();
         IMMultiblocks.init();
+
+        modContainer.registerConfig(ModConfig.Type.SERVER, IMServerConfig.CONFIG_SPEC);
+        IMServerConfig.MACHINES.populateAPI();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

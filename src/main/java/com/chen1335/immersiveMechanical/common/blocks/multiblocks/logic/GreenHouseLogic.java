@@ -17,6 +17,7 @@ import blusunrize.immersiveengineering.common.util.CachedRecipe;
 import blusunrize.immersiveengineering.common.util.EnergyHelper;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.smallMiningMachine.SmallMiningMachineLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.GreenHouseShape;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.network.GreenHouseGrowsPack;
 import io.netty.util.collection.IntObjectHashMap;
 import io.netty.util.collection.IntObjectMap;
@@ -298,7 +299,7 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
 
 
                 if (state.fertilizerAmount <= 0) {
-                    int outCount = (int) (IEServerConfig.MACHINES.cloche_fluid.get() * 1.5);
+                    int outCount = (int) (IEServerConfig.MACHINES.cloche_fluid.get() * IMServerConfig.MACHINES.green_house_fluid_efficiency.get());
                     if (state.tank.getFluidAmount() >= outCount) {
                         state.tank.drain(outCount, IFluidHandler.FluidAction.EXECUTE);
                     } else {
@@ -317,7 +318,7 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
                         }
                     }
 
-                    state.fertilizerAmount = IEServerConfig.MACHINES.cloche_fertilizer.get() * 3;
+                    state.fertilizerAmount = (int) (IEServerConfig.MACHINES.cloche_fertilizer.get() * IMServerConfig.MACHINES.green_house_fertilizer_efficiency.get());
                     state.syncRunnable.run();
                 }
 
@@ -347,7 +348,7 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
                 growth = (float) (growth + IEServerConfig.MACHINES.cloche_growth_mod.get() * state.fertilizerMod * GROW_MULTIPLIER);
                 state.fertilizerAmount--;
 
-                state.energyStorage.extractEnergy(10, false);
+                state.energyStorage.extractEnergy(IMServerConfig.MACHINES.green_house_consumption.get(), false);
             }
         }
 

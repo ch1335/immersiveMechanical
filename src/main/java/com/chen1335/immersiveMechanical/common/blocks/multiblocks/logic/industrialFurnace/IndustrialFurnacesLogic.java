@@ -135,8 +135,6 @@ public class IndustrialFurnacesLogic implements IMultiblockLogic<IndustrialFurna
             if (recipe == null)
                 continue;
 
-            int[] ints = new int[]{0, 0, 0, 0};
-
             MultiblockProcessInMachine<IndustrialFurnaceRecipe> process = new IndustrialFurnaceProcess(recipe, state, slot);
 
             if (state.processor.addProcessToQueue(process, level, false)) {

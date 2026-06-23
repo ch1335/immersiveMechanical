@@ -1,5 +1,6 @@
 package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven;
 
+import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
@@ -19,6 +20,7 @@ import com.chen1335.immersiveMechanical.API.ICoilModifiableMultiblockState;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.PyrolyseOvenShape;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -119,7 +121,6 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
             state.tank.drain(fill, IFluidHandler.FluidAction.EXECUTE);
         }
 
-
         if (state.energyStorage.getEnergyStored() <= 0) return;
 
         if (state.coilInfo == null) return;
@@ -132,12 +133,12 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
             } else {
                 RecipeHolder<PyrolyseOvenRecipe> recipe = getRecipe(context);
                 FluidStack fluid = state.tank.getFluid();
-                if (recipe == null || (!fluid.isEmpty() && !recipe.value().getFluidOutput().is(fluid.getFluidType())) || recipe.value().getBaseTime() != state.originalProcessMax) {
+                if (recipe == null || (!fluid.isEmpty() && !recipe.value().getFluidOutput().is(fluid.getFluidType())) || recipe.value().getTotalProcessTime() != state.originalProcessMax) {
                     state.process = 0;
                     state.processMax = 0;
                     state.active = false;
                 } else {
-                    int energyCost = (int) (recipe.value().getBaseEnergy() * state.coilInfo.energyModify() / state.processMax);
+                    int energyCost = (int) (recipe.value().getTotalProcessEnergy() * state.coilInfo.energyModify() / state.processMax);
                     if (state.energyStorage.getEnergyStored() >= energyCost) {
                         state.process--;
                         state.energyStorage.extractEnergy(energyCost, false);
@@ -205,7 +206,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
                 RecipeHolder<PyrolyseOvenRecipe> recipeHolder = getRecipe(context);
                 if (recipeHolder != null) {
                     PyrolyseOvenRecipe value = recipeHolder.value();
-                    state.originalProcessMax = value.getBaseTime();
+                    state.originalProcessMax = value.getTotalProcessTime();
                     state.processMax = (int) ((int) (state.originalProcessMax / state.coilInfo.timeModify()) * 0.75);
                     state.process = state.processMax;
                     state.active = true;
