@@ -34,7 +34,6 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -50,11 +49,11 @@ public class IndustrialFurnacesLogic implements IMultiblockLogic<IndustrialFurna
             slots[i] = FIRST_OUT_SLOT + i;
     });
 
-    private static final Set<CapabilityPosition> ENERGY_INPUTS = Set.of(new CapabilityPosition(1, 2, 1, RelativeBlockFace.UP));
+    private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1, 2, 1, RelativeBlockFace.UP);
 
-    private static final Set<CapabilityPosition> ITEM_INPUTS = Set.of(new CapabilityPosition(0, 0, 1, RelativeBlockFace.RIGHT));
+    private static final CapabilityPosition ITEM_INPUT = new CapabilityPosition(0, 0, 1, RelativeBlockFace.RIGHT);
 
-    private static final Set<CapabilityPosition> ITEM_OUTPUTS = Set.of(new CapabilityPosition(2, 0, 1, RelativeBlockFace.RIGHT));
+    private static final CapabilityPosition ITEM_OUTPUT = new CapabilityPosition(2, 0, 1, RelativeBlockFace.LEFT);
 
     private static final MultiblockFace MAIN_OUT_POS = new MultiblockFace(3, 0, 1, RelativeBlockFace.LEFT);
 
@@ -156,15 +155,15 @@ public class IndustrialFurnacesLogic implements IMultiblockLogic<IndustrialFurna
     @Override
     public void registerCapabilities(CapabilityRegistrar<IndustrialFurnacesLogic.State> register) {
         register.register(Capabilities.EnergyStorage.BLOCK, (state, position) -> {
-            return position.side() != null && !ENERGY_INPUTS.contains(position) ? null : state.energy;
+            return position.side() != null && !ENERGY_INPUT.equals(position) ? null : state.energy;
         });
 
         register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
-            return position.side() != null && !ITEM_INPUTS.contains(position) ? null : state.inputHandler;
+            return position.side() != null && !ITEM_INPUT.equals(position) ? null : state.inputHandler;
         });
 
         register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
-            return position.side() != null && !ITEM_OUTPUTS.contains(position) ? null : state.outputHandler;
+            return position.side() != null && !ITEM_OUTPUT.equals(position) ? null : state.outputHandler;
         });
     }
 

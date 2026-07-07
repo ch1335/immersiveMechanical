@@ -15,6 +15,7 @@ import blusunrize.immersiveengineering.common.items.DrillheadItem;
 import blusunrize.immersiveengineering.common.register.IEFluids;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.common.util.IESounds;
+import blusunrize.immersiveengineering.common.util.inventory.WrappingItemHandler;
 import blusunrize.immersiveengineering.common.util.sound.MultiblockSound;
 import com.chen1335.immersiveMechanical.common.IMItemHandlerHelper;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.SmallMiningMachineShape;
@@ -60,6 +61,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
     private static final CapabilityPosition ENERGY_INPUT = new CapabilityPosition(1, 2, 2, RelativeBlockFace.UP);
     private static final GameProfile MINER = new GameProfile(UUID.fromString("c870399f-003d-4f94-892d-140bb095f381"), "[SmallMiningMachineMiner]");
     private static final BlockPos CENTER = new BlockPos(1, 0, 1);
+    private static final CapabilityPosition ITEM_OUTPUT = new CapabilityPosition(1, 2, 2, RelativeBlockFace.BACK);
 
 
     @Override
@@ -185,6 +187,10 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         register.register(Capabilities.EnergyStorage.BLOCK, (state, position) -> {
             return position.side() == null || ENERGY_INPUT.equals(position) ? state.energy : null;
         });
+
+        register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
+            return position.side() == null || ITEM_OUTPUT.equals(position) ? state.outputHandler : null;
+        });
     }
 
 
@@ -219,6 +225,7 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
         public boolean finished = false;
         public BlockPos.MutableBlockPos currentMinedPos = null;
         public final Supplier<IItemHandler> output;
+        public final WrappingItemHandler outputHandler;
         private BooleanSupplier isPlayingSound = () -> false;
         public ItemStackHandler inventory = new ItemStackHandler(13) {
             @Override
@@ -265,6 +272,11 @@ public class SmallMiningMachineLogic implements IMultiblockLogic<SmallMiningMach
             this.syncRunnable = context.getSyncRunnable();
             this.levelSupplier = context.levelSupplier();
             output = context.getCapabilityAt(Capabilities.ItemHandler.BLOCK, ITEM_OUT);
+
+            this.outputHandler = new WrappingItemHandler(
+                    inventory, false, true, new WrappingItemHandler.IntRange(4, 13)
+            );
+
             IFluidHandler handler = FluidUtil.getFluidHandler(drill).orElseThrow(RuntimeException::new);
             handler.fill(new FluidStack(IEFluids.BIODIESEL.getStill(), 2000), IFluidHandler.FluidAction.EXECUTE);
         }

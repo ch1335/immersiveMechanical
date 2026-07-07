@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceLogic.FIRST_IN_SLOT;
-import static blusunrize.immersiveengineering.common.blocks.multiblocks.logic.arcfurnace.ArcFurnaceLogic.IN_SLOT_COUNT;
 
 public class IndustrialFurnacesInputHandler implements IItemHandler {
     private final ItemStackHandler inventory;
@@ -32,33 +30,28 @@ public class IndustrialFurnacesInputHandler implements IItemHandler {
 
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-        if(stack.isEmpty())
+        if (stack.isEmpty())
             return stack;
         stack = stack.copy();
-        List<Integer> possibleSlots = new ArrayList<>(IN_SLOT_COUNT);
-        for(int i = FIRST_IN_SLOT; i < IN_SLOT_COUNT; i++)
-        {
+        List<Integer> possibleSlots = new ArrayList<>(IndustrialFurnacesLogic.IN_SLOT_COUNT);
+        for (int i = IndustrialFurnacesLogic.FIRST_IN_SLOT; i < IndustrialFurnacesLogic.IN_SLOT_COUNT; i++) {
             ItemStack here = inventory.getStackInSlot(i);
-            if(here.isEmpty())
-            {
-                if(!simulate)
+            if (here.isEmpty()) {
+                if (!simulate)
                     inventory.setStackInSlot(i, stack);
                 onChanged.run();
                 return ItemStack.EMPTY;
-            }
-            else if(ItemStack.isSameItemSameComponents(stack, here)&&here.getCount() < here.getMaxStackSize())
+            } else if (ItemStack.isSameItemSameComponents(stack, here) && here.getCount() < here.getMaxStackSize())
                 possibleSlots.add(i);
         }
         possibleSlots.sort(Comparator.comparingInt(a -> inventory.getStackInSlot(a).getCount()));
-        for(int i : possibleSlots)
-        {
+        for (int i : possibleSlots) {
             ItemStack here = inventory.getStackInSlot(i);
-            int fillCount = Math.min(here.getMaxStackSize()-here.getCount(), stack.getCount());
-            if(!simulate)
+            int fillCount = Math.min(here.getMaxStackSize() - here.getCount(), stack.getCount());
+            if (!simulate)
                 here.grow(fillCount);
             stack.shrink(fillCount);
-            if(stack.isEmpty())
-            {
+            if (stack.isEmpty()) {
                 onChanged.run();
                 return ItemStack.EMPTY;
             }

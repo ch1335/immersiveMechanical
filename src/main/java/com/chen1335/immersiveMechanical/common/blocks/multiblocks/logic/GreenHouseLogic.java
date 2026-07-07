@@ -54,6 +54,8 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
 
     private static final CapabilityPosition ITEM_INPUT = new CapabilityPosition(2, 0, 0, RelativeBlockFace.FRONT);
 
+    private static final CapabilityPosition ITEM_OUTPUT = new CapabilityPosition(2, 0, 4, RelativeBlockFace.BACK);
+
     @Override
     public void tickServer(IMultiblockContext<State> context) {
         State state = context.getState();
@@ -105,6 +107,10 @@ public class GreenHouseLogic implements IMultiblockLogic<GreenHouseLogic.State>,
 
         register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
             return position.side() == null || ITEM_INPUT.equals(position) ? state.fertilizer : null;
+        });
+
+        register.register(Capabilities.ItemHandler.BLOCK, (state, position) -> {
+            return position.side() == null || ITEM_OUTPUT.equals(position) ? state.products : null;
         });
     }
 
