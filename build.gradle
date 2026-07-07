@@ -155,6 +155,9 @@ dependencies {
     implementation "curse.maven:jei-238222:7420587"
     implementation "curse.maven:jade-324717:7545219"
     implementation "curse.maven:just-enough-immersive-multiblocks-634571:7131196"
+
+    implementation "curse.maven:pipez-443900:8351631"
+
     jarJar(implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.6")
 }
 

@@ -48,7 +48,7 @@
   "immersive_mechanical.jei.expected_ore_output": "Expected Ore Output:",
   "immersive_mechanical.jei.main_ore": "Main Output",
   "immersive_mechanical.jei.spoils": "Spoils",
-  "immersive_mechanical.jei.available_biome": "Available Biomes:"
-
+  "immersive_mechanical.jei.available_biome": "Available Biomes:",
+  "desc.immersiveengineering.info.mineral.chromite": "Nickel Chromite"
 }
 

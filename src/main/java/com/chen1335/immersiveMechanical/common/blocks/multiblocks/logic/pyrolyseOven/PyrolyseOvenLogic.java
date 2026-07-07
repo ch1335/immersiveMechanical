@@ -138,7 +138,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
                     state.processMax = 0;
                     state.active = false;
                 } else {
-                    int energyCost = (int) (recipe.value().getTotalProcessEnergy() * state.coilInfo.energyModify() / state.processMax);
+                    int energyCost = (int) (recipe.value().getTotalProcessEnergy() * state.coilInfo.energyModify().getAsDouble() / state.processMax);
                     if (state.energyStorage.getEnergyStored() >= energyCost) {
                         state.process--;
                         state.energyStorage.extractEnergy(energyCost, false);
@@ -207,7 +207,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
                 if (recipeHolder != null) {
                     PyrolyseOvenRecipe value = recipeHolder.value();
                     state.originalProcessMax = value.getTotalProcessTime();
-                    state.processMax = (int) ((int) (state.originalProcessMax / state.coilInfo.timeModify()) * 0.75);
+                    state.processMax = (int) ((int) (state.originalProcessMax / state.coilInfo.timeModify().getAsDouble()) * 0.75);
                     state.process = state.processMax;
                     state.active = true;
                 }

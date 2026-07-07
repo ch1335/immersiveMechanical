@@ -29,8 +29,8 @@ public class CoilModifiableProcess<R extends MultiblockRecipe, S extends ICoilMo
         super.onFirstTick(context, level);
         Level rawLevel = level.getRawLevel();
         LevelDependentData<R> levelData = getLevelData(rawLevel);
-        setEnergyPerTick(rawLevel, (int) (levelData.energyPerTick() * state.getCoilInfo().energyModify()));
-        setMaxTicks(rawLevel, (int) (levelData.maxTicks() / state.getCoilInfo().timeModify()));
+        setEnergyPerTick(rawLevel, (int) (levelData.energyPerTick() * state.getCoilInfo().energyModify().getAsDouble()));
+        setMaxTicks(rawLevel, (int) (levelData.maxTicks() / state.getCoilInfo().timeModify().getAsDouble()));
     }
 
 }

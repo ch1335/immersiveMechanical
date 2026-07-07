@@ -22,6 +22,8 @@ public class IMBlockEntityTypes {
             .validBlock(IMBlocks.LARGE_BATTERY_CORE)
             .register();
 
+
+
     public static final MultiblockBEType<TurretLaserBlockEntity> TURRET_LASER = REGISTRATE.makeMultiblock(
             "turret_laser", TurretLaserBlockEntity::new, IMBlocks.TURRET_LASER
     );

@@ -29,8 +29,8 @@ public class IndustrialFurnaceProcess extends IMMultiblockProcessInMachine<Indus
         super.onFirstTick(context, level);
         Level rawLevel = level.getRawLevel();
         LevelDependentData<IndustrialFurnaceRecipe> levelData = getLevelData(rawLevel);
-        setEnergyPerTick(rawLevel, (int) (levelData.energyPerTick() * state.coilInfo.energyModify()));
-        setMaxTicks(rawLevel, (int) (levelData.maxTicks() / state.coilInfo.timeModify()));
+        setEnergyPerTick(rawLevel, (int) (levelData.energyPerTick() * state.coilInfo.energyModify().getAsDouble()));
+        setMaxTicks(rawLevel, (int) (levelData.maxTicks() / state.coilInfo.timeModify().getAsDouble()));
     }
 
 }

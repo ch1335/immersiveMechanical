@@ -1,5 +1,6 @@
 package com.chen1335.immersiveMechanical.definitions;
 
+import blusunrize.immersiveengineering.api.IETags;
 import blusunrize.immersiveengineering.common.blocks.BlockItemIE;
 import blusunrize.immersiveengineering.common.blocks.generic.ConnectorBlock;
 import blusunrize.immersiveengineering.common.blocks.metal.BasicConnectorBlock;
@@ -107,7 +108,7 @@ public class IMBlocks {
                             .sound(SoundType.DEEPSLATE)
             ))
             .item()
-            .tag(IMItemTags.ORES_CHROME)
+            .tag(IMItemTags.DEEPSLATE_CHROME)
             .build()
             .defaultBlockstate()
             .loot((lootTables, dropExperienceBlock) -> {

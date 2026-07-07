@@ -1,8 +1,10 @@
 package com.chen1335.immersiveMechanical.config;
 
-import blusunrize.immersiveengineering.ImmersiveEngineering;
 import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
+import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
+import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
 import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,15 +21,22 @@ public class IMServerConfig {
 
     @SubscribeEvent
     public static void onConfigLoad(ModConfigEvent.Loading ev) {
-
+        if (CONFIG_SPEC == ev.getConfig().getSpec()) {
+            CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, COILS.lv_coil);
+            CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, COILS.mv_coil);
+            CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, COILS.hv_coil);
+            CoilInfo.register(IMBlocks.COIL_NICHROME, COILS.nichrome_coil);
+        }
     }
 
     public static final ModConfigSpec CONFIG_SPEC;
     public static final IMServerConfig.Machines MACHINES;
+    public static final IMServerConfig.Coils COILS;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
         MACHINES = new Machines(builder);
+        COILS = new Coils(builder);
         CONFIG_SPEC = builder.build();
     }
 
@@ -89,12 +98,40 @@ public class IMServerConfig {
                     .defineInRange("timeModifier", 1, 1e-3, 1e3);
             if (popCategory)
                 builder.pop();
-            return new MultiblockRecipe.RecipeMultiplier(time::get,energy::get);
+            return new MultiblockRecipe.RecipeMultiplier(time::get, energy::get);
         }
 
-        public void populateAPI() {
+        public void setUpConfig() {
             IndustrialFurnaceRecipe.MULTIPLIERS.setValue(industrial_furnaces_recipe_multiplier);
             PyrolyseOvenRecipe.MULTIPLIERS.setValue(pyrolyse_oven_recipe_multiplier);
+        }
+    }
+
+    public static class Coils {
+        public final CoilInfo lv_coil;
+        public final CoilInfo mv_coil;
+        public final CoilInfo hv_coil;
+        public final CoilInfo nichrome_coil;
+
+        public Coils(ModConfigSpec.Builder builder) {
+            builder.push("coils");
+            lv_coil = coil(builder, "lv coil", new CoilInfo(() -> 1D, () -> 1D));
+            mv_coil = coil(builder, "mv coil", new CoilInfo(() -> 1.3D, () -> 1.15D));
+            hv_coil = coil(builder, "hv coil", new CoilInfo(() -> 1.7D, () -> 1.25D));
+            nichrome_coil = coil(builder, "nichrome coil", new CoilInfo(() -> 2.2D, () -> 1.45D));
+            builder.pop();
+        }
+
+        private CoilInfo coil(ModConfigSpec.Builder builder, String name, CoilInfo defaultInfo) {
+            builder.push(name.replace(' ', '_'));
+            ModConfigSpec.DoubleValue energy = builder
+                    .comment("The energy modifier of" + name)
+                    .defineInRange("energyModifier", defaultInfo.energyModify().getAsDouble(), 1e-3, 1e3);
+            ModConfigSpec.DoubleValue time = builder
+                    .comment("The time modifier of" + name)
+                    .defineInRange("timeModifier", defaultInfo.timeModify().getAsDouble(), 1e-3, 1e3);
+            builder.pop();
+            return new CoilInfo(time::get, energy::get);
         }
     }
 

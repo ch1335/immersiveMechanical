@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 
 public interface IMItemTags {
     TagKey<Item> ORES_CHROME = TagUtils.createItemWrapper(IETags.getOre("chrome"));
-
+    TagKey<Item> DEEPSLATE_CHROME = TagUtils.createItemWrapper(IETags.getOre("deepslate_chrome"));
     TagKey<Item> RAW_CHROME = TagUtils.createItemWrapper(IETags.getRawOre("chrome"));
 }

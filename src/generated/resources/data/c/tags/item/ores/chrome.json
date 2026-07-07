@@ -1,6 +1,6 @@
 {
   "values": [
     "immersive_mechanical:chrome_ore",
-    "immersive_mechanical:deepslate_chrome_ore"
+    "#c:ores/deepslate_chrome"
   ]
 }

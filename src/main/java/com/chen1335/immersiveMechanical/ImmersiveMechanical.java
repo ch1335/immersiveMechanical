@@ -1,11 +1,8 @@
 package com.chen1335.immersiveMechanical;
 
-import blusunrize.immersiveengineering.common.config.IEServerConfig;
-import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMSounds;
 import com.chen1335.immersiveMechanical.client.IMClient;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
 import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.definitions.*;
@@ -69,15 +66,11 @@ public class ImmersiveMechanical {
         IMMultiblocks.init();
 
         modContainer.registerConfig(ModConfig.Type.SERVER, IMServerConfig.CONFIG_SPEC);
-        IMServerConfig.MACHINES.populateAPI();
+        IMServerConfig.MACHINES.setUpConfig();
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
         IMWireTypes.setup();
-        CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, new CoilInfo(1F, 1F));
-        CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, new CoilInfo(1.3F, 1.15F));
-        CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, new CoilInfo(1.7F, 1.25F));
-        CoilInfo.register(IMBlocks.COIL_NICHROME, new CoilInfo(2.2F, 1.45F));
     }
 
     public static ResourceLocation id(String path) {

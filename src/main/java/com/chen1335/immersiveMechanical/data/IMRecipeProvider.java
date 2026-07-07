@@ -9,6 +9,7 @@ import blusunrize.immersiveengineering.common.register.IEItems;
 import blusunrize.immersiveengineering.data.recipes.builder.ArcFurnaceRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.CrusherRecipeBuilder;
 import blusunrize.immersiveengineering.data.recipes.builder.MetalPressRecipeBuilder;
+import blusunrize.immersiveengineering.data.recipes.builder.MineralMixBuilder;
 import com.chen1335.immersiveMechanical.API.tags.IMItemTags;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.data.recipeBuilders.IndustrialFurnaceRecipeBuilder;
@@ -23,21 +24,27 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+
+import static blusunrize.immersiveengineering.api.utils.TagUtils.createItemWrapper;
 
 public class IMRecipeProvider {
 
@@ -198,9 +205,50 @@ public class IMRecipeProvider {
                 .unlockedBy("has_nichrome_ingot", has(IMMetals.NICHROME.getTag(MetalTypes.INGOTS)))
                 .save(provider, toRL(toPath(IMItems.WIRE_NICHROME)));
 
+        mineralMixes(provider);
         press(provider, IEItems.Molds.MOLD_WIRE, IMMetals.NICHROME.getTag(MetalTypes.INGOTS), IMItems.WIRE_NICHROME, 2);
     }
 
+
+    private static void mineralMixes(RecipeOutput out)
+    {
+        // Metals
+        TagKey<Item> chrome = IMItemTags.DEEPSLATE_CHROME;
+        TagKey<Item> iron = Tags.Items.ORES_IRON;
+        TagKey<Item> gold = Tags.Items.ORES_GOLD;
+        TagKey<Item> copper = Tags.Items.ORES_COPPER;
+        TagKey<Item> aluminum = IETags.getItemTag(IETags.getTagsFor(EnumMetals.ALUMINUM).ore);
+        TagKey<Item> lead = IETags.getItemTag(IETags.getTagsFor(EnumMetals.LEAD).ore);
+        TagKey<Item> silver = IETags.getItemTag(IETags.getTagsFor(EnumMetals.SILVER).ore);
+        TagKey<Item> nickel = IETags.getItemTag(IETags.getTagsFor(EnumMetals.NICKEL).ore);
+        TagKey<Item> uranium = IETags.getItemTag(IETags.getTagsFor(EnumMetals.URANIUM).ore);
+        TagKey<Item> tin = createItemWrapper(IETags.getOre("tin"));
+        TagKey<Item> titanium = createItemWrapper(IETags.getOre("titanium"));
+        TagKey<Item> thorium = createItemWrapper(IETags.getOre("thorium"));
+        TagKey<Item> tungsten = createItemWrapper(IETags.getOre("tungsten"));
+        TagKey<Item> manganese = createItemWrapper(IETags.getOre("manganese"));
+        TagKey<Item> platinum = createItemWrapper(IETags.getOre("platinum"));
+        TagKey<Item> osmium = createItemWrapper(IETags.getOre("osmium"));
+        TagKey<Item> mercury = createItemWrapper(IETags.getOre("mercury"));
+        // Gems & Dusts
+        TagKey<Item> sulfur = IETags.sulfurDust;
+        TagKey<Item> phosphorus = createItemWrapper(IETags.getDust("phosphorus"));
+        TagKey<Item> redstone = Tags.Items.ORES_REDSTONE;
+        TagKey<Item> emerald = Tags.Items.ORES_EMERALD;
+        Block prismarine = Blocks.PRISMARINE;
+        TagKey<Item> aquamarine = createItemWrapper(IETags.getGem("aquamarine"));
+
+        MineralMixBuilder.builder()
+                .addOverworldSpoils()
+                .failchance(0.1F)
+                .weight(10)
+                .dimensionOverworld()
+                .biomeCondition(BiomeTags.IS_MOUNTAIN)
+                .ore(chrome,0.5F)
+                .ore(iron,0.3F)
+                .ore(aluminum,0.2F)
+                .build(out, toRL("mineral/chromite"));
+    }
     private static void press(RecipeOutput recipeOutput, ItemLike mold, TagKey<Item> input, ItemLike output, int count) {
         MetalPressRecipeBuilder.builder()
                 .input(input)

@@ -49,5 +49,6 @@
   "immersive_mechanical.jei.expected_ore_output": "期望产出:",
   "immersive_mechanical.jei.main_ore": "矿石",
   "immersive_mechanical.jei.spoils": "废石",
-    "immersive_mechanical.jei.available_biome": "允许的生物群系:"
+    "immersive_mechanical.jei.available_biome": "允许的生物群系:",
+  "desc.immersiveengineering.info.mineral.chromite": "镍铬矿"
 }
