@@ -146,6 +146,10 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+
+    flatDir {
+        dir 'dataGen'
+    }
 }
 
 
@@ -157,6 +161,9 @@ dependencies {
     implementation "curse.maven:just-enough-immersive-multiblocks-634571:7131196"
 
     implementation "curse.maven:pipez-443900:8351631"
+
+    compileOnly "blank:ImmersiveEngineering:1.21.1-12.4.3-194-datagen"
+    dataModulesOnly() "blank:ImmersiveEngineering:1.21.1-12.4.3-194-datagen"
 
     jarJar(implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.6")
 }
@@ -204,14 +211,6 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
-}
-
-tasks.register("buildWithoutDataGen") {
-    group "build"
-    dependsOn build
-    jar {
-        exclude "com/chen1335/immersiveMechanical/data"
-    }
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.

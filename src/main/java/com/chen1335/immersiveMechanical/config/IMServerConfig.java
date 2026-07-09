@@ -16,7 +16,12 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 public class IMServerConfig {
     @SubscribeEvent
     public static void onConfigReload(ModConfigEvent.Reloading ev) {
-
+        if (CONFIG_SPEC == ev.getConfig().getSpec()) {
+            CoilInfo.register(IEBlocks.MetalDecoration.LV_COIL, COILS.lv_coil);
+            CoilInfo.register(IEBlocks.MetalDecoration.MV_COIL, COILS.mv_coil);
+            CoilInfo.register(IEBlocks.MetalDecoration.HV_COIL, COILS.hv_coil);
+            CoilInfo.register(IMBlocks.COIL_NICHROME, COILS.nichrome_coil);
+        }
     }
 
     @SubscribeEvent

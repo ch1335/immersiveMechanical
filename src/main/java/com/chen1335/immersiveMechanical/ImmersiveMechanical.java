@@ -1,5 +1,7 @@
 package com.chen1335.immersiveMechanical;
 
+import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
+import blusunrize.immersiveengineering.data.BiomeTags;
 import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
 import com.chen1335.immersiveMechanical.API.objects.IMSounds;
 import com.chen1335.immersiveMechanical.client.IMClient;
