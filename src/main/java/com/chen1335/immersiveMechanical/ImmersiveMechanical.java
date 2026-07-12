@@ -69,6 +69,7 @@ public class ImmersiveMechanical {
 
         modContainer.registerConfig(ModConfig.Type.SERVER, IMServerConfig.CONFIG_SPEC);
         IMServerConfig.MACHINES.setUpConfig();
+
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

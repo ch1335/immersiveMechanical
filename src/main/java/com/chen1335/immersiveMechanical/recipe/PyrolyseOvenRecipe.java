@@ -32,6 +32,7 @@ public class PyrolyseOvenRecipe extends MultiblockRecipe {
 
     public PyrolyseOvenRecipe(IngredientWithSize input,
                               TagOutput main,
+                              //Not yet implemented
                               List<StackWithChance> outPutsWithChance,
                               FluidStack fluidOutput,
                               int baseTime,
@@ -82,7 +83,6 @@ public class PyrolyseOvenRecipe extends MultiblockRecipe {
     protected IERecipeSerializer<?> getIESerializer() {
         return IMRecipe.PYROLYSE_OVEN.getSerializer();
     }
-
 
 
     public static PyrolyseOvenRecipe fromCokeOvenRecipe(CokeOvenRecipe recipe) {

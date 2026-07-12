@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-26T17:58:00.4908829	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
+// 1.21.1	2026-07-09T16:30:27.531271	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
 d0d905d203268da4b2a1e1cda3589be0c85d1988 assets/immersive_mechanical/blockstates/chrome_ore.json
 a9b257ff24866f70ddb387ae0e3ae27a5eddf8f8 assets/immersive_mechanical/blockstates/coil.json
 5b238d210400d0d3abd853d3049cf93c6876d20a assets/immersive_mechanical/blockstates/coil_nichrome.json
@@ -141,7 +141,7 @@ e4d76cf630d8dd98b2657fc2c39cafaaa4ecba4c data/immersive_mechanical/recipe/metalp
 91ebbafa206beb340c15023d791575ee9b3fad4c data/immersive_mechanical/recipe/metalpress/rod_chrome.json
 f4406f8de38eb1375c32c9a7ea8c23924fcb08c3 data/immersive_mechanical/recipe/metalpress/rod_nichrome.json
 53ea0360a62c99260d605b6c36fc659372505689 data/immersive_mechanical/recipe/metalpress/wire_nichrome.json
-4ea4525ba8f71947494a8f3527375812820f1367 data/immersive_mechanical/recipe/mineral/chromite.json
+dcd1b20f7970bc8e0505240c3f38960954371f7b data/immersive_mechanical/recipe/mineral/chromite.json
 303c235fdb3a82b392061aeb68f21694d071562c data/immersive_mechanical/recipe/nichrome_wire_coil.json
 0b23afd94a1db77de1051e55cd03925d315e42a2 data/immersive_mechanical/recipe/nugget_chrome.json
 cb5f1d07c431fc322e962921e45b759bcf17ea18 data/immersive_mechanical/recipe/nugget_nichrome.json

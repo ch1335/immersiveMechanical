@@ -24,9 +24,4 @@ public class PyrolyseOvenRecipeTransfer implements IRecipeTransfer {
             byNameBuilder.put(resourceLocation, recipeHolder);
         }
     }
-
-    @Override
-    public void onFinalBuild() {
-
-    }
 }

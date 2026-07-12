@@ -5,7 +5,7 @@
       "minecraft:is_overworld"
     ],
     [
-      "c:is_mountain"
+      "minecraft:is_mountain"
     ]
   ],
   "fail_chance": 0.1,

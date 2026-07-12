@@ -70,6 +70,7 @@ neoForge {
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath(), '--existing', file('libs/ImmersiveEngineering-1.21.1-12.3.1-189.jar/').getAbsolutePath()
+
         }
 
         // applies to all the run configs above
@@ -109,13 +110,6 @@ sourceSets {
 }
 
 
-// Sets up a dependency configuration called 'localRuntime'.
-// This configuration should be used instead of 'runtimeOnly' to declare
-// a dependency that will be present for runtime testing but that is
-// "optional", meaning it will not be pulled by dependents of this mod.
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
 
 repositories.clear()
 repositories {
@@ -147,6 +141,29 @@ repositories {
         }
     }
 
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://maven.latvian.dev/releases"
+            }
+        }
+        filter {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                url 'https://jitpack.io'
+            }
+        }
+        filter {
+            includeGroup "com.github.rtyley"
+        }
+    }
+
     flatDir {
         dir 'dataGen'
     }
@@ -160,11 +177,14 @@ dependencies {
     implementation "curse.maven:jade-324717:7545219"
     implementation "curse.maven:just-enough-immersive-multiblocks-634571:7131196"
 
+    api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
+    implementation "curse.maven:rhino-416294:8218748"
+    implementation "curse.maven:probejs-585406:7105159"
+    implementation "curse.maven:immersive-engineering-js-1412446:7372652"
+
     implementation "curse.maven:pipez-443900:8351631"
 
-    compileOnly "blank:ImmersiveEngineering:1.21.1-12.4.3-194-datagen"
-    dataModulesOnly() "blank:ImmersiveEngineering:1.21.1-12.4.3-194-datagen"
-
+    implementation "blank:ImmersiveEngineering:1.21.1-12.4.3-194-datagen"
     jarJar(implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.6")
 }
 
@@ -212,6 +232,15 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+tasks.register("buildWithoutDataGen") {
+    group "build"
+    dependsOn build
+    jar {
+        exclude "com/chen1335/immersiveMechanical/data"
+    }
+}
+
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
 idea {

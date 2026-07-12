@@ -11,5 +11,5 @@ import net.minecraft.world.item.crafting.RecipeType;
 public interface IRecipeTransfer {
     void apply(HolderLookup.Provider provider, ResourceLocation resourcelocation, ImmutableMultimap.Builder<RecipeType<?>, RecipeHolder<?>> byTypeBuilder, ImmutableMap.Builder<ResourceLocation, RecipeHolder<?>> byNameBuilder, Recipe<?> recipe);
 
-    void onFinalBuild();
+   default void onFinalBuild(){};
 }

@@ -1,0 +1,1 @@
+com.chen1335.immersiveMechanical.kubejs.IMKubeJSPlugin
