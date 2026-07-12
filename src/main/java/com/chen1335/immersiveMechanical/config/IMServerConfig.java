@@ -56,6 +56,7 @@ public class IMServerConfig {
         public final ModConfigSpec.IntValue large_battery_core_capa;
         public final MultiblockRecipe.RecipeMultiplier industrial_furnaces_recipe_multiplier;
         public final MultiblockRecipe.RecipeMultiplier pyrolyse_oven_recipe_multiplier;
+        public final ModConfigSpec.IntValue pyrolyse_oven_parallel_multiplier;
 
         public Machines(ModConfigSpec.Builder builder) {
             builder.push("machines");
@@ -85,6 +86,11 @@ public class IMServerConfig {
 
             industrial_furnaces_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "industrial furnaces");
             pyrolyse_oven_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "pyrolyse oven");
+            {
+                builder.push("pyrolyse_oven");
+                pyrolyse_oven_parallel_multiplier = addPositive(builder, "parallel_multiplier", 4, "Compared to the parallel multiples of coke ovens");
+                builder.pop();
+            }
             builder.pop();
         }
 

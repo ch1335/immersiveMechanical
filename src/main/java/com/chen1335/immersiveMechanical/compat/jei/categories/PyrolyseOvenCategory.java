@@ -3,6 +3,7 @@ package com.chen1335.immersiveMechanical.compat.jei.categories;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIHelper;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.compat.jei.IMJei;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -65,7 +66,7 @@ public class PyrolyseOvenCategory implements IRecipeCategory<RecipeHolder<Pyroly
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<PyrolyseOvenRecipe> holder, IFocusGroup focuses) {
         PyrolyseOvenRecipe recipe = holder.value();
-        int batchSize = recipe.getInput().getCount();
+        int batchSize = recipe.getInput().getCount() * IMServerConfig.MACHINES.pyrolyse_oven_parallel_multiplier.get();
 
         builder.addSlot(RecipeIngredientRole.INPUT, 4, 15)
                 .addItemStacks(recipe.getInput().getMatchingStackList())
