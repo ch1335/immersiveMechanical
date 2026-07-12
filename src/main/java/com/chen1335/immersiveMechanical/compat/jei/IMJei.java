@@ -3,9 +3,14 @@ package com.chen1335.immersiveMechanical.compat.jei;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
 import blusunrize.immersiveengineering.api.energy.GeneratorFuel;
 import blusunrize.immersiveengineering.api.excavator.MineralMix;
+import blusunrize.immersiveengineering.client.gui.CokeOvenScreen;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIRecipeTypes;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.gui.GreenHouseScreen;
+import com.chen1335.immersiveMechanical.client.gui.IndustrialFurnacesScreen;
+import com.chen1335.immersiveMechanical.client.gui.PyrolyseOvenScreen;
+import com.chen1335.immersiveMechanical.common.gui.PyrolyseOvenMenu;
 import com.chen1335.immersiveMechanical.compat.jei.categories.GeneratorFuelCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.IndustrialFurnaceCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.MineralMixCategory;
@@ -18,6 +23,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -72,5 +78,12 @@ public class IMJei implements IModPlugin {
             registration.addRecipes(GENERATOR_FUEL, recipeManager.getAllRecipesFor(IERecipeTypes.GENERATOR_FUEL.get()));
             registration.addRecipes(MINERAL_MIX, recipeManager.getAllRecipesFor(IERecipeTypes.MINERAL_MIX.get()));
         }
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addRecipeClickArea(PyrolyseOvenScreen.class, 49, 33, 11, 14, PYROLYSE_OVEN);
+        registration.addRecipeClickArea(GreenHouseScreen.class, 127, 41, 14, 14, JEIRecipeTypes.CLOCHE);
+        registration.addRecipeClickArea(IndustrialFurnacesScreen.class, 80, 36, 14, 14, INDUSTRIAL_FURNACE);
     }
 }

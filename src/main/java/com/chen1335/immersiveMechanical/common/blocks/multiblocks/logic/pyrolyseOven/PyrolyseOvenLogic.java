@@ -153,7 +153,7 @@ public class PyrolyseOvenLogic implements IMultiblockLogic<PyrolyseOvenLogic.Sta
             if (recipe != null && state.active) {
                 PyrolyseOvenRecipe value = recipe.value();
                 int parallelPerRecipe = value.getInput().getCount();
-                int maxParallel = parallelPerRecipe * DEFAULT_PARALLEL_MUL;
+                int maxParallel = parallelPerRecipe * IMServerConfig.MACHINES.pyrolyse_oven_parallel_multiplier.get();
                 int successAmount = 0;
                 for (int i = maxParallel; i > 0; i--) {
                     int amount = value.getFluidOutput().getAmount();

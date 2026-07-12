@@ -9,6 +9,7 @@ import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
@@ -23,7 +24,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class PyrolyseOvenCategory implements IRecipeCategory<RecipeHolder<PyrolyseOvenRecipe>> {
     public static final ResourceLocation ICON = ImmersiveMechanical.id("textures/gui/jei/pyrolyse_oven_jei.png");
@@ -81,9 +85,28 @@ public class PyrolyseOvenCategory implements IRecipeCategory<RecipeHolder<Pyroly
         FluidStack fluidOutput = recipe.getFluidOutput();
         if (!fluidOutput.isEmpty()) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, 103, 7)
-                    .setFluidRenderer(12000L, false, 16, 47)
+                    .setFluidRenderer(48 * FluidType.BUCKET_VOLUME, false, 16, 47)
                     .addIngredient(NeoForgeTypes.FLUID_STACK, fluidOutput)
                     .addRichTooltipCallback(JEIHelper.fluidTooltipCallback);
+        }
+    }
+
+    @Override
+    public void onDisplayedIngredientsUpdate(RecipeHolder<PyrolyseOvenRecipe> recipe, List<IRecipeSlotDrawable> recipeSlots, IFocusGroup focuses) {
+        long now = System.currentTimeMillis();
+        long index = now / 1000L % 100000L;
+        int batchSize = recipe.value().getInput().getCount() * IMServerConfig.MACHINES.pyrolyse_oven_parallel_multiplier.get();
+        int qty = 1 + (Math.toIntExact(index) % batchSize);
+
+        IRecipeSlotDrawable inputSlot = recipeSlots.getFirst();
+        inputSlot.createDisplayOverrides().addItemStacks(inputSlot.getItemStacks().map(stack -> stack.copyWithCount(qty)).toList());
+
+        IRecipeSlotDrawable outputSlot = recipeSlots.get(1);
+        outputSlot.createDisplayOverrides().addItemStacks(outputSlot.getItemStacks().map(stack -> stack.copyWithCount(stack.getCount() * qty)).toList());
+
+        if (recipeSlots.size() > 2) {
+            IRecipeSlotDrawable tank = recipeSlots.get(2);
+            tank.createDisplayOverrides().addFluidStack(recipe.value().getFluidOutput().getFluid(), (long) recipe.value().getFluidOutput().getAmount() * qty);
         }
     }
 

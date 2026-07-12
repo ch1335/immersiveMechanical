@@ -85,9 +85,8 @@ public class IMServerConfig {
             }
 
             industrial_furnaces_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "industrial furnaces");
-            pyrolyse_oven_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "pyrolyse oven");
             {
-                builder.push("pyrolyse_oven");
+                pyrolyse_oven_recipe_multiplier = addMachineEnergyTimeModifiers(builder, "pyrolyse oven", false);
                 pyrolyse_oven_parallel_multiplier = addPositive(builder, "parallel_multiplier", 4, "Compared to the parallel multiples of coke ovens");
                 builder.pop();
             }

@@ -27,7 +27,7 @@ public class IndustrialFurnaceCategory implements IRecipeCategory<RecipeHolder<I
     private final IDrawable icon;
 
     private static final Component TITLE = Component.translatable("gui.jei.category.smelting");
-    public static final ResourceLocation ICON = ImmersiveMechanical.id("textures/jei/container/industrial_furnaces_jei.png");
+    public static final ResourceLocation ICON = ImmersiveMechanical.id("textures/gui/jei/industrial_furnaces_jei.png");
     private final IDrawableStatic background;
 
 
