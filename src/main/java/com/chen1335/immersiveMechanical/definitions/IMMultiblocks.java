@@ -14,6 +14,8 @@ import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.Coi
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industrialFurnace.IndustrialFurnacesLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven.PyrolyseOvenLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.smallMiningMachine.SmallMiningMachineLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.DEMOTemplate;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.LargeBatteryTemplate;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.RecordOriginalBlockMultiblock;
 import com.chen1335.registrate.IERegistrate;
 import com.chen1335.registrate.MultiblockDefinition;
@@ -29,7 +31,15 @@ import java.util.List;
 import static com.chen1335.immersiveMechanical.ImmersiveMechanical.REGISTRATE;
 
 public class IMMultiblocks {
-    public static final MultiblockDefinition<LargeBatteryLogic.State, LargeBatteryLogic> LARGE_BATTERY = REGISTRATE.multiblock("large_battery", LargeBatteryLogic::new)
+    public static final MultiblockDefinition<LargeBatteryLogic.State, LargeBatteryLogic> LARGE_BATTERY = REGISTRATE.multiblock("large_battery", LargeBatteryLogic::new, LargeBatteryTemplate::new)
+            .notMirrored()
+            .masterFromOrigin(new BlockPos(1, 0, 1))
+            .triggerFromOrigin(new BlockPos(1, 0, 2))
+            .size(new BlockPos(3, 5, 3))
+            .manualScale(9)
+            .register();
+
+    public static final MultiblockDefinition<LargeBatteryLogic.State, LargeBatteryLogic> LARGE_BATTERY_DEMO = REGISTRATE.multiblock("large_battery_demo", LargeBatteryLogic::new, DEMOTemplate::new)
             .notMirrored()
             .masterFromOrigin(new BlockPos(1, 0, 1))
             .triggerFromOrigin(new BlockPos(1, 0, 2))

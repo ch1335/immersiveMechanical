@@ -59,7 +59,7 @@ public class IMBlocks {
                     .strength(5.0F, 6.0F)
                     .requiresCorrectToolForDrops()
                     .mapColor(MapColor.METAL)
-            )).simpleItem()
+            ))
             .defaultBlockstate()
             .item(LargeBatteryBlockItem::new)
             .build()

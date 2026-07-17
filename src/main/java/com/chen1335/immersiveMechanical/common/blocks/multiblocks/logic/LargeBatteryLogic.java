@@ -47,7 +47,6 @@ public class LargeBatteryLogic implements IMultiblockLogic<LargeBatteryLogic.Sta
         }
     }
 
-
     @Override
     public State createInitialState(IInitialMultiblockContext<State> iInitialMultiblockContext) {
 

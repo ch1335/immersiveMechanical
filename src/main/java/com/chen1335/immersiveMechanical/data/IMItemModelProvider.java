@@ -14,6 +14,9 @@ public class IMItemModelProvider {
 
         provider.obj(IMMultiblocks.LARGE_BATTERY.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/large_battery.obj")).transforms(ImmersiveMechanical.id("item/large_battery"));
 
+        provider.obj(IMMultiblocks.LARGE_BATTERY_DEMO.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/large_battery.obj")).transforms(ImmersiveMechanical.id("item/large_battery"));
+
+
         provider.obj(IMMultiblocks.GREEN_HOUSE.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/green_house.obj.ie")).transforms(ImmersiveMechanical.id("item/green_house")).renderType(RenderType.translucent().name);
 
         provider.obj(IMMultiblocks.INDUSTRIAL_FURNACES.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/industrial_furnaces.obj")).transforms(ImmersiveMechanical.id("item/industrial_furnaces")).renderType(RenderType.cutout().name);

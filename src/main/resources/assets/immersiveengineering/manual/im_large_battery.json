@@ -1,7 +1,7 @@
 {
   "start": {
     "type": "multiblock",
-    "name": "immersive_mechanical:multiblocks/large_battery"
+    "name": "immersive_mechanical:multiblocks/large_battery_demo"
   },
   "large_battery_core": {
     "type": "crafting",
