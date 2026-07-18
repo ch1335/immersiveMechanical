@@ -179,7 +179,6 @@ dependencies {
 
     api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
     implementation "curse.maven:rhino-416294:8218748"
-    implementation "curse.maven:probejs-585406:7105159"
     implementation "curse.maven:immersive-engineering-js-1412446:7372652"
 
     implementation "curse.maven:pipez-443900:8351631"

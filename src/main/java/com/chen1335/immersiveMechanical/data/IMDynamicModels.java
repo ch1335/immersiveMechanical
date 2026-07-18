@@ -20,7 +20,6 @@ public class IMDynamicModels {
                 .end();
 
 
-
         for(Map.Entry<Block, ModelFile> multiblock : provider.getMultiblockStatesProvider().unsplitModels.entrySet()) {
             provider.withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());
         }
