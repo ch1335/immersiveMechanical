@@ -2,13 +2,11 @@ package com.chen1335.immersiveMechanical.client;
 
 import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
-import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
-import blusunrize.immersiveengineering.client.render.tile.DynamicModel;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.client.models.callbacks.CoilCallbacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
+import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
+import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelRender;
 import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
 import net.minecraft.resources.ResourceLocation;
 
@@ -23,6 +21,8 @@ public class IMClient {
 
     static {
         IEApi.renderCacheClearers.add(GreenHouseRender::reset);
+        IEApi.renderCacheClearers.add(FlyWheelCoilRender::reset);
+        IEApi.renderCacheClearers.add(FlyWheelRender::reset);
     }
 
     private static ResourceLocation rl(String s) {

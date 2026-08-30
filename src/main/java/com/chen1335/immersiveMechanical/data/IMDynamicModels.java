@@ -19,6 +19,17 @@ public class IMDynamicModels {
                 .callback(DynamicSubmodelCallbacks.INSTANCE)
                 .end();
 
+        provider.getBuilder(ImmersiveMechanical.id("flywheel_coil").toString())
+                .customLoader(IEOBJBuilder::begin)
+                .modelLocation(ImmersiveMechanical.id("models/block/metal_multiblock/flywheel/flywheel_coil.obj"))
+                .callback(DynamicSubmodelCallbacks.INSTANCE)
+                .end();
+
+        provider.getBuilder(ImmersiveMechanical.id("flywheel").toString())
+                .customLoader(IEOBJBuilder::begin)
+                .modelLocation(ImmersiveMechanical.id("models/block/metal_multiblock/flywheel/flywheel.obj"))
+                .callback(DynamicSubmodelCallbacks.INSTANCE)
+                .end();
 
         for(Map.Entry<Block, ModelFile> multiblock : provider.getMultiblockStatesProvider().unsplitModels.entrySet()) {
             provider.withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());

@@ -14,6 +14,7 @@
     "immersive_mechanical:industrial_furnaces",
     "immersive_mechanical:coil",
     "immersive_mechanical:coil_vertical",
-    "immersive_mechanical:pyrolyse_oven"
+    "immersive_mechanical:pyrolyse_oven",
+    "immersive_mechanical:flywheel_endpoint"
   ]
 }

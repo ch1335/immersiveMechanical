@@ -13,6 +13,7 @@ public class IMMultiblockStates {
         provider.createMultiblock(provider.innerObj("block/metal_multiblock/industrial_furnaces.obj"), IMMultiblocks.INDUSTRIAL_FURNACES.multiblock());
         provider.createMultiblock(provider.innerObj("block/metal_multiblock/small_mining_machine.obj"), IMMultiblocks.SMALL_MINING_MACHINE.multiblock());
         provider.createMultiblock(provider.innerObj("block/metal_multiblock/pyrolyse_oven.obj",cutout()), IMMultiblocks.PYROLYSE_OVEN.multiblock());
+        provider.createMultiblock(provider.innerObj("block/metal_multiblock/flywheel/endpoint.obj",cutout()), IMMultiblocks.FLYWHEEL_ENDPOINT.multiblock());
 
 
         provider.createDynamicMultiblock(

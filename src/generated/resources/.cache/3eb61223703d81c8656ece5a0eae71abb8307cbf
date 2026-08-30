@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-18T13:46:52.5316288	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
+// 1.21.1	2026-08-29T23:58:36.8926211	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
 d0d905d203268da4b2a1e1cda3589be0c85d1988 assets/immersive_mechanical/blockstates/chrome_ore.json
 a9b257ff24866f70ddb387ae0e3ae27a5eddf8f8 assets/immersive_mechanical/blockstates/coil.json
 5b238d210400d0d3abd853d3049cf93c6876d20a assets/immersive_mechanical/blockstates/coil_nichrome.json
@@ -6,6 +6,7 @@ c51a4473c3e1b4012760c23a998c7759ab04cc9a assets/immersive_mechanical/blockstates
 98b08debda441c7d91db3e1cc86ae4aaff6f2e9a assets/immersive_mechanical/blockstates/connector_ehv.json
 727d42a671a28e2fa54a043683ed75463d3ae6b5 assets/immersive_mechanical/blockstates/connector_ehv_relay.json
 74760ca9cb3c28509b77bb7bc5fe833af88a7722 assets/immersive_mechanical/blockstates/deepslate_chrome_ore.json
+b005e219d9b5a63df4c6e638d2fc0baffcd35453 assets/immersive_mechanical/blockstates/flywheel_endpoint.json
 8e89219dd3f5741efc705cd27e049d702397050e assets/immersive_mechanical/blockstates/green_house.json
 aaa8a89502493bdf2a4f17c76ba4e35d8237a56c assets/immersive_mechanical/blockstates/industrial_furnaces.json
 13f8a5ca034b1fdc58483fd800ee18092c36506e assets/immersive_mechanical/blockstates/large_battery.json
@@ -22,14 +23,18 @@ ac46309413358f274ccd5730d56d892e3992fa2b assets/immersive_mechanical/models/bloc
 6024039abbd73e83014b6a2bdf81327960b0c1c6 assets/immersive_mechanical/models/block/metal_device/turret_laser.json
 6ba91413b03aa729d0735f72fd7c280ff618fdec assets/immersive_mechanical/models/block/metal_multiblock/coil_split.json
 b64eae8738219f594428b0b8ee39190c199da0e3 assets/immersive_mechanical/models/block/metal_multiblock/coil_vertical_split.json
+a236569721b5cb44101be524edc3f68f48c60ff8 assets/immersive_mechanical/models/block/metal_multiblock/flywheel/endpoint_split.json
 ea54f5f577cc618fdeb249ee60e7a344bf0df086 assets/immersive_mechanical/models/block/metal_multiblock/green_house_split.json
-e37c6d0ab5b5c8ad89b65d39fc929f86c0a18734 assets/immersive_mechanical/models/block/metal_multiblock/industrial_furnaces_split.json
+6a088dfa964d7f009001cf2dbfc0d8d4961ccb92 assets/immersive_mechanical/models/block/metal_multiblock/industrial_furnaces_split.json
 eda8463a68df1cfd838ffef741efffc71569ffc2 assets/immersive_mechanical/models/block/metal_multiblock/large_battery_split.json
 3e3b24aa04954271d12a36bc0e2d03975ac9f5c4 assets/immersive_mechanical/models/block/metal_multiblock/pyrolyse_oven_split.json
 2cb95637cba01f050714e0ef6186a66e29b4a36d assets/immersive_mechanical/models/block/metal_multiblock/small_mining_machine_split.json
 f961d94bd48edc06259ddacc6164b62f47202a50 assets/immersive_mechanical/models/block/turret_laser_top.json
 ad894cd78fe70f94120366c9a7857a3c42d771c7 assets/immersive_mechanical/models/dynamic/coil.json
 8e3b80e02cbf9c5ee58ee7ce19eaf6e266f712b5 assets/immersive_mechanical/models/dynamic/coil_vertical.json
+8b272db5624536d52995210e806a9b3e8826ddf0 assets/immersive_mechanical/models/dynamic/flywheel.json
+ec70e927720b41390770354e23fe89e79898877b assets/immersive_mechanical/models/dynamic/flywheel_coil.json
+ced41ce2c486499f44eba707cd4cae0d7a5fadff assets/immersive_mechanical/models/dynamic/flywheel_endpoint.json
 e3247644d7ee8b88a0336632c1b2057651af6697 assets/immersive_mechanical/models/dynamic/green_house.json
 b416c70a76324d20b72c4eb7f200e62413d3c51b assets/immersive_mechanical/models/dynamic/industrial_furnaces.json
 413d663af3015b3b3de134c05896257925d42702 assets/immersive_mechanical/models/dynamic/large_battery.json
@@ -111,6 +116,7 @@ e325227768917ec0fa1d479515f71ce4ee778a47 data/immersive_mechanical/advancement/r
 ab53dc622a699f428177daa70c2d8d39e5347fb1 data/immersive_mechanical/loot_table/blocks/connector_ehv.json
 d74da0667bdbf65a4a2e4522f02803af72dc30d0 data/immersive_mechanical/loot_table/blocks/connector_ehv_relay.json
 a7e61ab5ab08cb635e832ebaac54a3807d4009a0 data/immersive_mechanical/loot_table/blocks/deepslate_chrome_ore.json
+cf324011b1c4de7ba0383a98f32fe860a877e1da data/immersive_mechanical/loot_table/blocks/flywheel_endpoint.json
 a0cc4aa9cb170143bb421701ac3ea6e8034194a8 data/immersive_mechanical/loot_table/blocks/green_house.json
 1300c649917efdd6c609a99210aa90f010395343 data/immersive_mechanical/loot_table/blocks/industrial_furnaces.json
 b912815e58107dead003feedfc7f40a5203f5a4f data/immersive_mechanical/loot_table/blocks/large_battery.json
@@ -153,7 +159,7 @@ cbfcdf09f59a7a5ba981e18b3ee2507071626430 data/immersive_mechanical/recipe/plate_
 ccd1bfe7c780c3ac0a9360f34795557315dfbd87 data/immersive_mechanical/recipe/wire_nichrome.json
 f1c0c789fdf17b6fd7ce23f690f693786287772c data/immersive_mechanical/worldgen/configured_feature/chrome_ore_large.json
 6489443297cdd28158d294e1e594881bd6aa0835 data/immersive_mechanical/worldgen/placed_feature/chrome_ore_large.json
-05c5083227072028162bcd8279b66766e4804fb5 data/minecraft/tags/block/mineable/pickaxe.json
+bf1099eeddf377f02a0203e9dbba8f2f85cb6d42 data/minecraft/tags/block/mineable/pickaxe.json
 2c05bd4f38ac8eb0ae7a30fd3488d806f1f835b1 data/minecraft/tags/block/needs_iron_tool.json
 d3061513ea8b9c77dfe611db4f98cc840522c2c6 data/minecraft/tags/damage_type/bypasses_cooldown.json
 d3061513ea8b9c77dfe611db4f98cc840522c2c6 data/minecraft/tags/damage_type/no_knockback.json

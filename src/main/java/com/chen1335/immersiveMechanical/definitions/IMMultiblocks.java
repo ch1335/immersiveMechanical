@@ -4,19 +4,22 @@ import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.UnionMultiblock;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
+import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelRender;
 import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
 import com.chen1335.immersiveMechanical.client.render.tile.SmallMiningMachineRender;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.GreenHousePartBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.IMCoilPartBlock;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.SimpleAnimatedBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.GreenHouseLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.LargeBatteryLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industrialFurnace.IndustrialFurnacesLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven.PyrolyseOvenLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.smallMiningMachine.SmallMiningMachineLogic;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.DEMOTemplate;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.LargeBatteryTemplate;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.RecordOriginalBlockMultiblock;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.*;
 import com.chen1335.registrate.IERegistrate;
 import com.chen1335.registrate.MultiblockDefinition;
 import com.google.common.collect.ImmutableList;
@@ -107,6 +110,25 @@ public class IMMultiblocks {
             .manualScale(9)
             .register();
 
+
+    public static final MultiblockDefinition<EndPointLogic.State, EndPointLogic> FLYWHEEL_ENDPOINT = REGISTRATE.multiblock("flywheel_endpoint", EndPointLogic::new, EndPointTemplate::new)
+            .notMirrored()
+            .masterFromOrigin(new BlockPos(1, 0, 0))
+            .triggerFromOrigin(new BlockPos(1, 1, 2))
+            .size(new BlockPos(3, 3, 3))
+            .render(() -> FlyWheelCoilRender::new)
+            .manualScale(9)
+            .register();
+
+    public static final MultiblockDefinition<FlyWheelLogic.State, FlyWheelLogic> FLYWHEEL = REGISTRATE.multiblock("flywheel", FlyWheelLogic::new, TestAbleTemplateMultiblock::new)
+            .notMirrored()
+            .masterFromOrigin(new BlockPos(1, 1, 0))
+            .triggerFromOrigin(new BlockPos(1, 1, 0))
+            .size(new BlockPos(3, 3, 1))
+            .render(() -> FlyWheelRender::new)
+            .customBlock(SimpleAnimatedBlock::new)
+            .manualScale(9)
+            .register();
 
     public static final MultiblockHandler.IMultiblock INDUSTRIAL_FURNACES_DEMO = register((new UnionMultiblock(ImmersiveMechanical.id("industrial_furnaces_demo"),
             ImmutableList.of(
