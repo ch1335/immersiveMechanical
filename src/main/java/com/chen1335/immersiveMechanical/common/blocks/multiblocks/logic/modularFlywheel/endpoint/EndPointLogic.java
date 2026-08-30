@@ -1,27 +1,34 @@
 package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint;
 
+import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
-import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.IFlyWheelPart;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.capabilities.Capabilities;
 
+import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-public class EndPointLogic implements IMultiblockLogic<EndPointLogic.State>, IServerTickableComponent<EndPointLogic.State>, IClientTickableComponent<EndPointLogic.State> {
+public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implements IServerTickableComponent<EndPointLogic.State>, IClientTickableComponent<EndPointLogic.State> {
+    private static final Set<CapabilityPosition> ENERGY_INTERFACE = Set.of(
+            new CapabilityPosition(0, 0, 1, RelativeBlockFace.RIGHT),
+            new CapabilityPosition(0, 1, 1, RelativeBlockFace.RIGHT),
+            new CapabilityPosition(2, 0, 1, RelativeBlockFace.LEFT),
+            new CapabilityPosition(2, 1, 1, RelativeBlockFace.LEFT)
+    );
+
 
     @Override
     public EndPointLogic.State createInitialState(IInitialMultiblockContext<EndPointLogic.State> context) {
@@ -37,37 +44,50 @@ public class EndPointLogic implements IMultiblockLogic<EndPointLogic.State>, ISe
     public void tickClient(IMultiblockContext<EndPointLogic.State> context) {
         State state = context.getState();
         if (context.getLevel().shouldTickModulo(10) && state.masterState == null) {
-            state.masterState = state.getMasterState();
+            state.updateMasterState();
         }
+
         state.angleOld = state.angle;
-        state.angle += 50;
+        state.angle += state.angularVelocity;
 //        if (state.angle >= 360F) {
 //            state.angle -= 360F;
 //        }
     }
 
     @Override
-    public void tickServer(IMultiblockContext<EndPointLogic.State> context) {
-
+    public void registerCapabilities(CapabilityRegistrar<State> register) {
+        register.register(Capabilities.EnergyStorage.BLOCK, (state, position) -> {
+            return position.side() != null && !ENERGY_INTERFACE.contains(position) ? null : state.innerEnergy;
+        });
     }
 
-    public static class State implements IMultiblockState, IFlyWheelPart {
-        public boolean isMaster = false;
+    @Override
+    public void tickServer(IMultiblockContext<EndPointLogic.State> context) {
+        if (context.getState().isMaster) {
+            if (context.getLevel().shouldTickModulo(20)) {
+                context.requestMasterBESync();
+            }
+            State state = context.getState();
+            state.angularVelocity = (float) state.innerEnergy.getEnergyStored() /state.innerEnergy.getMaxEnergyStored() * 360;
+        }
+    }
 
-        private BlockPos masterPos = null;
-        private State masterState = null;
+
+    public static class State extends FlyWheelPart {
+        public boolean isMaster = false;
         private float angle;
         private float angleOld;
         private float angularVelocity;
-        private final Supplier<@Nullable Level> levelSupplier;
+        public MutableEnergyStorage innerEnergy = new MutableEnergyStorage(100000000);
 
-        public State(IInitialMultiblockContext<State> context) {
-            levelSupplier = context.levelSupplier();
+        public State(IInitialMultiblockContext<? extends FlyWheelPart> context) {
+            super(context);
         }
+
 
         @Override
         public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            writeMasterNBT(nbt, provider);
+            super.writeSaveNBT(nbt, provider);
             nbt.putFloat("angle", angle);
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
@@ -75,7 +95,7 @@ public class EndPointLogic implements IMultiblockLogic<EndPointLogic.State>, ISe
 
         @Override
         public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            readMasterNBT(nbt, provider);
+            super.readSaveNBT(nbt, provider);
             angle = nbt.getFloat("angle");
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
@@ -84,7 +104,7 @@ public class EndPointLogic implements IMultiblockLogic<EndPointLogic.State>, ISe
 
         @Override
         public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            writeMasterNBT(nbt, provider);
+            super.writeSyncNBT(nbt, provider);
             nbt.putFloat("angle", angle);
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
@@ -92,57 +112,31 @@ public class EndPointLogic implements IMultiblockLogic<EndPointLogic.State>, ISe
 
         @Override
         public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
-            readMasterNBT(nbt, provider);
+            super.readSyncNBT(nbt, provider);
             angle = nbt.getFloat("angle");
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
         }
 
-        @Override
-        public void setMasterPos(BlockPos masterPose) {
-            this.masterPos = masterPose;
-        }
-
-        @Override
-        public BlockPos getMasterPos() {
-            return masterPos;
-        }
-
         public float getAngle() {
-            if (!isMaster && masterState != null) {
-                return masterState.angle;
-            }
-            return angle;
+            return masterState != null ? masterState.angle : angle;
         }
 
         public float getAngleOld() {
-            if (!isMaster && masterState != null) {
-                return masterState.angleOld;
-            }
-            return angleOld;
+            return masterState != null ? masterState.angleOld : angleOld;
         }
 
-        public State getMasterState() {
+        @Override
+        public void updateMasterState() {
             if (isMaster) {
-                return this;
-            } else {
-                if (masterState != null) {
-                    return masterState;
-                } else if (masterPos != null) {
-                    Level level = levelSupplier.get();
-                    if (level != null) {
-                        BlockEntity blockEntity = level.getBlockEntity(masterPos);
-                        if (blockEntity instanceof IMultiblockBE<?> be) {
-                            IMultiblockState iMultiblockState = be.getHelper().getContext().getState();
-                            if (iMultiblockState instanceof State state) {
-                                masterState = state;
-                                return masterState;
-                            }
-                        }
-                    }
-                }
+                masterState = this;
+                return;
             }
-            return this;
+            super.updateMasterState();
+        }
+
+        public float calculationAngularVelocity(int e, float i) {
+            return (float) Math.toDegrees(Math.sqrt(e * 2 / i));
         }
     }
 }

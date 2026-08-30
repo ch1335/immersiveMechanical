@@ -45,7 +45,7 @@ public class FlyWheelRender extends IEMultiblockRenderer<FlyWheelLogic.State> {
 
         List<BakedQuad> quads = MODEL.getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelDataUtils.single(DynamicSubmodelCallbacks.getProperty(), IEProperties.VisibilityList.showAll()), RenderType.SOLID);
         poseStack.pushPose();
-        VertexConsumer buffer = bufferIn.getBuffer(RenderType.solid());
+        VertexConsumer buffer = bufferIn.getBuffer(RenderType.translucent());
         poseStack.translate(0.5F, .5F, 0.5F);
 
         Direction facing = ctx.getLevel().getOrientation().front();
@@ -55,7 +55,7 @@ public class FlyWheelRender extends IEMultiblockRenderer<FlyWheelLogic.State> {
         FlyWheelLogic.State state = ctx.getState();
         poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, state.getAngleOld(), state.getAngle())));
 
-        RenderUtils.renderModelTESRFancy(quads, buffer, poseStack, ctx.getLevel().getRawLevel(), ctx.getLevel().getAbsoluteOrigin(), true, -1, packedLight);
+        RenderUtils.renderModelTESRFast(quads, buffer, poseStack, packedLight, combinedOverlayIn);
         poseStack.popPose();
     }
 

@@ -60,7 +60,7 @@ public class FlyWheelCoilRender extends IEMultiblockRenderer<EndPointLogic.State
         }
 
 
-        RenderUtils.renderModelTESRFancy(quads, solidBuilder, poseStack, ctx.getLevel().getRawLevel(), ctx.getLevel().getAbsoluteOrigin(), true, -1, packedLight);
+        RenderUtils.renderModelTESRFast(quads, solidBuilder, poseStack, packedLight,combinedOverlayIn);
         poseStack.popPose();
     }
 

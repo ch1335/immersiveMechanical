@@ -1,11 +1,11 @@
-package com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks;
+package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint;
 
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.IFlyWheelPart;
-import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.TestAbleTemplateMultiblock;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,8 +30,12 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
         EndPointTemplate flywheelEndpoint = (EndPointTemplate) IMMultiblocks.FLYWHEEL_ENDPOINT.multiblock();
         boolean success = true;
         List<Runnable> runnables = new ArrayList<>();
+        List<BlockPos> linkedParts = new ArrayList<>();
         if (canForm(level, pos, side, player)) {
-            runnables.add(() -> this.innerCreateStructure(level, pos, side, player));
+            runnables.add(() -> {
+                this.innerCreateStructure(level, pos, side, player);
+                linkedParts.add(getMasterPose(level,pos));
+            });
         } else {
             success = false;
         }
@@ -41,12 +45,18 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
             if (flywheel.canForm(level, relative, side, player)) {
                 length++;
                 BlockPos finalRelative = relative;
-                runnables.add(() -> flywheel.createStructure(level, finalRelative, side, player));
+                runnables.add(() -> {
+                    flywheel.createStructure(level, finalRelative, side, player);
+                    linkedParts.add(getMasterPose(level,finalRelative));
+                });
             } else {
                 relative = pos.relative(side.getOpposite(), length + 5);
                 if (flywheelEndpoint.canForm(level, relative, side.getOpposite(), player)) {
                     BlockPos finalRelative1 = relative;
-                    runnables.add(() -> flywheelEndpoint.innerCreateStructure(level, finalRelative1, side.getOpposite(), player));
+                    runnables.add(() -> {
+                        flywheelEndpoint.innerCreateStructure(level, finalRelative1, side.getOpposite(), player);
+                        linkedParts.add(getMasterPose(level,finalRelative1));
+                    });
                 } else {
                     success = false;
                 }
@@ -60,8 +70,9 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
 
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof IMultiblockBE<?> be) {
-                ((EndPointLogic.State) be.getHelper().getContext().getState()).isMaster = true;
-
+                EndPointLogic.State state1 = (EndPointLogic.State) be.getHelper().getContext().getState();
+                state1.isMaster = true;
+                state1.linkedParts = linkedParts;
                 BlockPos masterPose = be.getHelper().getContext().getLevel().getAbsoluteOrigin();
 
                 for (int i = 0; i <= length; i++) {
@@ -69,8 +80,9 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
                     BlockEntity partEntity = level.getBlockEntity(partPos);
                     if (partEntity instanceof IMultiblockBE<?> partBe) {
                         IMultiblockState state = partBe.getHelper().getContext().getState();
-                        if (state instanceof IFlyWheelPart flyWheelPart) {
+                        if (state instanceof FlyWheelPart flyWheelPart) {
                             flyWheelPart.setMasterPos(masterPose);
+                            flyWheelPart.linkedParts = linkedParts;
                         }
                     }
                 }
@@ -79,7 +91,16 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
         return success;
     }
 
-    public boolean innerCreateStructure(Level world, BlockPos pos, Direction side, Player player) {
-        return super.createStructure(world, pos, side, player);
+    public BlockPos getMasterPose(Level level, BlockPos blockPos) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof IMultiblockBE<?> be) {
+            return be.getHelper().getContext().getLevel().toAbsolute(be.getHelper().getPositionInMB());
+        } else {
+            return blockPos;
+        }
+    }
+
+    public void innerCreateStructure(Level world, BlockPos pos, Direction side, Player player) {
+        super.createStructure(world, pos, side, player);
     }
 }
