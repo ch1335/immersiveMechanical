@@ -134,6 +134,7 @@ public class IMMultiblocks {
             .render(() -> FlyWheelRender::new)
             .customBlock(FlyWheelPartBlock::new)
             .manualScale(9)
+            .additionalPredicates(List.of(MatcherPredicates::flywheelMaterial))
             .register();
 
     public static final MultiblockHandler.IMultiblock INDUSTRIAL_FURNACES_DEMO = register((new UnionMultiblock(ImmersiveMechanical.id("industrial_furnaces_demo"),

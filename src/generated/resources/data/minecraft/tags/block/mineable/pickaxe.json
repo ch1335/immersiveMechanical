@@ -15,6 +15,7 @@
     "immersive_mechanical:coil",
     "immersive_mechanical:coil_vertical",
     "immersive_mechanical:pyrolyse_oven",
-    "immersive_mechanical:flywheel_endpoint"
+    "immersive_mechanical:flywheel_endpoint",
+    "immersive_mechanical:flywheel"
   ]
 }

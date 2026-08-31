@@ -1,14 +1,13 @@
 package com.chen1335.immersiveMechanical.client.render.tile;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
-import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.utils.client.ModelDataUtils;
-import blusunrize.immersiveengineering.client.models.obj.callback.DynamicSubmodelCallbacks;
 import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.models.callbacks.FlyWheelCallBacks;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -43,7 +42,7 @@ public class FlyWheelRender extends IEMultiblockRenderer<FlyWheelLogic.State> {
             MODEL = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getModelManager().getModel(MODEL_RESOURCE_LOCATION);
         }
 
-        List<BakedQuad> quads = MODEL.getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelDataUtils.single(DynamicSubmodelCallbacks.getProperty(), IEProperties.VisibilityList.showAll()), RenderType.SOLID);
+        List<BakedQuad> quads = MODEL.getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelDataUtils.single(FlyWheelCallBacks.getProperty(), ctx.getState().getMaterial()), RenderType.SOLID);
         poseStack.pushPose();
         VertexConsumer buffer = bufferIn.getBuffer(RenderType.translucent());
         poseStack.translate(0.5F, .5F, 0.5F);

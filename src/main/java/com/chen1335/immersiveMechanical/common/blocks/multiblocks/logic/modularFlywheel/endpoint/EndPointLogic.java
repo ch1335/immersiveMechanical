@@ -13,7 +13,6 @@ import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularF
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -57,7 +56,15 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
     @Override
     public void registerCapabilities(CapabilityRegistrar<State> register) {
         register.register(Capabilities.EnergyStorage.BLOCK, (state, position) -> {
-            return position.side() != null && !ENERGY_INTERFACE.contains(position) ? null : state.innerEnergy;
+            if (position.side() == null || ENERGY_INTERFACE.contains(position)) {
+                if (state.masterState == null) {
+                    state.updateMasterState();
+                }
+                if (state.masterState != null) {
+                    return state.masterState.innerEnergy;
+                }
+            }
+            return null;
         });
     }
 
@@ -65,10 +72,10 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
     public void tickServer(IMultiblockContext<EndPointLogic.State> context) {
         if (context.getState().isMaster) {
             if (context.getLevel().shouldTickModulo(20)) {
-                context.requestMasterBESync();
+                context.markDirtyAndSync();
             }
             State state = context.getState();
-            state.angularVelocity = (float) state.innerEnergy.getEnergyStored() /state.innerEnergy.getMaxEnergyStored() * 360;
+            state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / state.innerEnergy.getMaxEnergyStored() * 120;
         }
     }
 
@@ -78,7 +85,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         private float angle;
         private float angleOld;
         private float angularVelocity;
-        public MutableEnergyStorage innerEnergy = new MutableEnergyStorage(100000000);
+        public MutableEnergyStorage innerEnergy = new MutableEnergyStorage(600000000);
 
         public State(IInitialMultiblockContext<? extends FlyWheelPart> context) {
             super(context);
@@ -91,6 +98,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             nbt.putFloat("angle", angle);
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
+            nbt.putInt("EnergyStored", innerEnergy.getEnergyStored());
         }
 
         @Override
@@ -99,13 +107,13 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             angle = nbt.getFloat("angle");
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
+            innerEnergy.setStoredEnergy(nbt.getInt("EnergyStored"));
         }
 
 
         @Override
         public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
             super.writeSyncNBT(nbt, provider);
-            nbt.putFloat("angle", angle);
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
         }
@@ -113,7 +121,6 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         @Override
         public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
             super.readSyncNBT(nbt, provider);
-            angle = nbt.getFloat("angle");
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
         }

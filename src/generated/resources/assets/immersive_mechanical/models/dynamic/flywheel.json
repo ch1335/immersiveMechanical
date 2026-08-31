@@ -1,5 +1,5 @@
 {
-  "callbacks": "immersiveengineering:submodel",
+  "callbacks": "immersive_mechanical:flywheel",
   "loader": "immersiveengineering:ie_obj",
   "model": "immersive_mechanical:models/block/metal_multiblock/flywheel/flywheel.obj"
 }

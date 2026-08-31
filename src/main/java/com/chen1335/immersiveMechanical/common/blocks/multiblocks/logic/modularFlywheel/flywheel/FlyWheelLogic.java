@@ -4,15 +4,23 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientT
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBMemorizeStructure;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Function;
 
-public class FlyWheelLogic extends FlyWheelPartLogic<FlyWheelLogic.State> implements IClientTickableComponent<FlyWheelLogic.State> {
+public class FlyWheelLogic extends FlyWheelPartLogic<FlyWheelLogic.State> implements IClientTickableComponent<FlyWheelLogic.State>, MBMemorizeStructure<FlyWheelLogic.State> {
     @Override
     public void tickClient(IMultiblockContext<FlyWheelLogic.State> context) {
         FlyWheelLogic.State state = context.getState();
@@ -31,7 +39,22 @@ public class FlyWheelLogic extends FlyWheelPartLogic<FlyWheelLogic.State> implem
         return blockPos -> Shapes.block();
     }
 
+    @Override
+    public void setMemorizedBlockState(State state, BlockPos pos, BlockState blockState) {
+
+    }
+
+    @Override
+    public BlockState getMemorizedBlockState(State state, BlockPos pos) {
+        if (pos.getX() ==1 && pos.getY() ==1) {
+            return null;
+        }
+        return state.material.defaultBlockState();
+    }
+
     public static class State extends FlyWheelPart {
+        public Block material = Blocks.IRON_BLOCK;
+
 
         public State(IInitialMultiblockContext<State> context) {
             super(context);
@@ -45,5 +68,44 @@ public class FlyWheelLogic extends FlyWheelPartLogic<FlyWheelLogic.State> implem
             return masterState != null ? masterState.getAngleOld() : 0;
         }
 
+        @Override
+        public void writeSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            super.writeSaveNBT(nbt, provider);
+            BuiltInRegistries.BLOCK.getResourceKey(material).ifPresent(blockResourceKey -> {
+                nbt.putString("material", blockResourceKey.location().toString());
+            });
+        }
+
+        @Override
+        public void readSaveNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            super.readSaveNBT(nbt, provider);
+            if (nbt.contains("material")) {
+                BuiltInRegistries.BLOCK.getHolder(ResourceLocation.parse(nbt.getString("material"))).ifPresent(blockReference -> {
+                    material = blockReference.value();
+                });
+            }
+        }
+
+        @Override
+        public void writeSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            super.writeSyncNBT(nbt, provider);
+            BuiltInRegistries.BLOCK.getResourceKey(material).ifPresent(blockResourceKey -> {
+                nbt.putString("material", blockResourceKey.location().toString());
+            });
+        }
+
+        @Override
+        public void readSyncNBT(CompoundTag nbt, HolderLookup.Provider provider) {
+            super.readSyncNBT(nbt, provider);
+            if (nbt.contains("material")) {
+                BuiltInRegistries.BLOCK.getHolder(ResourceLocation.parse(nbt.getString("material"))).ifPresent(blockReference -> {
+                    material = blockReference.value();
+                });
+            }
+        }
+
+        public Block getMaterial() {
+            return material;
+        }
     }
 }

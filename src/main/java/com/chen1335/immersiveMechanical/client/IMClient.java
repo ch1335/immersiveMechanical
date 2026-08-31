@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.IEApi;
 import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.client.models.callbacks.CoilCallbacks;
+import com.chen1335.immersiveMechanical.client.models.callbacks.FlyWheelCallBacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
 import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
 import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelRender;
@@ -17,6 +18,7 @@ public class IMClient {
     public static void init() {
         IEOBJCallbacks.register(rl("green_house"), GreenHouseCallbacks.INSTANCE);
         IEOBJCallbacks.register(rl("coil"), CoilCallbacks.INSTANCE);
+        IEOBJCallbacks.register(rl("flywheel"), FlyWheelCallBacks.INSTANCE);
     }
 
     static {

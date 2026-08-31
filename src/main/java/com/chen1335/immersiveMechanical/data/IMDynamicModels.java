@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.client.models.obj.callback.DynamicSubmode
 import blusunrize.immersiveengineering.data.blockstates.MultiblockStates;
 import blusunrize.immersiveengineering.data.models.IEOBJBuilder;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.models.callbacks.FlyWheelCallBacks;
 import com.chen1335.registrate.devData.IEDynamicModelProvider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
@@ -28,7 +29,7 @@ public class IMDynamicModels {
         provider.getBuilder(ImmersiveMechanical.id("flywheel").toString())
                 .customLoader(IEOBJBuilder::begin)
                 .modelLocation(ImmersiveMechanical.id("models/block/metal_multiblock/flywheel/flywheel.obj"))
-                .callback(DynamicSubmodelCallbacks.INSTANCE)
+                .callback(FlyWheelCallBacks.INSTANCE)
                 .end();
 
         for(Map.Entry<Block, ModelFile> multiblock : provider.getMultiblockStatesProvider().unsplitModels.entrySet()) {
