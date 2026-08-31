@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-31T15:20:04.8183957	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
+// 1.21.1	2026-08-31T20:15:44.0477306	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
 d0d905d203268da4b2a1e1cda3589be0c85d1988 assets/immersive_mechanical/blockstates/chrome_ore.json
 a9b257ff24866f70ddb387ae0e3ae27a5eddf8f8 assets/immersive_mechanical/blockstates/coil.json
 5b238d210400d0d3abd853d3049cf93c6876d20a assets/immersive_mechanical/blockstates/coil_nichrome.json
@@ -109,6 +109,17 @@ fa99fdbf40cf54a07b435057d7061d1d84e30116 data/immersive_mechanical/advancement/r
 04b2b5354ea7fa25a2d987f97835b490741d2e51 data/immersive_mechanical/advancement/recipes/misc/turret_laser.json
 e325227768917ec0fa1d479515f71ce4ee778a47 data/immersive_mechanical/advancement/recipes/misc/wire_nichrome.json
 947ef5c6514f6198ec851ba788e45a3a3dbfdefb data/immersive_mechanical/damage_type/laser.json
+499f6dc1ed2d332688337a854773f8b20349c539 data/immersive_mechanical/immersive_mechanical/flywheel_material/aluminum.json
+f15c0253885fc52f127ca7e960c6dd2c6205198e data/immersive_mechanical/immersive_mechanical/flywheel_material/constantan.json
+a3d9458c7224aee89e1c55026dbc1ec7aef41172 data/immersive_mechanical/immersive_mechanical/flywheel_material/copper.json
+157d081872c21a9c9d1ec2fef47e4a4686be0ede data/immersive_mechanical/immersive_mechanical/flywheel_material/electrum.json
+ccf05300be837609d86977169927c782d62a03a6 data/immersive_mechanical/immersive_mechanical/flywheel_material/gold.json
+841c63398c8b7dc4f552596153b870fdc85d21a3 data/immersive_mechanical/immersive_mechanical/flywheel_material/iron.json
+90f244602d4b685105eb915c98edc673c67e4a84 data/immersive_mechanical/immersive_mechanical/flywheel_material/lead.json
+4213b2982aa131ef775c109d860784fa270c081b data/immersive_mechanical/immersive_mechanical/flywheel_material/nickel.json
+3b894c70ef57537b2b957dc2676a4b06d047445f data/immersive_mechanical/immersive_mechanical/flywheel_material/silver.json
+35e1e24ea56c14a71b4792c4b04568f33b259968 data/immersive_mechanical/immersive_mechanical/flywheel_material/steel.json
+7297547795fb2c4bbf6d3658dac0e1f3c438b3fb data/immersive_mechanical/immersive_mechanical/flywheel_material/uranium.json
 484e7c4adb70a7ea618b62f19f0146cc651d04b3 data/immersive_mechanical/loot_table/blocks/chrome_ore.json
 590c4c41ae9a83e8644deec36349202f56ab931b data/immersive_mechanical/loot_table/blocks/coil.json
 02ec4dfb7c9bb9d2b0a4989db8c35d6fa3e98435 data/immersive_mechanical/loot_table/blocks/coil_nichrome.json

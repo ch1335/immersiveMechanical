@@ -1,18 +1,22 @@
 package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint;
 
-import blusunrize.immersiveengineering.api.energy.MutableEnergyStorage;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IServerTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import com.chen1335.immersiveMechanical.API.energy.ReSizeAbleEnergyStorage;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlywheelMaterial;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -42,6 +46,10 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
     @Override
     public void tickClient(IMultiblockContext<EndPointLogic.State> context) {
         State state = context.getState();
+        if (!state.init) {
+            state.updateMasterState();
+            state.init = true;
+        }
         if (context.getLevel().shouldTickModulo(10) && state.masterState == null) {
             state.updateMasterState();
         }
@@ -71,10 +79,24 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
     @Override
     public void tickServer(IMultiblockContext<EndPointLogic.State> context) {
         if (context.getState().isMaster) {
+            State state = context.getState();
+            if (!state.init) {
+                state.updateMasterState();
+                state.init = true;
+                state.innerEnergy.setMaxEnergyStored(0);
+                state.linkedParts.forEach(blockPos -> {
+                    BlockEntity blockEntity = context.getLevel().getRawLevel().getBlockEntity(blockPos);
+                    if (blockEntity instanceof IMultiblockBE<?> be && be.getHelper().getState() instanceof FlyWheelLogic.State state1) {
+                        FlywheelMaterial.get(context.getLevel().getRawLevel(), state1.material).ifPresent(holder -> {
+                            state.innerEnergy.setMaxEnergyStored(state.innerEnergy.getMaxEnergyStored() + holder.value().maxEnergyStored());
+                        });
+                    }
+                });
+            }
+
             if (context.getLevel().shouldTickModulo(20)) {
                 context.markDirtyAndSync();
             }
-            State state = context.getState();
             state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / state.innerEnergy.getMaxEnergyStored() * 120;
         }
     }
@@ -85,7 +107,9 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         private float angle;
         private float angleOld;
         private float angularVelocity;
-        public MutableEnergyStorage innerEnergy = new MutableEnergyStorage(600000000);
+        private boolean init = false;
+
+        public ReSizeAbleEnergyStorage innerEnergy = new ReSizeAbleEnergyStorage(0, 8192, 8192);
 
         public State(IInitialMultiblockContext<? extends FlyWheelPart> context) {
             super(context);
