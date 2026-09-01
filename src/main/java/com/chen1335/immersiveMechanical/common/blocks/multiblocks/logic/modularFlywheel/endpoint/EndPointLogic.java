@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockB
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
+import blusunrize.immersiveengineering.common.register.IEItems;
 import com.chen1335.immersiveMechanical.API.energy.ReSizeAbleEnergyStorage;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
@@ -16,7 +17,13 @@ import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularF
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -36,6 +43,25 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
     @Override
     public EndPointLogic.State createInitialState(IInitialMultiblockContext<EndPointLogic.State> context) {
         return new State(context);
+    }
+
+    @Override
+    public ItemInteractionResult click(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Player player, InteractionHand hand, BlockHitResult absoluteHit, boolean isClient) {
+        ItemStack itemInHand = player.getItemInHand(hand);
+        if (itemInHand.is(IEItems.Tools.HAMMER.asItem())) {
+            if (!isClient) {
+                State state = ctx.getState();
+                state.connectionType = state.connectionType == ConnectionType.INPUT ? ConnectionType.OUTPUT : ConnectionType.INPUT;
+                ctx.markDirtyAndSync();
+
+                BlockPos absolute = ctx.getLevel().toAbsolute(posInMultiblock);
+                BlockState blockState = ctx.getLevel().getBlockState(posInMultiblock);
+                ctx.getLevel().getRawLevel().sendBlockUpdated(absolute,blockState,blockState,3);
+                ctx.getLevel().getRawLevel().updateNeighbourForOutputSignal(absolute,blockState.getBlock());
+            }
+            return ItemInteractionResult.SUCCESS;
+        }
+        return super.click(ctx, posInMultiblock, player, hand, absoluteHit, isClient);
     }
 
     @Override
@@ -97,7 +123,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             if (context.getLevel().shouldTickModulo(20)) {
                 context.markDirtyAndSync();
             }
-            state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / state.innerEnergy.getMaxEnergyStored() * 120;
+            state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / state.innerEnergy.getMaxEnergyStored() * 100;
         }
     }
 
@@ -109,6 +135,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         private float angularVelocity;
         private boolean init = false;
 
+        public ConnectionType connectionType = ConnectionType.INPUT;
         public ReSizeAbleEnergyStorage innerEnergy = new ReSizeAbleEnergyStorage(0, 8192, 8192);
 
         public State(IInitialMultiblockContext<? extends FlyWheelPart> context) {
@@ -123,6 +150,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
             nbt.putInt("EnergyStored", innerEnergy.getEnergyStored());
+            nbt.putString("connectionType", connectionType.name());
         }
 
         @Override
@@ -132,6 +160,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
             innerEnergy.setStoredEnergy(nbt.getInt("EnergyStored"));
+            connectionType = ConnectionType.valueOf(nbt.getString("connectionType"));
         }
 
 
@@ -140,6 +169,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             super.writeSyncNBT(nbt, provider);
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
+            nbt.putString("connectionType", connectionType.name());
         }
 
         @Override
@@ -147,6 +177,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             super.readSyncNBT(nbt, provider);
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
+            connectionType = ConnectionType.valueOf(nbt.getString("connectionType"));
         }
 
         public float getAngle() {
@@ -165,9 +196,10 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             }
             super.updateMasterState();
         }
+    }
 
-        public float calculationAngularVelocity(int e, float i) {
-            return (float) Math.toDegrees(Math.sqrt(e * 2 / i));
-        }
+    public enum ConnectionType {
+        INPUT,
+        OUTPUT;
     }
 }

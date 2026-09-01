@@ -1,13 +1,14 @@
 {
   "parent": "minecraft:block/block",
-  "dynamic": false,
+  "dynamic": true,
   "inner_model": {
     "parent": "minecraft:block/block",
-    "automatic_culling": false,
-    "flip_v": true,
-    "loader": "neoforge:obj",
-    "model": "immersive_mechanical:models/block/metal_multiblock/flywheel/endpoint.obj",
-    "render_type": "minecraft:cutout",
+    "callbacks": "immersive_mechanical:end_point",
+    "layers": [
+      "solid"
+    ],
+    "loader": "immersiveengineering:ie_obj",
+    "model": "immersive_mechanical:models/block/metal_multiblock/flywheel/endpoint.obj.ie",
     "textures": {
       "particle": "immersive_mechanical:block/metal_multiblock/flywheel/ring"
     }

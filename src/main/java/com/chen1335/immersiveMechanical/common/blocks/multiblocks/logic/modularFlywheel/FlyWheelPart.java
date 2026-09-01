@@ -91,7 +91,7 @@ public class FlyWheelPart implements IMultiblockState {
             if (level != null) {
                 BlockEntity blockEntity = level.getBlockEntity(masterPos);
                 if (blockEntity instanceof IMultiblockBE<?> be) {
-                    IMultiblockState iMultiblockState = be.getHelper().getContext().getState();
+                    IMultiblockState iMultiblockState = be.getHelper().getState();
                     if (iMultiblockState instanceof EndPointLogic.State state) {
                         masterState = state;
                     }

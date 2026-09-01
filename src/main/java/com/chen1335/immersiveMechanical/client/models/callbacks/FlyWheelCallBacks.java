@@ -1,6 +1,5 @@
 package com.chen1335.immersiveMechanical.client.models.callbacks;
 
-import blusunrize.immersiveengineering.api.IEProperties;
 import blusunrize.immersiveengineering.api.client.ieobj.BlockCallback;
 import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import blusunrize.immersiveengineering.client.ClientUtils;
@@ -21,8 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public class FlyWheelCallBacks implements BlockCallback<Block> {
     public static final FlyWheelCallBacks INSTANCE = new FlyWheelCallBacks();
 
-    public static ModelProperty<Block> getProperty()
-    {
+    public static ModelProperty<Block> getProperty() {
         return IEOBJCallbacks.getModelProperty(INSTANCE);
     }
 
