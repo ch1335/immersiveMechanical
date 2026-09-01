@@ -6,13 +6,16 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultib
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.CapabilityPosition;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.util.MultiblockFace;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.RelativeBlockFace;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import com.chen1335.immersiveMechanical.API.energy.ReSizeAbleEnergyStorage;
+import com.chen1335.immersiveMechanical.API.energy.WrappedEnergy;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlywheelMaterial;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.blockEntities.EndPointDummy;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -22,14 +25,18 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 
+import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implements IServerTickableComponent<EndPointLogic.State>, IClientTickableComponent<EndPointLogic.State> {
     private static final Set<CapabilityPosition> ENERGY_INTERFACE = Set.of(
@@ -49,15 +56,10 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
     public ItemInteractionResult click(IMultiblockContext<State> ctx, BlockPos posInMultiblock, Player player, InteractionHand hand, BlockHitResult absoluteHit, boolean isClient) {
         ItemStack itemInHand = player.getItemInHand(hand);
         if (itemInHand.is(IEItems.Tools.HAMMER.asItem())) {
+            State state = ctx.getState();
             if (!isClient) {
-                State state = ctx.getState();
                 state.connectionType = state.connectionType == ConnectionType.INPUT ? ConnectionType.OUTPUT : ConnectionType.INPUT;
                 ctx.markDirtyAndSync();
-
-                BlockPos absolute = ctx.getLevel().toAbsolute(posInMultiblock);
-                BlockState blockState = ctx.getLevel().getBlockState(posInMultiblock);
-                ctx.getLevel().getRawLevel().sendBlockUpdated(absolute,blockState,blockState,3);
-                ctx.getLevel().getRawLevel().updateNeighbourForOutputSignal(absolute,blockState.getBlock());
             }
             return ItemInteractionResult.SUCCESS;
         }
@@ -95,7 +97,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
                     state.updateMasterState();
                 }
                 if (state.masterState != null) {
-                    return state.masterState.innerEnergy;
+                    return state.energyHandler;
                 }
             }
             return null;
@@ -104,8 +106,8 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
 
     @Override
     public void tickServer(IMultiblockContext<EndPointLogic.State> context) {
-        if (context.getState().isMaster) {
-            State state = context.getState();
+        State state = context.getState();
+        if (state.isMaster) {
             if (!state.init) {
                 state.updateMasterState();
                 state.init = true;
@@ -125,6 +127,19 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             }
             state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / state.innerEnergy.getMaxEnergyStored() * 100;
         }
+
+        ReSizeAbleEnergyStorage masterEnergy = state.getMasterEnergy();
+        if (masterEnergy != null && state.connectionType == ConnectionType.OUTPUT) {
+            for (Supplier<IEnergyStorage> iEnergyStorageSupplier : context.getState().energyOutputs) {
+                IEnergyStorage iEnergyStorage = iEnergyStorageSupplier.get();
+                if (iEnergyStorage != null) {
+                    int canReceive = iEnergyStorage.receiveEnergy(Integer.MAX_VALUE, true);
+                    int canExtract = masterEnergy.extractEnergy(canReceive, true);
+                    iEnergyStorage.receiveEnergy(canExtract, false);
+                    masterEnergy.extractEnergy(canExtract, false);
+                }
+            }
+        }
     }
 
 
@@ -135,11 +150,44 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         private float angularVelocity;
         private boolean init = false;
 
+        public static final Set<MultiblockFace> ENERGY_OUTS = Set.of(
+                new MultiblockFace(-1, 0, 1, RelativeBlockFace.LEFT),
+                new MultiblockFace(-1, 1, 1, RelativeBlockFace.LEFT),
+                new MultiblockFace(3, 0, 1, RelativeBlockFace.RIGHT),
+                new MultiblockFace(3, 1, 1, RelativeBlockFace.RIGHT)
+        );
+        public final Set<Supplier<IEnergyStorage>> energyOutputs;
+        public Set<EndPointDummy> dummyBEs = new HashSet<>();
         public ConnectionType connectionType = ConnectionType.INPUT;
-        public ReSizeAbleEnergyStorage innerEnergy = new ReSizeAbleEnergyStorage(0, 8192, 8192);
+
+        public final ReSizeAbleEnergyStorage innerEnergy = new ReSizeAbleEnergyStorage(0, 8192, 8192);
+
+        public WrappedEnergy<ReSizeAbleEnergyStorage> energyHandler = new WrappedEnergy<>(this::getMasterEnergy) {
+            @Override
+            public boolean canExtract() {
+                return connectionType == ConnectionType.OUTPUT;
+            }
+
+            @Override
+            public boolean canReceive() {
+                return connectionType == ConnectionType.INPUT;
+            }
+
+            @Override
+            public int extractEnergy(int toExtract, boolean simulate) {
+                return super.extractEnergy(toExtract, simulate);
+            }
+
+            @Override
+            public int receiveEnergy(int toReceive, boolean simulate) {
+                return super.receiveEnergy(toReceive, simulate);
+            }
+        };
+
 
         public State(IInitialMultiblockContext<? extends FlyWheelPart> context) {
             super(context);
+            this.energyOutputs = ENERGY_OUTS.stream().map(face -> context.getCapabilityAt(Capabilities.EnergyStorage.BLOCK, face)).collect(Collectors.toSet());
         }
 
 
@@ -178,6 +226,12 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
             connectionType = ConnectionType.valueOf(nbt.getString("connectionType"));
+
+            for (EndPointDummy dummyBE : dummyBEs) {
+                if (dummyBE.getLevel() != null) {
+                    dummyBE.getLevel().sendBlockUpdated(dummyBE.getBlockPos(), dummyBE.getBlockState(), dummyBE.getBlockState(), 2);
+                }
+            }
         }
 
         public float getAngle() {
@@ -195,6 +249,16 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
                 return;
             }
             super.updateMasterState();
+        }
+
+        @Nullable
+        public ReSizeAbleEnergyStorage getMasterEnergy() {
+            if (isMaster) {
+                return innerEnergy;
+            } else if (masterState != null) {
+                return masterState.innerEnergy;
+            }
+            return innerEnergy;
         }
     }
 

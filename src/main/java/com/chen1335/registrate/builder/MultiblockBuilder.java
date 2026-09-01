@@ -7,14 +7,17 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistra
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistrationBuilder;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockLogic;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockItem;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockPartBlock;
 import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
-import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IETemplateMultiblock;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultiblockBuilder;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes;
+import com.chen1335.immersiveMechanical.API.IMBEConstructor;
+import com.chen1335.immersiveMechanical.mixinsAPI.IRegistrationBuilderExtension;
 import com.chen1335.registrate.IERegistrate;
 import com.chen1335.registrate.IMultiblockFactory;
 import com.chen1335.registrate.MultiblockDefinition;
@@ -56,6 +59,9 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
     private final String name;
     private final Supplier<L> logicSupplier;
     private final IMultiblockFactory multiblockFactory;
+
+    private IMBEConstructor<S, ? extends MultiblockBlockEntityMaster<S>> masterConstruct = MultiblockBlockEntityMaster::new;
+    private IMBEConstructor<S, ? extends MultiblockBlockEntityDummy<S>> dummyConstruct = MultiblockBlockEntityDummy::new;
 
     private final MultiblockRegistrationBuilder.RegistrationMethod<Block> blockRegistrationMethod = new MultiblockRegistrationBuilder.RegistrationMethod<Block>() {
         @Override
@@ -172,6 +178,16 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         return this;
     }
 
+    public MultiblockBuilder<S, L> customMasterBE(IMBEConstructor<S, ? extends MultiblockBlockEntityMaster<S>> masterConstruct) {
+        this.masterConstruct = masterConstruct;
+        return this;
+    }
+
+    public MultiblockBuilder<S, L> customDummyBE(IMBEConstructor<S, ? extends MultiblockBlockEntityDummy<S>> dummyConstruct) {
+        this.dummyConstruct = dummyConstruct;
+        return this;
+    }
+
     public MultiblockBuilder<S, L> render(NonNullSupplier<NonNullFunction<BlockEntityRendererProvider.Context, IEMultiblockRenderer<S>>> renderer) {
         this.renderer = renderer;
         RegistrateDistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> this::registerRenderer);
@@ -196,11 +212,13 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
 
         L logic = logicSupplier.get();
         Mutable<TemplateMultiblock> typeBox = new MutableObject<>();
-        IEMultiblockBuilder<S> builder = new IEMultiblockBuilder<>(logic, ResourceLocation.fromNamespaceAndPath(owner.getModid(),name).toString())
+        IEMultiblockBuilder<S> builder = new IEMultiblockBuilder<>(logic, ResourceLocation.fromNamespaceAndPath(owner.getModid(), name).toString())
                 .customBlock(blockRegistrationMethod, itemRegistrationMethod, registration -> makeBlock.apply(properties, registration), makeItem)
-                .defaultBEs(multiblockBes)
                 .structure(typeBox::getValue);
 
+        IRegistrationBuilderExtension<S, ?> builder1 = (IRegistrationBuilderExtension<S, ?>) builder;
+
+        builder1.IM$customBEs(MultiblockRegistrationBuilder.RegistrationMethod.fromDeferred(multiblockBes), masterConstruct, dummyConstruct);
 
         if (!mirrorable) {
             builder.notMirrored();

@@ -3,10 +3,12 @@ package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modular
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBMemorizeStructure;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -46,13 +50,15 @@ public class FlyWheelLogic extends FlyWheelPartLogic<FlyWheelLogic.State> implem
 
     @Override
     public BlockState getMemorizedBlockState(State state, BlockPos pos) {
-        if (pos.getX() ==1 && pos.getY() ==1) {
+        if (pos.getX() == 1 && pos.getY() == 1) {
             return null;
         }
         return state.material.defaultBlockState();
     }
 
     public static class State extends FlyWheelPart {
+        public Function<MultiblockBlockEntityMaster<State>, AABB> renderBoundingBox = Util.memoize(be -> AABB.ofSize(Vec3.atLowerCornerOf(be.getBlockPos()), 2, 2, 2));
+
         public Block material = Blocks.IRON_BLOCK;
 
 

@@ -60,7 +60,7 @@ public class FlyWheelRender extends IEMultiblockRenderer<FlyWheelLogic.State> {
 
     @Override
     public @NotNull AABB getRenderBoundingBox(@NotNull MultiblockBlockEntityMaster<FlyWheelLogic.State> blockEntity) {
-        return super.getRenderBoundingBox(blockEntity);
+        return blockEntity.getHelper().getState().renderBoundingBox.apply(blockEntity);
     }
 
     public static void reset() {

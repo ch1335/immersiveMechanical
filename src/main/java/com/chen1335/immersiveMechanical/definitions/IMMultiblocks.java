@@ -1,6 +1,8 @@
 package com.chen1335.immersiveMechanical.definitions;
 
 import blusunrize.immersiveengineering.api.multiblocks.MultiblockHandler;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityDummy;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.UnionMultiblock;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
@@ -17,6 +19,8 @@ import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industri
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartBlockBasic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointTemplate;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.blockEntities.EndPointDummy;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.blockEntities.EndPointMaster;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelPartBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelTemplate;
@@ -123,6 +127,8 @@ public class IMMultiblocks {
             .size(new BlockPos(3, 3, 3))
             .render(() -> FlyWheelCoilRender::new)
             .customBlock(FlyWheelPartBlockBasic::new)
+            .customMasterBE(EndPointMaster::new)
+            .customDummyBE(EndPointDummy::new)
             .manualScale(9)
             .register();
 
