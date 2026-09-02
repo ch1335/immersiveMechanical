@@ -1,6 +1,5 @@
 package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.pyrolyseOven;
 
-import blusunrize.immersiveengineering.api.crafting.MultiblockRecipe;
 import blusunrize.immersiveengineering.api.energy.AveragingEnergyStorage;
 import blusunrize.immersiveengineering.api.fluid.FluidUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;

@@ -8,6 +8,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.interfaces.MBMemorizeStructure;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.FlyWheelShape;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -40,7 +41,7 @@ public class FlyWheelLogic extends FlyWheelPartLogic<FlyWheelLogic.State> implem
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType) {
-        return blockPos -> Shapes.block();
+        return new FlyWheelShape();
     }
 
     @Override

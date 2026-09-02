@@ -32,7 +32,7 @@ public class IMWireTypes {
     }
 
     private enum Tier {
-        EHV("EHV", 131072, 0.0002, 64, 1.003, 0Xcae1ed, IMItems.EHV_WIRE_COIL, 0.3, 2.0F, 30.0F);
+        EHV("EHV", 131072, 0.0002, 64, 1.003, 0Xcae1ed, IMItems.EHV_WIRE_COIL, 0.3, 1.74F, 30.0F);
         //        UHV("UHV", 2097152, 0.00004, 1024, 1.001, 0X9badb7, IMItems.UHV_WIRE_COIL, 0.3, 2.5F, 50.0F);
         public final String name;
         public final int transferRate;

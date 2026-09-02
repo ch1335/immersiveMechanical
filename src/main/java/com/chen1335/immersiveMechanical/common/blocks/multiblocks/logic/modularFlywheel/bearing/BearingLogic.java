@@ -6,6 +6,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockCon
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.BearingShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -21,7 +22,7 @@ public class BearingLogic extends FlyWheelPartLogic<BearingLogic.State> implemen
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType) {
-        return blockPos -> Shapes.block();
+        return new BearingShape();
     }
 
     @Override

@@ -19,6 +19,7 @@ import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularF
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlywheelMaterial;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.blockEntities.EndPointDummy;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.EndPointShape;
 import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -73,7 +74,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
 
     @Override
     public Function<BlockPos, VoxelShape> shapeGetter(ShapeType forType) {
-        return blockPos -> Shapes.block();
+        return new EndPointShape();
     }
 
     @Override
