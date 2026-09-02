@@ -7,6 +7,8 @@ import net.neoforged.neoforge.common.data.SoundDefinition;
 public class IMSoundDefinitionsProvider {
     public static void init(IESoundDefinitionsProvider provider) {
         provider.add(IMSounds.LASER_TURRET_BEAM.value(), definition().with(provider.makeSound("laser_turret_beam")));
+        provider.add(IMSounds.FLY_WHEEL.value(), definition().with(provider.makeSound("flywheel")));
+
     }
 
     public static SoundDefinition definition() {

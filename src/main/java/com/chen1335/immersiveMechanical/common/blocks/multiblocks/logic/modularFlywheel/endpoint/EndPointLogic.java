@@ -12,28 +12,33 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import blusunrize.immersiveengineering.common.register.IEItems;
 import com.chen1335.immersiveMechanical.API.energy.ReSizeAbleEnergyStorage;
 import com.chen1335.immersiveMechanical.API.energy.WrappedEnergy;
+import com.chen1335.immersiveMechanical.API.objects.IMSounds;
+import com.chen1335.immersiveMechanical.API.sound.DynamicMultiblockSound;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlywheelMaterial;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.blockEntities.EndPointDummy;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
-import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -87,6 +92,19 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
 //        if (state.angle >= 360F) {
 //            state.angle -= 360F;
 //        }
+
+        if (!state.isPlayingSound.getAsBoolean()) {
+            state.isPlayingSound = DynamicMultiblockSound.startSound(
+                    () -> true, context.isValid(), Vec3.atLowerCornerOf(context.getLevel().getAbsoluteOrigin()), IMSounds.FLY_WHEEL, () -> {
+                        int energyStored = state.energyHandler.getEnergyStored();
+                        int maxEnergyStored = state.energyHandler.getMaxEnergyStored();
+                        if (maxEnergyStored == 0) {
+                            return 0F;
+                        }
+                        return (float) energyStored / maxEnergyStored * 0.25F;
+                    }, 0.5f
+            );
+        }
     }
 
     @Override
@@ -116,27 +134,38 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
                     BlockEntity blockEntity = context.getLevel().getRawLevel().getBlockEntity(blockPos);
                     if (blockEntity instanceof IMultiblockBE<?> be && be.getHelper().getState() instanceof FlyWheelLogic.State state1) {
                         FlywheelMaterial.get(context.getLevel().getRawLevel(), state1.material).ifPresent(holder -> {
-                            state.innerEnergy.setMaxEnergyStored(state.innerEnergy.getMaxEnergyStored() + holder.value().maxEnergyStored());
+                            state.innerEnergy.setMaxEnergyStored(state.innerEnergy.getMaxEnergyStored() + holder.value().maxEnergyStored() * IMServerConfig.MACHINES.flywheel_energy_storage_coefficient.get());
                         });
                     }
                 });
             }
-
             if (context.getLevel().shouldTickModulo(20)) {
+                if (state.isMaster) {
+                    ReSizeAbleEnergyStorage masterEnergy = state.getMasterEnergy();
+                    int toExtract = (int) (masterEnergy.getEnergyStored() * 0.01 / 3600);
+                    masterEnergy.extractEnergy(toExtract, false);
+                }
                 context.markDirtyAndSync();
             }
-            state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / state.innerEnergy.getMaxEnergyStored() * 100;
+            int maxEnergyStored = state.innerEnergy.getMaxEnergyStored();
+            if (maxEnergyStored !=0) {
+                state.angularVelocity = (float) state.innerEnergy.getEnergyStored() / maxEnergyStored * 100;
+            }
         }
 
-        ReSizeAbleEnergyStorage masterEnergy = state.getMasterEnergy();
-        if (masterEnergy != null && state.connectionType == ConnectionType.OUTPUT) {
+        if (state.energyHandler.getMaxEnergyStored() != 0) {
+            int maxTransfer = IMServerConfig.MACHINES.flywheel_maximum_energy_transfer.get();
+            maxTransfer = Mth.lerpInt((float) Math.min(((float) state.energyHandler.getEnergyStored() / state.energyHandler.getMaxEnergyStored()) / IMServerConfig.MACHINES.flywheel_maximum_output_speed_requirement.get(), 1), (int) (maxTransfer *IMServerConfig.MACHINES.flywheel_basic_output_multiplier.get()), maxTransfer);
+            state.receiveRemaining = maxTransfer;
+            state.extractRemaining = maxTransfer;
+        }
+
+        if (state.connectionType == ConnectionType.OUTPUT) {
             for (Supplier<IEnergyStorage> iEnergyStorageSupplier : context.getState().energyOutputs) {
                 IEnergyStorage iEnergyStorage = iEnergyStorageSupplier.get();
                 if (iEnergyStorage != null) {
-                    int canReceive = iEnergyStorage.receiveEnergy(Integer.MAX_VALUE, true);
-                    int canExtract = masterEnergy.extractEnergy(canReceive, true);
-                    iEnergyStorage.receiveEnergy(canExtract, false);
-                    masterEnergy.extractEnergy(canExtract, false);
+                    int received = iEnergyStorage.receiveEnergy(Integer.MAX_VALUE, false);
+                    state.energyHandler.extractEnergy(received, false);
                 }
             }
         }
@@ -149,6 +178,10 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         private float angleOld;
         private float angularVelocity;
         private boolean init = false;
+        private BooleanSupplier isPlayingSound = () -> false;
+
+        public int receiveRemaining = 0;
+        public int extractRemaining = 0;
 
         public static final Set<MultiblockFace> ENERGY_OUTS = Set.of(
                 new MultiblockFace(-1, 0, 1, RelativeBlockFace.LEFT),
@@ -160,9 +193,12 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
         public Set<EndPointDummy> dummyBEs = new HashSet<>();
         public ConnectionType connectionType = ConnectionType.INPUT;
 
-        public final ReSizeAbleEnergyStorage innerEnergy = new ReSizeAbleEnergyStorage(0, 8192, 8192);
+        public final ReSizeAbleEnergyStorage innerEnergy = new ReSizeAbleEnergyStorage(0,
+                IMServerConfig.MACHINES.flywheel_maximum_energy_transfer.get(),
+                IMServerConfig.MACHINES.flywheel_maximum_energy_transfer.get());
 
         public WrappedEnergy<ReSizeAbleEnergyStorage> energyHandler = new WrappedEnergy<>(this::getMasterEnergy) {
+
             @Override
             public boolean canExtract() {
                 return connectionType == ConnectionType.OUTPUT;
@@ -175,11 +211,19 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
 
             @Override
             public int extractEnergy(int toExtract, boolean simulate) {
+                if (!simulate) {
+                    toExtract = Math.min(toExtract, extractRemaining);
+                    extractRemaining -= toExtract;
+                }
                 return super.extractEnergy(toExtract, simulate);
             }
 
             @Override
             public int receiveEnergy(int toReceive, boolean simulate) {
+                if (!simulate) {
+                    toReceive = Math.min(toReceive, receiveRemaining);
+                    receiveRemaining -= toReceive;
+                }
                 return super.receiveEnergy(toReceive, simulate);
             }
         };
@@ -218,6 +262,8 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             nbt.putFloat("angularVelocity", angularVelocity);
             nbt.putBoolean("isMaster", isMaster);
             nbt.putString("connectionType", connectionType.name());
+            nbt.putInt("maxEnergy", innerEnergy.getMaxEnergyStored());
+            nbt.putInt("energy", innerEnergy.getEnergyStored());
         }
 
         @Override
@@ -226,7 +272,8 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             angularVelocity = nbt.getFloat("angularVelocity");
             isMaster = nbt.getBoolean("isMaster");
             connectionType = ConnectionType.valueOf(nbt.getString("connectionType"));
-
+            innerEnergy.setMaxEnergyStored(nbt.getInt("maxEnergy"));
+            innerEnergy.setStoredEnergy(nbt.getInt("energy"));
             for (EndPointDummy dummyBE : dummyBEs) {
                 if (dummyBE.getLevel() != null) {
                     dummyBE.getLevel().sendBlockUpdated(dummyBE.getBlockPos(), dummyBE.getBlockState(), dummyBE.getBlockState(), 2);
@@ -251,7 +298,6 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
             super.updateMasterState();
         }
 
-        @Nullable
         public ReSizeAbleEnergyStorage getMasterEnergy() {
             if (isMaster) {
                 return innerEnergy;

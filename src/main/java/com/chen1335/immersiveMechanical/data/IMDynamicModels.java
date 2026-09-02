@@ -32,6 +32,12 @@ public class IMDynamicModels {
                 .callback(FlyWheelCallBacks.INSTANCE)
                 .end();
 
+        provider.getBuilder(ImmersiveMechanical.id("bearing").toString())
+                .customLoader(IEOBJBuilder::begin)
+                .modelLocation(ImmersiveMechanical.id("models/block/metal_multiblock/flywheel/bearing.obj"))
+                .callback(DynamicSubmodelCallbacks.INSTANCE)
+                .end();
+
         for(Map.Entry<Block, ModelFile> multiblock : provider.getMultiblockStatesProvider().unsplitModels.entrySet()) {
             provider.withExistingParent(BuiltInRegistries.BLOCK.getKey(multiblock.getKey()).getPath(), multiblock.getValue().getLocation());
         }

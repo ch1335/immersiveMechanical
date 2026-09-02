@@ -31,6 +31,9 @@ public class IMItemModelProvider {
         provider.obj(IMBlocks.TURRET_LASER.get(), ImmersiveMechanical.id("block/metal_device/turret_laser_inv.obj")).transforms(ImmersiveMechanical.id("item/turret"));
 
         provider.obj(IMMultiblocks.PYROLYSE_OVEN.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/pyrolyse_oven.obj")).transforms(ImmersiveMechanical.id("item/pyrolyse_oven"));
+        provider.obj(IMMultiblocks.FLYWHEEL_ENDPOINT.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/flywheel/endpoint.obj.ie")).transforms(ImmersiveMechanical.id("item/flywheel/endpoint"));
+        provider.obj(IMMultiblocks.FLYWHEEL.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/flywheel/flywheel.obj")).transforms(ImmersiveMechanical.id("item/flywheel/flywheel"));
+        provider.obj(IMMultiblocks.BEARING.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/flywheel/bearing.obj")).transforms(ImmersiveMechanical.id("item/flywheel/flywheel"));
 
     }
 }

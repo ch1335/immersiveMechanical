@@ -39,10 +39,8 @@ public class LargeBatteryLogic implements IMultiblockLogic<LargeBatteryLogic.Sta
         for (Supplier<IEnergyStorage> iEnergyStorageSupplier : iMultiblockContext.getState().energyOutputs) {
             IEnergyStorage iEnergyStorage = iEnergyStorageSupplier.get();
             if (iEnergyStorage != null) {
-                int canReceive = iEnergyStorage.receiveEnergy(128000000, true);
-                int canExtract = iMultiblockContext.getState().energy.extractEnergy(canReceive, true);
-                iEnergyStorage.receiveEnergy(canExtract, false);
-                iMultiblockContext.getState().energy.extractEnergy(canExtract, false);
+                int received = iEnergyStorage.receiveEnergy(128000000, false);
+                iMultiblockContext.getState().energy.extractEnergy(received, false);
             }
         }
     }

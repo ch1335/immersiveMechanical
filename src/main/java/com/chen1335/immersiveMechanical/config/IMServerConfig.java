@@ -57,6 +57,11 @@ public class IMServerConfig {
         public final MultiblockRecipe.RecipeMultiplier industrial_furnaces_recipe_multiplier;
         public final MultiblockRecipe.RecipeMultiplier pyrolyse_oven_recipe_multiplier;
         public final ModConfigSpec.IntValue pyrolyse_oven_parallel_multiplier;
+        public final ModConfigSpec.IntValue flywheel_energy_storage_coefficient;
+        public final ModConfigSpec.IntValue flywheel_maximum_length;
+        public final ModConfigSpec.IntValue flywheel_maximum_energy_transfer;
+        public final ModConfigSpec.DoubleValue flywheel_maximum_output_speed_requirement;
+        public final ModConfigSpec.DoubleValue flywheel_basic_output_multiplier;
 
         public Machines(ModConfigSpec.Builder builder) {
             builder.push("machines");
@@ -90,6 +95,19 @@ public class IMServerConfig {
                 pyrolyse_oven_parallel_multiplier = addPositive(builder, "parallel_multiplier", 4, "Compared to the parallel multiples of coke ovens");
                 builder.pop();
             }
+
+            {
+                builder.push("fly_wheel");
+                flywheel_energy_storage_coefficient = addPositive(builder, "storage_coefficient", 1, "Maximum energy storage multiplier of flywheel");
+                flywheel_maximum_length = addPositive(builder, "maximum_length", 10, "Maximum length of flywheel");
+                flywheel_maximum_energy_transfer = addPositive(builder, "maximum_energy_transfer", 16384, "Maximum energy transfer of flywheel");
+                flywheel_maximum_output_speed_requirement = builder.comment("Maximum output speed requirement")
+                        .defineInRange("maximum_output_speed_requirement", 0.5D, 0D, 1D);
+                flywheel_basic_output_multiplier = builder.comment("Basic output multiplier")
+                        .defineInRange("basic_output_multiplier", 0.25D, 0.1D, 1D);
+                builder.pop();
+            }
+
             builder.pop();
         }
 

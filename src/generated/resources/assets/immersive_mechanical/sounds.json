@@ -1,4 +1,9 @@
 {
+  "flywheel": {
+    "sounds": [
+      "immersive_mechanical:flywheel"
+    ]
+  },
   "laser_turret_beam": {
     "sounds": [
       "immersive_mechanical:laser_turret_beam"

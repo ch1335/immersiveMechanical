@@ -2,6 +2,10 @@
   "itemGroup.immersive_mechanical": "沉浸机械",
   "block.immersive_mechanical.large_battery": "大型蓄电池",
   "block.immersive_mechanical.green_house": "温室",
+  "block.immersive_mechanical.flywheel": "飞轮",
+  "block.immersive_mechanical.flywheel_endpoint": "飞轮端点",
+  "block.immersive_mechanical.bearing": "轴",
+
   "block.immersive_mechanical.connector_ehv": "超高压接线器",
   "block.immersive_mechanical.turret_laser": "高能激光炮塔",
   "block.immersive_mechanical.connector_ehv_relay": "超高压续电器",

@@ -21,8 +21,8 @@ public class MatcherPredicates {
     }
 
     public static BlockMatcher.Result flywheelMaterial(BlockState expected, BlockState found, @Nullable Level level, @Nullable BlockPos pos) {
-        if (level != null) {
-            Optional<Holder.Reference<FlywheelMaterial>> any = level.holderLookup(IMRegistries.FLYWHEEL_MATERIAL).listElements().filter(holder -> holder.value().holderSet().contains(expected.getBlockHolder())).findAny();
+        if (level != null && !found.isAir()) {
+            Optional<Holder.Reference<FlywheelMaterial>> any = level.holderLookup(IMRegistries.FLYWHEEL_MATERIAL).listElements().filter(holder -> holder.value().holderSet().contains(found.getBlockHolder())).findAny();
             if (any.isPresent()) {
                 return BlockMatcher.Result.allow(2);
             }

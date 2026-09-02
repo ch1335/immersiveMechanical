@@ -6,10 +6,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.Multibloc
 import blusunrize.immersiveengineering.common.blocks.multiblocks.UnionMultiblock;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
-import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
-import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelRender;
-import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
-import com.chen1335.immersiveMechanical.client.render.tile.SmallMiningMachineRender;
+import com.chen1335.immersiveMechanical.client.render.tile.*;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.GreenHousePartBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.PartBlocks.IMCoilPartBlock;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.GreenHouseLogic;
@@ -17,6 +14,8 @@ import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.LargeBat
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.industrialFurnace.IndustrialFurnacesLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartBlockBasic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.bearing.BearingLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.bearing.BearingTemplate;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointTemplate;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.blockEntities.EndPointDummy;
@@ -141,6 +140,16 @@ public class IMMultiblocks {
             .customBlock(FlyWheelPartBlock::new)
             .manualScale(9)
             .additionalPredicates(List.of(MatcherPredicates::flywheelMaterial))
+            .register();
+
+    public static final MultiblockDefinition<BearingLogic.State, BearingLogic> BEARING = REGISTRATE.multiblock("bearing", BearingLogic::new, BearingTemplate::new)
+            .notMirrored()
+            .masterFromOrigin(new BlockPos(0, 0, 0))
+            .triggerFromOrigin(new BlockPos(0, 0, 0))
+            .size(new BlockPos(1, 1, 1))
+            .render(() -> BearingRender::new)
+            .customBlock(FlyWheelPartBlock::new)
+            .manualScale(9)
             .register();
 
     public static final MultiblockHandler.IMultiblock INDUSTRIAL_FURNACES_DEMO = register((new UnionMultiblock(ImmersiveMechanical.id("industrial_furnaces_demo"),

@@ -6,6 +6,7 @@ import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockB
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockState;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMultiblocks.TestAbleTemplateMultiblock;
+import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,44 +28,53 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
     @Override
     public boolean createStructure(Level level, BlockPos pos, Direction side, Player player) {
         TestAbleTemplateMultiblock flywheel = (TestAbleTemplateMultiblock) IMMultiblocks.FLYWHEEL.multiblock();
+        TestAbleTemplateMultiblock bearing = (TestAbleTemplateMultiblock) IMMultiblocks.BEARING.multiblock();
         EndPointTemplate flywheelEndpoint = (EndPointTemplate) IMMultiblocks.FLYWHEEL_ENDPOINT.multiblock();
-        boolean success = true;
+        int maxLength = IMServerConfig.MACHINES.flywheel_maximum_length.get();
         List<Runnable> runnables = new ArrayList<>();
         List<BlockPos> linkedParts = new ArrayList<>();
         if (canForm(level, pos, side, player)) {
             runnables.add(() -> {
                 this.innerCreateStructure(level, pos, side, player);
-                linkedParts.add(getMasterPose(level,pos));
+                linkedParts.add(getMasterPose(level, pos));
             });
         } else {
-            success = false;
+            return false;
         }
+
         int length = 0;
-        while (success) {
-            BlockPos relative = pos.relative(side.getOpposite(), length + 3);
-            if (flywheel.canForm(level, relative, side, player)) {
-                length++;
-                BlockPos finalRelative = relative;
+
+        for (int i = 0; i <= maxLength; i++) {
+            BlockPos otherEndPoint = pos.relative(side.getOpposite(), i + 5);
+            if (flywheelEndpoint.canForm(level, otherEndPoint, side.getOpposite(), player)) {
+                length = i;
                 runnables.add(() -> {
-                    flywheel.createStructure(level, finalRelative, side, player);
-                    linkedParts.add(getMasterPose(level,finalRelative));
+                    flywheelEndpoint.innerCreateStructure(level, otherEndPoint, side.getOpposite(), player);
+                    linkedParts.add(getMasterPose(level, otherEndPoint));
                 });
-            } else {
-                relative = pos.relative(side.getOpposite(), length + 5);
-                if (flywheelEndpoint.canForm(level, relative, side.getOpposite(), player)) {
-                    BlockPos finalRelative1 = relative;
-                    runnables.add(() -> {
-                        flywheelEndpoint.innerCreateStructure(level, finalRelative1, side.getOpposite(), player);
-                        linkedParts.add(getMasterPose(level,finalRelative1));
-                    });
-                } else {
-                    success = false;
-                }
-                break;
+            } else if (i == maxLength) {
+                return false;
             }
         }
 
-        if (success) {
+        for (int i = 0; i < length; i++) {
+            BlockPos relative = pos.relative(side.getOpposite(), i + 3);
+            if (flywheel.canForm(level, relative, side, player)) {
+                runnables.add(() -> {
+                    flywheel.createStructure(level, relative, side, player);
+                    linkedParts.add(getMasterPose(level, relative));
+                });
+            } else if (bearing.canForm(level, relative, side, player)) {
+                runnables.add(() -> {
+                    bearing.createStructure(level, relative, side, player);
+                    linkedParts.add(getMasterPose(level, relative));
+                });
+            } else {
+                return false;
+            }
+        }
+
+        if (length > 0) {
             runnables.forEach(Runnable::run);
             runnables.clear();
 
@@ -87,8 +97,9 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
                     }
                 }
             }
+            return true;
         }
-        return success;
+        return false;
     }
 
     public BlockPos getMasterPose(Level level, BlockPos blockPos) {

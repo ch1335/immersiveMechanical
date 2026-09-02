@@ -5,7 +5,10 @@
   "block.immersive_mechanical.connector_ehv": "EHV Connector",
   "block.immersive_mechanical.turret_laser": "High-energy laser turret",
   "block.immersive_mechanical.green_house": "Green House",
+  "block.immersive_mechanical.flywheel": "Flywheel",
+  "block.immersive_mechanical.flywheel_endpoint": "Flywheel Endpoint",
   "block.immersive_mechanical.small_mining_machine": "Small Mining Machine",
+  "block.immersive_mechanical.bearing": "Shaft",
 
   "block.immersive_mechanical.industrial_furnaces": "Industrial Furnace",
   "block.immersive_mechanical.connector_ehv_relay": "EHV Wire Relay",

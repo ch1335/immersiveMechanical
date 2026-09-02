@@ -12,7 +12,7 @@ public class IMSounds {
     );
 
     public static final Holder<SoundEvent> LASER_TURRET_BEAM = registerSound("laser_turret_beam");
-
+    public static final Holder<SoundEvent> FLY_WHEEL = registerSound("flywheel");
     private static Holder<SoundEvent> registerSound(String name) {
         return REGISTER.register(name, () -> SoundEvent.createVariableRangeEvent(ImmersiveMechanical.id(name)));
     }
