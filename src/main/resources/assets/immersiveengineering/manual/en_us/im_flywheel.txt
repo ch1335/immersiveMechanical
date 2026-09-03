@@ -1,0 +1,14 @@
+Flywheel
+Spin It Up!
+<&flywheel_endpoint>A flywheel is a machine that stores energy through high-speed rotation and releases it when needed.
+The flywheel structure consists of two flywheel endpoints with flywheels or shafts between them. Build one end as shown above, then use the Engineer's Hammer on the heavy engineering block at either side of the endpoint to form it.<np>
+<&flywheel>Continue adding flywheels along the axis between the two endpoints. If you only need to support a longer structure, you can use heavy engineering blocks as shafts instead.
+
+All flywheels must use the same material. The material determines the energy storage capacity of each individual flywheel.
+
+You can transfer energy through the four side interfaces of the flywheel endpoints. Use the Engineer's Hammer on an endpoint to switch it between input and output modes.
+
+The flywheel continuously loses a small amount of energy. Its energy transfer rate ranges from §o<config;i;immersive_mechanical.machines.fly_wheel.basic_energy_transfer>§r IF/t to §o<config;i;immersive_mechanical.machines.fly_wheel.maximum_energy_transfer>§r IF/t. The maximum input and output rates increase with the current rotational speed: the faster the flywheel spins, the greater its transfer capacity, reaching its maximum at half speed.
+
+The maximum flywheel length is §o<config;i;immersive_mechanical.machines.fly_wheel.maximum_length>§r. Multiple flywheels and shafts can be combined in one structure. Shafts provide support but do not increase energy storage capacity like flywheels do.
+<np>Below are the maximum energy storage values for different materials:<&list>
