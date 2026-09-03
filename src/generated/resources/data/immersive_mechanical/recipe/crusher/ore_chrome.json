@@ -1,6 +1,6 @@
 {
   "type": "immersiveengineering:crusher",
-  "energy": 0,
+  "energy": 6000,
   "input": {
     "tag": "c:ores/chrome"
   },

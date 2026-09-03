@@ -60,8 +60,8 @@ public class IMServerConfig {
         public final ModConfigSpec.IntValue flywheel_energy_storage_coefficient;
         public final ModConfigSpec.IntValue flywheel_maximum_length;
         public final ModConfigSpec.IntValue flywheel_maximum_energy_transfer;
-        public final ModConfigSpec.DoubleValue flywheel_maximum_output_speed_requirement;
-        public final ModConfigSpec.DoubleValue flywheel_basic_output_multiplier;
+        public final ModConfigSpec.IntValue flywheel_basic_energy_transfer;
+        public final ModConfigSpec.DoubleValue flywheel_maximum_transfer_requirement;
 
         public Machines(ModConfigSpec.Builder builder) {
             builder.push("machines");
@@ -101,10 +101,10 @@ public class IMServerConfig {
                 flywheel_energy_storage_coefficient = addPositive(builder, "storage_coefficient", 1, "Maximum energy storage multiplier of flywheel");
                 flywheel_maximum_length = addPositive(builder, "maximum_length", 10, "Maximum length of flywheel");
                 flywheel_maximum_energy_transfer = addPositive(builder, "maximum_energy_transfer", 16384, "Maximum energy transfer of flywheel");
-                flywheel_maximum_output_speed_requirement = builder.comment("Maximum output speed requirement")
-                        .defineInRange("maximum_output_speed_requirement", 0.5D, 0D, 1D);
-                flywheel_basic_output_multiplier = builder.comment("Basic output multiplier")
-                        .defineInRange("basic_output_multiplier", 0.25D, 0.1D, 1D);
+                flywheel_maximum_transfer_requirement = builder.comment("Maximum transfer speed requirement")
+                        .defineInRange("flywheel_maximum_transfer_requirement", 0.5D, 0D, 1D);
+                flywheel_basic_energy_transfer = addPositive(builder, "basic_energy_transfer", 4096, "Basic energy transfer of flywheel");
+
                 builder.pop();
             }
 

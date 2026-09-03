@@ -1,4 +1,5 @@
 {
-  "block": "#c:storage_blocks/uranium",
+  "blocks": "#c:storage_blocks/uranium",
+  "manualBlock": "immersiveengineering:storage_uranium",
   "maxEnergyStored": 48375000
 }

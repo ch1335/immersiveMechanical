@@ -1,4 +1,5 @@
 {
-  "block": "#c:storage_blocks/gold",
+  "blocks": "#c:storage_blocks/gold",
+  "manualBlock": "minecraft:gold_block",
   "maxEnergyStored": 49125000
 }

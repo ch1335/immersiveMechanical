@@ -1,4 +1,5 @@
 {
-  "block": "#minecraft:logs",
+  "blocks": "#minecraft:logs",
+  "manualBlock": "minecraft:oak_log",
   "maxEnergyStored": 1000000
 }

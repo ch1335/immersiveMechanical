@@ -3,14 +3,12 @@ package com.chen1335.immersiveMechanical.compat.jei;
 import blusunrize.immersiveengineering.api.crafting.IERecipeTypes;
 import blusunrize.immersiveengineering.api.energy.GeneratorFuel;
 import blusunrize.immersiveengineering.api.excavator.MineralMix;
-import blusunrize.immersiveengineering.client.gui.CokeOvenScreen;
 import blusunrize.immersiveengineering.common.blocks.multiblocks.IEMultiblocks;
 import blusunrize.immersiveengineering.common.util.compat.jei.JEIRecipeTypes;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.client.gui.GreenHouseScreen;
 import com.chen1335.immersiveMechanical.client.gui.IndustrialFurnacesScreen;
 import com.chen1335.immersiveMechanical.client.gui.PyrolyseOvenScreen;
-import com.chen1335.immersiveMechanical.common.gui.PyrolyseOvenMenu;
 import com.chen1335.immersiveMechanical.compat.jei.categories.GeneratorFuelCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.IndustrialFurnaceCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.MineralMixCategory;
@@ -65,7 +63,7 @@ public class IMJei implements IModPlugin {
         registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE);
         registration.addRecipeCatalyst(greenHouseIconStack, JEIRecipeTypes.CLOCHE_FERTILIZER);
         registration.addRecipeCatalyst(IMMultiblocks.INDUSTRIAL_FURNACES.registration().iconStack(), INDUSTRIAL_FURNACE);
-        registration.addRecipeCatalyst(IMMultiblocks.PYROLYSE_OVEN_DEMO.getBlock().asItem(), PYROLYSE_OVEN);
+        registration.addRecipeCatalyst(IMMultiblocks.PYROLYSE_OVEN.getBlock().asItem(), PYROLYSE_OVEN);
         registration.addRecipeCatalyst(IEMultiblocks.DIESEL_GENERATOR.getBlock().asItem(), GENERATOR_FUEL);
     }
 

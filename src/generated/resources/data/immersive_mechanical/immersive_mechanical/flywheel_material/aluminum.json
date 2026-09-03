@@ -1,4 +1,5 @@
 {
-  "block": "#c:storage_blocks/aluminum",
+  "blocks": "#c:storage_blocks/aluminum",
+  "manualBlock": "immersiveengineering:storage_aluminum",
   "maxEnergyStored": 6875000
 }

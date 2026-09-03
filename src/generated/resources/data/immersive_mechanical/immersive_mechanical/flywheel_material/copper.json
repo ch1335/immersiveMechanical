@@ -1,4 +1,5 @@
 {
-  "block": "#c:storage_blocks/copper",
+  "blocks": "#c:storage_blocks/copper",
+  "manualBlock": "minecraft:copper_block",
   "maxEnergyStored": 22750000
 }

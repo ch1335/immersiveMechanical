@@ -45,15 +45,17 @@ public class FlyWheelRender extends IEMultiblockRenderer<FlyWheelLogic.State> {
         List<BakedQuad> quads = MODEL.getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelDataUtils.single(FlyWheelCallBacks.getProperty(), ctx.getState().getMaterial()), RenderType.SOLID);
         poseStack.pushPose();
         VertexConsumer buffer = bufferIn.getBuffer(RenderType.translucent());
-        poseStack.translate(0.5F, .5F, 0.5F);
 
+        poseStack.translate(0.5,0.5,0.5);
         Direction facing = ctx.getLevel().getOrientation().front();
         float dir = facing == Direction.SOUTH ? Mth.PI : facing == Direction.NORTH ? 0 : facing == Direction.EAST ? -Mth.HALF_PI : Mth.HALF_PI;
         poseStack.mulPose(new Quaternionf().rotateY(dir));
 
+
         FlyWheelLogic.State state = ctx.getState();
         poseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, state.getAngleOld(), state.getAngle())));
 
+        poseStack.translate(-0.5,-0.5,-0.5);
         RenderUtils.renderModelTESRFast(quads, buffer, poseStack, packedLight, combinedOverlayIn);
         poseStack.popPose();
     }

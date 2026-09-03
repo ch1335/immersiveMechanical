@@ -3,11 +3,16 @@ package com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modular
 import blusunrize.immersiveengineering.api.multiblocks.blocks.component.IClientTickableComponent;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IInitialMultiblockContext;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.util.ShapeType;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPart;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlyWheelPartLogic;
+import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.flywheel.FlyWheelLogic;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.shapes.BearingShape;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -34,6 +39,8 @@ public class BearingLogic extends FlyWheelPartLogic<BearingLogic.State> implemen
     }
 
     public static class State extends FlyWheelPart {
+        public Function<MultiblockBlockEntityMaster<BearingLogic.State>, AABB> renderBoundingBox = Util.memoize(be -> AABB.ofSize(Vec3.atLowerCornerOf(be.getBlockPos()), 2, 2, 2));
+
         public float getAngle() {
             return masterState != null ? masterState.getAngle() : 0;
         }

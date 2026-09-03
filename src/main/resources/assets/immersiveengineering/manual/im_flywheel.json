@@ -1,0 +1,14 @@
+{
+  "flywheel_endpoint": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:flywheel_demo"
+  },
+  "flywheel": {
+    "type": "multiblock",
+    "name": "immersive_mechanical:multiblocks/flywheel"
+  },
+  "list": {
+    "type": "dynamic_table",
+    "table": "flywheel_material"
+  }
+}

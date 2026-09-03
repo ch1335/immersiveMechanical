@@ -1,4 +1,5 @@
 {
-  "block": "#c:storage_blocks/silver",
+  "blocks": "#c:storage_blocks/silver",
+  "manualBlock": "immersiveengineering:storage_silver",
   "maxEnergyStored": 26625000
 }

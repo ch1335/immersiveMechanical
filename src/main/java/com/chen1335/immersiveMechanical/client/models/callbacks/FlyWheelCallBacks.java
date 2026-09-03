@@ -36,7 +36,7 @@ public class FlyWheelCallBacks implements BlockCallback<Block> {
 
     @Override
     public Block getDefaultKey() {
-        return Blocks.IRON_BLOCK;
+        return Blocks.GOLD_BLOCK;
     }
 
     @Override

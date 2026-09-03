@@ -1,0 +1,14 @@
+飞轮
+把能量转起来!
+<&flywheel_endpoint>飞轮是一种利用高速旋转储存能量，并可在需要时释放能量的机械。
+飞轮结构由两个飞轮端点和中间的飞轮或轴组成。像上图一样搭建一端，然后用工程师锤右击任意一侧的端点的重型工程块使其成形。<np>
+<&flywheel>在两个端点之间沿轴向继续增加飞轮；如果只是需要支撑更长的结构，也可以直接使用重型工程块作为轴。
+
+飞轮主体必须使用同一种材料，材料决定单个飞轮的储能容量。
+
+你可以从飞轮端点的四个侧面接口传输能量。用工程师锤右击端点可以在输入和输出之间切换。
+
+飞轮会持续损耗少量能量。飞轮的能量传输功率为§o<config;i;immersive_mechanical.machines.fly_wheel.basic_energy_transfer>§rIF/t~§o<config;i;immersive_mechanical.machines.fly_wheel.maximum_energy_transfer>§rIF/t，最大输入和输出功率会随当前转速提高：转速越高，飞轮的传输能力越强，在一半转速时达到最高值。
+
+飞轮的最大长度为§o<config;i;immersive_mechanical.machines.fly_wheel.maximum_length>§r，结构中可以组合多个飞轮和轴。轴用于支撑结构，本身不会像飞轮一样增加储能容量。
+<np>下面是不同材料的储能上限<&list>

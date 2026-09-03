@@ -1,6 +1,6 @@
 {
   "type": "immersiveengineering:crusher",
-  "energy": 0,
+  "energy": 3000,
   "input": {
     "tag": "c:ingots/nichrome"
   },

@@ -4,6 +4,7 @@ import blusunrize.immersiveengineering.api.client.ieobj.BlockCallback;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.endpoint.EndPointLogic;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -13,20 +14,20 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EndPointCallBacks implements BlockCallback<EndPointLogic.ConnectionType> {
+public class EndPointCallBacks implements BlockCallback<EndPointCallBacks.Key> {
     public static final EndPointCallBacks INSTANCE = new EndPointCallBacks();
 
     @Override
-    public EndPointLogic.ConnectionType extractKey(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState blockState, BlockEntity blockEntity) {
+    public Key extractKey(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState blockState, BlockEntity blockEntity) {
         if (level.getBlockEntity(pos) instanceof IMultiblockBE<?> be && be.getHelper().getState() instanceof EndPointLogic.State state) {
-            return state.connectionType;
+            return new Key(false, state.connectionType);
         }
         return getDefaultKey();
     }
 
     @Override
-    public EndPointLogic.ConnectionType getDefaultKey() {
-        return EndPointLogic.ConnectionType.INPUT;
+    public Key getDefaultKey() {
+        return new Key(true, EndPointLogic.ConnectionType.INPUT);
     }
 
 
@@ -36,12 +37,20 @@ public class EndPointCallBacks implements BlockCallback<EndPointLogic.Connection
     }
 
     @Override
-    public @Nullable TextureAtlasSprite getTextureReplacement(EndPointLogic.ConnectionType connectionType, String group, String material) {
+    public boolean shouldRenderGroup(Key key, String group, RenderType layer) {
+        if ("coil".equals(group)) {
+            return key.renderCoil;
+        }
+        return true;
+    }
+
+    @Override
+    public @Nullable TextureAtlasSprite getTextureReplacement(Key key, String group, String material) {
         if (material.equals("connection")) {
             ResourceLocation sideTexture = null;
-            if (connectionType == EndPointLogic.ConnectionType.INPUT) {
+            if (key.connectionType == EndPointLogic.ConnectionType.INPUT) {
                 sideTexture = ResourceLocation.parse("immersive_mechanical:block/metal_multiblock/flywheel/interface_input");
-            } else if (connectionType == EndPointLogic.ConnectionType.OUTPUT) {
+            } else if (key.connectionType == EndPointLogic.ConnectionType.OUTPUT) {
                 sideTexture = ResourceLocation.parse("immersive_mechanical:block/metal_multiblock/flywheel/interface_output");
             }
             if (sideTexture != null) {
@@ -49,5 +58,9 @@ public class EndPointCallBacks implements BlockCallback<EndPointLogic.Connection
             }
         }
         return null;
+    }
+
+    public record Key(boolean renderCoil, EndPointLogic.ConnectionType connectionType) {
+
     }
 }

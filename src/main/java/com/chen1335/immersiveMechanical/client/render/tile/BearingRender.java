@@ -2,6 +2,7 @@ package com.chen1335.immersiveMechanical.client.render.tile;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.env.IMultiblockContext;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.registry.MultiblockBlockEntityMaster;
 import blusunrize.immersiveengineering.api.utils.client.ModelDataUtils;
 import blusunrize.immersiveengineering.client.render.tile.IEMultiblockRenderer;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
@@ -21,6 +22,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
@@ -56,6 +58,11 @@ public class BearingRender extends IEMultiblockRenderer<BearingLogic.State> {
 
         RenderUtils.renderModelTESRFast(quads, buffer, poseStack, packedLight, combinedOverlayIn);
         poseStack.popPose();
+    }
+
+    @Override
+    public @NotNull AABB getRenderBoundingBox(@NotNull MultiblockBlockEntityMaster<BearingLogic.State> blockEntity) {
+        return blockEntity.getHelper().getState().renderBoundingBox.apply(blockEntity);
     }
 
     public static void reset() {

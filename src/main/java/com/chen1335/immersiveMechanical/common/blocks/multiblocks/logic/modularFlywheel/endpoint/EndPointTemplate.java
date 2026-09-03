@@ -52,6 +52,7 @@ public class EndPointTemplate extends TestAbleTemplateMultiblock {
                     flywheelEndpoint.innerCreateStructure(level, otherEndPoint, side.getOpposite(), player);
                     linkedParts.add(getMasterPose(level, otherEndPoint));
                 });
+                break;
             } else if (i == maxLength) {
                 return false;
             }

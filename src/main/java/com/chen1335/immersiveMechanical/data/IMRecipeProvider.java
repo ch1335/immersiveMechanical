@@ -31,7 +31,6 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -135,7 +134,7 @@ public class IMRecipeProvider {
                 .showNotification(false)
                 .save(provider);
 
-        oreCrusher(provider, IMItemTags.ORES_CHROME, IMMetals.CHROME);
+        oreCrusher(provider, IMItemTags.ORES_CHROME, IMMetals.CHROME, 6000);
 
 
         ArcFurnaceRecipeBuilder.builder()
@@ -210,8 +209,7 @@ public class IMRecipeProvider {
     }
 
 
-    private static void mineralMixes(RecipeOutput out)
-    {
+    private static void mineralMixes(RecipeOutput out) {
         // Metals
         TagKey<Item> chrome = IMItemTags.DEEPSLATE_CHROME;
         TagKey<Item> iron = Tags.Items.ORES_IRON;
@@ -244,11 +242,12 @@ public class IMRecipeProvider {
                 .weight(10)
                 .dimensionOverworld()
                 .biomeCondition(BiomeTags.IS_MOUNTAIN)
-                .ore(chrome,0.5F)
-                .ore(iron,0.3F)
-                .ore(aluminum,0.2F)
+                .ore(chrome, 0.5F)
+                .ore(iron, 0.3F)
+                .ore(aluminum, 0.2F)
                 .build(out, toRL("mineral/chromite"));
     }
+
     private static void press(RecipeOutput recipeOutput, ItemLike mold, TagKey<Item> input, ItemLike output, int count) {
         MetalPressRecipeBuilder.builder()
                 .input(input)
@@ -298,10 +297,11 @@ public class IMRecipeProvider {
                 .save(recipeOutput);
     }
 
-    private static void oreCrusher(RecipeOutput recipeOutput, TagKey<Item> oreTag, MetalDefinition metals) {
+    private static void oreCrusher(RecipeOutput recipeOutput, TagKey<Item> oreTag, MetalDefinition metals, int energy) {
         CrusherRecipeBuilder.builder()
                 .input(Ingredient.of(oreTag))
                 .output(new TagOutput(metals.getTag(MetalTypes.DUSTS), 2))
+                .setEnergy(energy)
                 .build(recipeOutput, toRL("crusher/ore_" + metals.getName()));
     }
 
@@ -309,6 +309,7 @@ public class IMRecipeProvider {
         CrusherRecipeBuilder.builder()
                 .input(Ingredient.of(metals.getTag(MetalTypes.INGOTS)))
                 .output(new TagOutput(metals.getTag(MetalTypes.DUSTS)))
+                .setEnergy(3000)
                 .build(recipeOutput, toRL("crusher/ingot_" + metals.getName()));
     }
 

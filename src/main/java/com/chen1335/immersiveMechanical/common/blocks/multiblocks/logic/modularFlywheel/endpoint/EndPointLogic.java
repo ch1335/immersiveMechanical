@@ -32,7 +32,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
@@ -156,7 +155,7 @@ public class EndPointLogic extends FlyWheelPartLogic<EndPointLogic.State> implem
 
         if (state.energyHandler.getMaxEnergyStored() != 0) {
             int maxTransfer = IMServerConfig.MACHINES.flywheel_maximum_energy_transfer.get();
-            maxTransfer = Mth.lerpInt((float) Math.min(((float) state.energyHandler.getEnergyStored() / state.energyHandler.getMaxEnergyStored()) / IMServerConfig.MACHINES.flywheel_maximum_output_speed_requirement.get(), 1), (int) (maxTransfer *IMServerConfig.MACHINES.flywheel_basic_output_multiplier.get()), maxTransfer);
+            maxTransfer = Mth.lerpInt((float) Math.min(((float) state.energyHandler.getEnergyStored() / state.energyHandler.getMaxEnergyStored()) / IMServerConfig.MACHINES.flywheel_maximum_transfer_requirement.get(), 1), IMServerConfig.MACHINES.flywheel_basic_energy_transfer.get(), maxTransfer);
             state.receiveRemaining = maxTransfer;
             state.extractRemaining = maxTransfer;
         }

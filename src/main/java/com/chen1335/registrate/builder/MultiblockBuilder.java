@@ -17,6 +17,7 @@ import blusunrize.immersiveengineering.common.blocks.multiblocks.logic.IEMultibl
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import blusunrize.immersiveengineering.common.register.IEMenuTypes;
 import com.chen1335.immersiveMechanical.API.IMBEConstructor;
+import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.mixinsAPI.IRegistrationBuilderExtension;
 import com.chen1335.registrate.IERegistrate;
 import com.chen1335.registrate.IMultiblockFactory;
@@ -79,6 +80,7 @@ public class MultiblockBuilder<S extends IMultiblockState, L extends IMultiblock
         public <T extends Item> Supplier<T> register(String path, Supplier<T> makeInstance) {
             return owner.item(path, properties1 -> makeInstance.get())
                     .model(NonNullBiConsumer.noop())
+                    .removeTab(ImmersiveMechanical.TAB.getKey())
                     .register();
         }
     };

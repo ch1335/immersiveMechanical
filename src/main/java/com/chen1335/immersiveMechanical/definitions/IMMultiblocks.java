@@ -176,6 +176,19 @@ public class IMMultiblocks {
         }
     }));
 
+    public static final MultiblockHandler.IMultiblock FLYWHEEL_DEMO = register((new UnionMultiblock(ImmersiveMechanical.id("flywheel_demo"),
+            ImmutableList.of(
+                    new UnionMultiblock.TransformedMultiblock(FLYWHEEL_ENDPOINT.multiblock(), Vec3i.ZERO, Rotation.NONE),
+                    new UnionMultiblock.TransformedMultiblock(FLYWHEEL.multiblock(), new Vec3i(0, 0, -1), Rotation.NONE),
+                    new UnionMultiblock.TransformedMultiblock(FLYWHEEL_ENDPOINT.multiblock(), new Vec3i(2, 0, -2), Rotation.CLOCKWISE_180)
+
+            )) {
+        @Override
+        public @NotNull BlockPos getTriggerOffset() {
+            return new BlockPos(0, 0, 1);
+        }
+    }));
+
     private static <T extends MultiblockHandler.IMultiblock> T register(T multiblock) {
         REGISTRATE.getMultiblocks().add(multiblock);
         IERegistrate.ALL_MULTIBLOCKS.add(multiblock);

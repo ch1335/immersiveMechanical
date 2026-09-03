@@ -1,4 +1,5 @@
 {
-  "block": "#c:storage_blocks/electrum",
+  "blocks": "#c:storage_blocks/electrum",
+  "manualBlock": "immersiveengineering:storage_electrum",
   "maxEnergyStored": 36875000
 }

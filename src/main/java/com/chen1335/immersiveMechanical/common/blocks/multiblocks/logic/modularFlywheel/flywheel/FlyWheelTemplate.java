@@ -28,7 +28,7 @@ public class FlyWheelTemplate extends TestAbleTemplateMultiblock {
 
     @Override
     public boolean isBlockTrigger(BlockState state, Direction d, @NotNull Level world) {
-        return false;
+        return super.isBlockTrigger(state, d, world);
     }
 
     @Override
