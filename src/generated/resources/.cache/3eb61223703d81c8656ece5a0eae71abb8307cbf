@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-05T16:00:42.6086776	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
+// 1.21.1	2026-09-05T23:23:15.9644136	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
 d0d905d203268da4b2a1e1cda3589be0c85d1988 assets/immersive_mechanical/blockstates/chrome_ore.json
 a9b257ff24866f70ddb387ae0e3ae27a5eddf8f8 assets/immersive_mechanical/blockstates/coil.json
 5b238d210400d0d3abd853d3049cf93c6876d20a assets/immersive_mechanical/blockstates/coil_nichrome.json
@@ -106,6 +106,7 @@ a8324b75989c5136cbed6513ddf09d525fcae9e9 data/immersive_mechanical/advancement/r
 e208fdedc5f1f20d609edf4fba53f7ff4151013b data/immersive_mechanical/advancement/recipes/misc/ehv_wire_coil.json
 ffd11989b4599639940f8b5cbd5ae4d9f175d1d1 data/immersive_mechanical/advancement/recipes/misc/ingot_chrome.json
 5604f479f6304893dc17a1337b3f8305f74cad6f data/immersive_mechanical/advancement/recipes/misc/ingot_nichrome.json
+8b9b46e0f7427c20c97039d1bb4c33dc48503add data/immersive_mechanical/advancement/recipes/misc/landmine.json
 51fead9d79342d69240d72d35b7c5066bad2bf1e data/immersive_mechanical/advancement/recipes/misc/large_battery_core.json
 312eda1c5183324e95435ac510dcfba37a66fc24 data/immersive_mechanical/advancement/recipes/misc/nichrome_wire_coil.json
 dbc823fe53fd6dca07e3f930bb0324a79a69d08c data/immersive_mechanical/advancement/recipes/misc/nugget_chrome.json
@@ -163,6 +164,7 @@ f34b871141e2a20bd4611b11c8827639f9c09ad4 data/immersive_mechanical/recipe/crushe
 903b311e82cf51b8964c67d8f65516b4a7ff8be2 data/immersive_mechanical/recipe/industrial_furnace/industrial_furnace/raw_chrome.json
 768dd9d64e8631a495e62e7d4ff0461c5b3f1828 data/immersive_mechanical/recipe/ingot_chrome.json
 8a71b890b7fc470779e49e5ffa7e999b50383493 data/immersive_mechanical/recipe/ingot_nichrome.json
+499199e8ecf5ea7ab0b52976833a48455d802c6a data/immersive_mechanical/recipe/landmine.json
 55f9a0522815fae935be71cc8c9b42ffceeb5945 data/immersive_mechanical/recipe/large_battery_core.json
 7fe454a359b0d04f5cf71ef7a231cbf1fe4dabdf data/immersive_mechanical/recipe/metalpress/plate_chrome.json
 e4d76cf630d8dd98b2657fc2c39cafaaa4ecba4c data/immersive_mechanical/recipe/metalpress/plate_nichrome.json

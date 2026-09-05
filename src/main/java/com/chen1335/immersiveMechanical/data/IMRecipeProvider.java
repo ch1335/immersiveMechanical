@@ -135,7 +135,7 @@ public class IMRecipeProvider {
                 .showNotification(false)
                 .save(provider);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.LANDMINE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.LANDMINE.get().getDefaultInstance().copyWithCount(4))
                 .define('A', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
                 .define('B', IETags.getTagsFor(EnumMetals.STEEL).ingot)
                 .define('C', IEItems.Ingredients.COMPONENT_IRON)

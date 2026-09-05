@@ -19,12 +19,12 @@ import java.util.function.Supplier;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class RecipeBuilder<T extends Recipe<?>> extends AbstractBuilder<RecipeType<?>, RecipeType<T>, AbstractRegistrate<?>, RecipeBuilder<T>> {
+public class RecipeBuilder<S extends RecipeSerializer<T>,T extends Recipe<?>> extends AbstractBuilder<RecipeType<?>, RecipeType<T>, AbstractRegistrate<?>, RecipeBuilder<S,T>> {
 
     private final Class<T> clazz;
-    private final Supplier<IERecipeSerializer<T>> recipeSerializerSupplier;
+    private final Supplier<S> recipeSerializerSupplier;
 
-    public RecipeBuilder(AbstractRegistrate<?> owner, AbstractRegistrate<?> parent, String name, BuilderCallback callback, Class<T> clazz, Supplier<IERecipeSerializer<T>> serializerSupplier) {
+    public RecipeBuilder(AbstractRegistrate<?> owner, AbstractRegistrate<?> parent, String name, BuilderCallback callback, Class<T> clazz, Supplier<S> serializerSupplier) {
         super(owner, parent, name, callback, Registries.RECIPE_TYPE);
         this.clazz = clazz;
         this.recipeSerializerSupplier = serializerSupplier;
@@ -38,27 +38,27 @@ public class RecipeBuilder<T extends Recipe<?>> extends AbstractBuilder<RecipeTy
 
     @Override
     protected RegistryEntry<RecipeType<?>, RecipeType<T>> createEntryWrapper(DeferredHolder<RecipeType<?>, RecipeType<T>> delegate) {
-        RegistryEntry<RecipeSerializer<?>, IERecipeSerializer<T>> register = getOwner().entry(getName(), builderCallback -> new RecipeSerializerBuilder<>(getOwner(), getParent(), getName(), builderCallback, recipeSerializerSupplier)).register();
+        RegistryEntry<RecipeSerializer<?>, S> register = getOwner().entry(getName(), builderCallback -> new RecipeSerializerBuilder<>(getOwner(), getParent(), getName(), builderCallback, recipeSerializerSupplier)).register();
         return new IERecipeEntry<>(getOwner(), delegate, clazz, register);
     }
 
     @Override
-    public IERecipeEntry<T> register() {
-        return (IERecipeEntry<T>) super.register();
+    public IERecipeEntry<S,T> register() {
+        return (IERecipeEntry<S,T>) super.register();
     }
 
-    public static class RecipeSerializerBuilder<T extends Recipe<?>> extends AbstractBuilder<RecipeSerializer<?>, IERecipeSerializer<T>, AbstractRegistrate<?>, RecipeSerializerBuilder<T>> {
+    public static class RecipeSerializerBuilder<S extends RecipeSerializer<T>,T extends Recipe<?>> extends AbstractBuilder<RecipeSerializer<?>, S, AbstractRegistrate<?>, RecipeSerializerBuilder<S,T>> {
 
-        private final Supplier<IERecipeSerializer<T>> supplier;
+        private final Supplier<S> supplier;
 
-        public RecipeSerializerBuilder(AbstractRegistrate<?> owner, AbstractRegistrate<?> parent, String name, BuilderCallback callback, Supplier<IERecipeSerializer<T>> supplier) {
+        public RecipeSerializerBuilder(AbstractRegistrate<?> owner, AbstractRegistrate<?> parent, String name, BuilderCallback callback, Supplier<S> supplier) {
             super(owner, parent, name, callback, Registries.RECIPE_SERIALIZER);
             this.supplier = supplier;
         }
 
 
         @Override
-        protected @NonnullType IERecipeSerializer<T> createEntry() {
+        protected @NonnullType S createEntry() {
             return supplier.get();
         }
     }

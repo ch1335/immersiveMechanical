@@ -29,6 +29,7 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void registerModels(ModelEvent.RegisterAdditional event) {
             event.register(LandmineRender.MODEL_RESOURCE_LOCATION);
+            event.register(FlyWheelCoilRender.MODEL_RESOURCE_LOCATION);
         }
 
         @SubscribeEvent

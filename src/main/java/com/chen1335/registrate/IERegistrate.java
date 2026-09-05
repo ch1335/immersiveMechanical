@@ -32,6 +32,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -138,7 +139,7 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
         return ArgContainerInvoker.IM$create(DeferredHolder.create(menu.getRegistryKey(), menu.register().getId()), container);
     }
 
-    public <T extends Recipe<?>> RecipeBuilder<T> recipeType(String name, Class<T> clazz, Supplier<IERecipeSerializer<T>> supplier) {
+    public <S extends RecipeSerializer<T>,T extends Recipe<?>> RecipeBuilder<S,T> recipeType(String name, Class<T> clazz, Supplier<S> supplier) {
         return entry(name, callBack -> new RecipeBuilder<>(this, this, name, callBack, clazz, supplier));
     }
 
