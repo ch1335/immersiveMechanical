@@ -33,6 +33,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -130,6 +131,18 @@ public class IMRecipeProvider {
                 .pattern(" A ")
                 .pattern("BAB")
                 .pattern("BAB")
+                .unlockedBy("has_steel_ingot", has(IETags.getTagsFor(EnumMetals.STEEL).ingot))
+                .showNotification(false)
+                .save(provider);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IMItems.LANDMINE.get())
+                .define('A', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
+                .define('B', IETags.getTagsFor(EnumMetals.STEEL).ingot)
+                .define('C', IEItems.Ingredients.COMPONENT_IRON)
+                .define('D', Items.TNT)
+                .pattern(" A ")
+                .pattern("BCB")
+                .pattern("BDB")
                 .unlockedBy("has_steel_ingot", has(IETags.getTagsFor(EnumMetals.STEEL).ingot))
                 .showNotification(false)
                 .save(provider);

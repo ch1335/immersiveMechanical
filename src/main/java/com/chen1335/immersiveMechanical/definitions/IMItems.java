@@ -3,7 +3,7 @@ package com.chen1335.immersiveMechanical.definitions;
 import blusunrize.immersiveengineering.common.items.IEBaseItem;
 import blusunrize.immersiveengineering.common.items.WireCoilItem;
 import com.chen1335.immersiveMechanical.API.tags.IMItemTags;
-import com.chen1335.immersiveMechanical.common.items.misc.Landmine;
+import com.chen1335.immersiveMechanical.common.items.misc.LandmineItem;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
 import com.chen1335.registrate.IERegistrate;
 import com.tterrag.registrate.builders.ItemBuilder;
@@ -31,7 +31,7 @@ public class IMItems {
     public static final ItemEntry<Item> NICHROME_WIRE_COIL = REGISTRATE.item("nichrome_wire_coil", Item::new)
             .register();
 
-    public static final ItemEntry<Landmine> LANDMINE = REGISTRATE.item("landmine", Landmine::new)
+    public static final ItemEntry<LandmineItem> LANDMINE = REGISTRATE.item("landmine", LandmineItem::new)
             .model((c,p)->{})
             .register();
 

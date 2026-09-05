@@ -56,6 +56,10 @@ Landmine extends Entity {
         }
     }
 
+    public void setDisguise(BlockState blockState) {
+        entityData.set(DISGUISE, blockState);
+    }
+
     public BlockState getDisguise() {
         return entityData.get(DISGUISE);
     }
