@@ -1,8 +1,7 @@
 package com.chen1335.immersiveMechanical;
 
-import blusunrize.immersiveengineering.common.blocks.IEBlockInterfaces;
-import blusunrize.immersiveengineering.data.BiomeTags;
 import com.chen1335.immersiveMechanical.API.objects.IMAttachmentTypes;
+import com.chen1335.immersiveMechanical.API.objects.IMDataComponents;
 import com.chen1335.immersiveMechanical.API.objects.IMSounds;
 import com.chen1335.immersiveMechanical.client.IMClient;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
@@ -58,6 +57,7 @@ public class ImmersiveMechanical {
         IMRecipe.init();
         IMSounds.REGISTER.register(modEventBus);
         IMAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
+        IMDataComponents.DATA_COMPONENT_TYPE.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::clientSetup);
         IMMetals.init();

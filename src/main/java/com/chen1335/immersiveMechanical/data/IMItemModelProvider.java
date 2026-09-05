@@ -1,7 +1,7 @@
 package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
-import com.chen1335.immersiveMechanical.client.models.callbacks.entity.LandmineCallBacks;
+import com.chen1335.immersiveMechanical.client.models.callbacks.LandmineCallBacks;
 import com.chen1335.immersiveMechanical.definitions.IMBlocks;
 import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;

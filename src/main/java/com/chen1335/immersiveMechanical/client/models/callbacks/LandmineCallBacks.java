@@ -1,10 +1,12 @@
-package com.chen1335.immersiveMechanical.client.models.callbacks.entity;
+package com.chen1335.immersiveMechanical.client.models.callbacks;
 
 import blusunrize.immersiveengineering.api.client.ieobj.BlockCallback;
 import blusunrize.immersiveengineering.api.client.ieobj.IEOBJCallbacks;
 import blusunrize.immersiveengineering.api.client.ieobj.ItemCallback;
 import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.ModelUtils;
+import com.chen1335.immersiveMechanical.API.objects.IMDataComponents;
+import com.chen1335.immersiveMechanical.common.items.dataComponents.Disguise;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +21,7 @@ import net.neoforged.neoforge.client.model.data.ModelProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class LandmineCallBacks implements BlockCallback<BlockState> , ItemCallback<BlockState> {
+public class LandmineCallBacks implements BlockCallback<BlockState>, ItemCallback<BlockState> {
     public static final LandmineCallBacks INSTANCE = new LandmineCallBacks();
 
     public static ModelProperty<BlockState> getProperty() {
@@ -54,6 +56,6 @@ public class LandmineCallBacks implements BlockCallback<BlockState> , ItemCallba
 
     @Override
     public BlockState extractKey(ItemStack stack, LivingEntity owner) {
-        return Blocks.AIR.defaultBlockState();
+        return stack.getOrDefault(IMDataComponents.DISGUISE.value(), Disguise.EMPTY).blockState();
     }
 }

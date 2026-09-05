@@ -4,7 +4,7 @@ import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.utils.client.ModelDataUtils;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
-import com.chen1335.immersiveMechanical.client.models.callbacks.entity.LandmineCallBacks;
+import com.chen1335.immersiveMechanical.client.models.callbacks.LandmineCallBacks;
 import com.chen1335.immersiveMechanical.common.entities.Landmine;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
