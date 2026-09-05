@@ -9,6 +9,8 @@
   "block.immersive_mechanical.flywheel_endpoint": "Flywheel Endpoint",
   "block.immersive_mechanical.small_mining_machine": "Small Mining Machine",
   "block.immersive_mechanical.bearing": "Shaft",
+  "entity.immersive_mechanical.landmine": "Landmine",
+  "item.immersive_mechanical.landmine": "Landmine",
 
   "block.immersive_mechanical.industrial_furnaces": "Industrial Furnace",
   "block.immersive_mechanical.connector_ehv_relay": "EHV Wire Relay",

@@ -2,9 +2,10 @@ package com.chen1335.immersiveMechanical.definitions;
 
 import blusunrize.immersiveengineering.common.items.IEBaseItem;
 import blusunrize.immersiveengineering.common.items.WireCoilItem;
-import com.chen1335.registrate.IERegistrate;
 import com.chen1335.immersiveMechanical.API.tags.IMItemTags;
+import com.chen1335.immersiveMechanical.common.items.misc.Landmine;
 import com.chen1335.immersiveMechanical.common.wires.IMWireTypes;
+import com.chen1335.registrate.IERegistrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.Item;
@@ -28,6 +29,10 @@ public class IMItems {
             .register();
 
     public static final ItemEntry<Item> NICHROME_WIRE_COIL = REGISTRATE.item("nichrome_wire_coil", Item::new)
+            .register();
+
+    public static final ItemEntry<Landmine> LANDMINE = REGISTRATE.item("landmine", Landmine::new)
+            .model((c,p)->{})
             .register();
 
     public static void register(IEventBus modEventBus) {

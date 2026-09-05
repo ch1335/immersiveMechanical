@@ -5,6 +5,8 @@
   "block.immersive_mechanical.flywheel": "飞轮",
   "block.immersive_mechanical.flywheel_endpoint": "飞轮端点",
   "block.immersive_mechanical.bearing": "轴",
+  "entity.immersive_mechanical.landmine": "地雷",
+  "item.immersive_mechanical.landmine": "地雷",
 
   "block.immersive_mechanical.connector_ehv": "超高压接线器",
   "block.immersive_mechanical.turret_laser": "高能激光炮塔",

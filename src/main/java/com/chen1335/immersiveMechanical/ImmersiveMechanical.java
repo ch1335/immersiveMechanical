@@ -64,7 +64,7 @@ public class ImmersiveMechanical {
         IMItems.init();
         IMBlocks.init();
         IMMultiblocks.init();
-
+        IMEntityTypes.init();
         modContainer.registerConfig(ModConfig.Type.SERVER, IMServerConfig.CONFIG_SPEC);
         IMServerConfig.MACHINES.setUpConfig();
 

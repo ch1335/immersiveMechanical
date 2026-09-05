@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-03T21:33:15.3490868	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
+// 1.21.1	2026-09-05T16:00:42.6086776	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
 d0d905d203268da4b2a1e1cda3589be0c85d1988 assets/immersive_mechanical/blockstates/chrome_ore.json
 a9b257ff24866f70ddb387ae0e3ae27a5eddf8f8 assets/immersive_mechanical/blockstates/coil.json
 5b238d210400d0d3abd853d3049cf93c6876d20a assets/immersive_mechanical/blockstates/coil_nichrome.json
@@ -38,6 +38,7 @@ ec70e927720b41390770354e23fe89e79898877b assets/immersive_mechanical/models/dyna
 ced41ce2c486499f44eba707cd4cae0d7a5fadff assets/immersive_mechanical/models/dynamic/flywheel_endpoint.json
 e3247644d7ee8b88a0336632c1b2057651af6697 assets/immersive_mechanical/models/dynamic/green_house.json
 b416c70a76324d20b72c4eb7f200e62413d3c51b assets/immersive_mechanical/models/dynamic/industrial_furnaces.json
+53c1b58df4bdf0e7dfea17314000dea0d6889435 assets/immersive_mechanical/models/dynamic/landmine.json
 413d663af3015b3b3de134c05896257925d42702 assets/immersive_mechanical/models/dynamic/large_battery.json
 0b1c4a1ca2a4ecbf5ec7a69f144cd0cef7d915d1 assets/immersive_mechanical/models/dynamic/laser_turret.json
 5be51285775fe6f9b33f4e6d891c2b7c63bdab1d assets/immersive_mechanical/models/dynamic/pyrolyse_oven.json
@@ -60,6 +61,7 @@ b5180bf679a5083509d5d0518a1b6e37d62803fd assets/immersive_mechanical/models/item
 c41654f92db205087b94526f81c5ef3bedfe90f6 assets/immersive_mechanical/models/item/industrial_furnaces.json
 e7a14ef00eae8954f014cc5f5e524c5459a199cb assets/immersive_mechanical/models/item/ingot_chrome.json
 67ac1714d4b3a788a6fb60d52ed8b9c21482996e assets/immersive_mechanical/models/item/ingot_nichrome.json
+1984b7dceb5046e0bc12f673cdcf437e28881539 assets/immersive_mechanical/models/item/landmine.json
 b63d2fd67df6a37029c6bb91b27bbd0fab718a09 assets/immersive_mechanical/models/item/large_battery.json
 a2fb2ab770c0a8b844d986abb2b0e4898c32d935 assets/immersive_mechanical/models/item/large_battery_core.json
 b63d2fd67df6a37029c6bb91b27bbd0fab718a09 assets/immersive_mechanical/models/item/large_battery_demo.json

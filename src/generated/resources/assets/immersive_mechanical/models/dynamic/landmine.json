@@ -1,0 +1,8 @@
+{
+  "callbacks": "immersive_mechanical:landmine",
+  "layers": [
+    "translucent"
+  ],
+  "loader": "immersiveengineering:ie_obj",
+  "model": "immersive_mechanical:models/entity/landmine/landmine.obj.ie"
+}

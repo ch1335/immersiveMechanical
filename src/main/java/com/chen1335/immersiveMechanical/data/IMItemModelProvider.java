@@ -1,7 +1,9 @@
 package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.models.callbacks.entity.LandmineCallBacks;
 import com.chen1335.immersiveMechanical.definitions.IMBlocks;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.registrate.devData.IEItemModelProvider;
 import net.minecraft.client.renderer.RenderType;
@@ -34,6 +36,15 @@ public class IMItemModelProvider {
         provider.obj(IMMultiblocks.FLYWHEEL_ENDPOINT.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/flywheel/endpoint.obj.ie")).transforms(ImmersiveMechanical.id("item/flywheel/endpoint"));
         provider.obj(IMMultiblocks.FLYWHEEL.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/flywheel/flywheel.obj")).transforms(ImmersiveMechanical.id("item/flywheel/flywheel"));
         provider.obj(IMMultiblocks.BEARING.getBlockItem(), ImmersiveMechanical.id("block/metal_multiblock/flywheel/bearing.obj")).transforms(ImmersiveMechanical.id("item/flywheel/flywheel"));
+
+        provider.ieObjBuilder(
+                        IMItems.LANDMINE.asItem(),
+                        ImmersiveMechanical.id("entity/landmine/landmine.obj.ie")
+                )
+                .layer(RenderType.translucent())
+                .callback(LandmineCallBacks.INSTANCE)
+                .end()
+                .transforms(ImmersiveMechanical.id("item/landmine"));
 
     }
 }

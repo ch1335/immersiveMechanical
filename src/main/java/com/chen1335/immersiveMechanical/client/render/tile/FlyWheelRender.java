@@ -39,7 +39,7 @@ public class FlyWheelRender extends IEMultiblockRenderer<FlyWheelLogic.State> {
     @Override
     public void render(@NotNull IMultiblockContext<FlyWheelLogic.State> ctx, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferIn, int packedLight, int combinedOverlayIn) {
         if (MODEL == null) {
-            MODEL = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getModelManager().getModel(MODEL_RESOURCE_LOCATION);
+            MODEL = Minecraft.getInstance().getModelManager().getModel(MODEL_RESOURCE_LOCATION);
         }
 
         List<BakedQuad> quads = MODEL.getQuads(null, null, ApiUtils.RANDOM_SOURCE, ModelDataUtils.single(FlyWheelCallBacks.getProperty(), ctx.getState().getMaterial()), RenderType.SOLID);

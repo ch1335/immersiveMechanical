@@ -10,6 +10,8 @@ import com.chen1335.immersiveMechanical.client.models.callbacks.CoilCallbacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.EndPointCallBacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.FlyWheelCallBacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
+import com.chen1335.immersiveMechanical.client.models.callbacks.entity.LandmineCallBacks;
+import com.chen1335.immersiveMechanical.client.render.entity.LandmineRender;
 import com.chen1335.immersiveMechanical.client.render.tile.BearingRender;
 import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
 import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelRender;
@@ -35,6 +37,7 @@ public class IMClient {
         IEOBJCallbacks.register(rl("coil"), CoilCallbacks.INSTANCE);
         IEOBJCallbacks.register(rl("flywheel"), FlyWheelCallBacks.INSTANCE);
         IEOBJCallbacks.register(rl("end_point"), EndPointCallBacks.INSTANCE);
+        IEOBJCallbacks.register(rl("landmine"), LandmineCallBacks.INSTANCE);
     }
 
     static {
@@ -42,6 +45,7 @@ public class IMClient {
         IEApi.renderCacheClearers.add(FlyWheelCoilRender::reset);
         IEApi.renderCacheClearers.add(FlyWheelRender::reset);
         IEApi.renderCacheClearers.add(BearingRender::reset);
+        IEApi.renderCacheClearers.add(LandmineRender::reset);
     }
 
     private static ResourceLocation rl(String s) {

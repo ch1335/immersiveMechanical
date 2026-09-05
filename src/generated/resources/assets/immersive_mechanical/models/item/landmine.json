@@ -1,0 +1,124 @@
+{
+  "callbacks": "immersive_mechanical:landmine",
+  "display": {
+    "firstperson_lefthand": {
+      "rotation": [
+        0.0,
+        -90.0,
+        0.0
+      ],
+      "scale": [
+        0.3749999,
+        0.3749999,
+        -0.37499988
+      ],
+      "translation": [
+        -1.5000005,
+        6.4999995,
+        2.9999995
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0.0,
+        90.0,
+        0.0
+      ],
+      "scale": [
+        0.3749999,
+        0.3749999,
+        0.37499988
+      ],
+      "translation": [
+        -1.5000005,
+        6.4999995,
+        3.0000005
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0.0,
+        0.0,
+        -44.999973
+      ],
+      "scale": [
+        0.43749976,
+        0.43749976,
+        0.43749976
+      ],
+      "translation": [
+        2.9999988,
+        0.99999976,
+        2.499999
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "translation": [
+        4.0,
+        4.0,
+        4.0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        180.0,
+        -56.24998,
+        157.49995
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.7499999
+      ],
+      "translation": [
+        -8.000001,
+        -0.8000009,
+        -4.7683716E-7
+      ]
+    },
+    "thirdperson_lefthand": {
+      "right_rotation": [
+        90.0,
+        -9.999998,
+        0.0
+      ],
+      "scale": [
+        -0.375,
+        0.375,
+        0.375
+      ],
+      "translation": [
+        3.0,
+        -2.0,
+        4.0
+      ]
+    },
+    "thirdperson_righthand": {
+      "right_rotation": [
+        90.0,
+        9.999998,
+        0.0
+      ],
+      "scale": [
+        0.375,
+        0.375,
+        0.375
+      ],
+      "translation": [
+        3.0,
+        -2.0,
+        4.0
+      ]
+    }
+  },
+  "layers": [
+    "translucent"
+  ],
+  "loader": "immersiveengineering:ie_obj",
+  "model": "immersive_mechanical:models/entity/landmine/landmine.obj.ie"
+}

@@ -1,6 +1,7 @@
 package com.chen1335.immersiveMechanical.client;
 
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.render.entity.LandmineRender;
 import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
 import com.chen1335.immersiveMechanical.client.render.tile.LaserTurretRender;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
@@ -27,8 +28,7 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void registerModels(ModelEvent.RegisterAdditional event) {
-            event.register(LaserTurretRender.MODEL_RESOURCE_LOCATION);
-            event.register(FlyWheelCoilRender.MODEL_RESOURCE_LOCATION);
+            event.register(LandmineRender.MODEL_RESOURCE_LOCATION);
         }
 
         @SubscribeEvent
