@@ -25,6 +25,7 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
@@ -135,11 +136,16 @@ public class GreenHouseRender extends IEMultiblockRenderer<GreenHouseLogic.State
                 }
 
 
-                int col = ClientUtils.mc().getBlockColors().getColor(blockState, null, state.masterBlockPose, -1);
+                int color = ClientUtils.mc().getBlockColors().getColor(blockState, ctx.getLevel().getRawLevel(), state.masterBlockPose, -1);
                 matrixStack.pushTransformation(block.getSecond());
-                RenderUtils.renderModelTESRFancy(
-                        plantQuadList, baseBuilder, matrixStack, ctx.getLevel().getRawLevel(), state.masterBlockPose, false, col, combinedLightIn
-                );
+
+
+                float red = (color >> 16 & 255) / 255F;
+                float green = (color >> 8 & 255) / 255F;
+                float blue = (color & 255) / 255F;
+                for (BakedQuad quad : plantQuadList)
+                    baseBuilder.putBulkData(matrixStack.last(), quad, red, green, blue, 1, combinedLightIn, OverlayTexture.NO_OVERLAY);
+
                 matrixStack.popPose();
             }
 
@@ -149,10 +155,7 @@ public class GreenHouseRender extends IEMultiblockRenderer<GreenHouseLogic.State
             };
             recipe.renderFunction.injectQuads(seed, growth, quadInjector);
             if (!injectedQuadList.isEmpty())
-                RenderUtils.renderModelTESRFancy(
-                        injectedQuadList, baseBuilder, matrixStack, ctx.getLevel().getRawLevel(), state.masterBlockPose, false, -1, combinedLightIn
-                );
-
+                RenderUtils.renderModelTESRFast(injectedQuadList, baseBuilder, matrixStack, -1, combinedLightIn, OverlayTexture.NO_OVERLAY);
             matrixStack.popPose();
         }
     }

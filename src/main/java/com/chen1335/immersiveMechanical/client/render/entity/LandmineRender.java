@@ -2,6 +2,7 @@ package com.chen1335.immersiveMechanical.client.render.entity;
 
 import blusunrize.immersiveengineering.api.ApiUtils;
 import blusunrize.immersiveengineering.api.utils.client.ModelDataUtils;
+import blusunrize.immersiveengineering.client.ClientUtils;
 import blusunrize.immersiveengineering.client.utils.RenderUtils;
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
 import com.chen1335.immersiveMechanical.client.models.callbacks.LandmineCallBacks;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +51,8 @@ public class LandmineRender extends EntityRenderer<Landmine> {
         }
 
         VertexConsumer buffer = bufferSource.getBuffer(RenderType.cutout());
-        RenderUtils.renderModelTESRFast(quads, buffer, poseStack, packedLight, packedLight);
+        int col = ClientUtils.mc().getBlockColors().getColor(landmine.getDisguise(), landmine.level(), landmine.blockPosition(), 0);
+        RenderUtils.renderModelTESRFast(quads, buffer, poseStack, col, packedLight, OverlayTexture.NO_OVERLAY);
     }
 
     public static void reset() {

@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-05T23:23:15.9644136	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
+// 1.21.1	2026-09-05T23:51:52.8729325	Registrate Provider for immersive_mechanical [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (enchantments), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Block States: immersive_mechanical, Multiblock models/block states, Dynamic models, Item models, Sound Definitions, Tags for minecraft:damage_type mod id immersive_mechanical]
 d0d905d203268da4b2a1e1cda3589be0c85d1988 assets/immersive_mechanical/blockstates/chrome_ore.json
 a9b257ff24866f70ddb387ae0e3ae27a5eddf8f8 assets/immersive_mechanical/blockstates/coil.json
 5b238d210400d0d3abd853d3049cf93c6876d20a assets/immersive_mechanical/blockstates/coil_nichrome.json
@@ -164,7 +164,7 @@ f34b871141e2a20bd4611b11c8827639f9c09ad4 data/immersive_mechanical/recipe/crushe
 903b311e82cf51b8964c67d8f65516b4a7ff8be2 data/immersive_mechanical/recipe/industrial_furnace/industrial_furnace/raw_chrome.json
 768dd9d64e8631a495e62e7d4ff0461c5b3f1828 data/immersive_mechanical/recipe/ingot_chrome.json
 8a71b890b7fc470779e49e5ffa7e999b50383493 data/immersive_mechanical/recipe/ingot_nichrome.json
-499199e8ecf5ea7ab0b52976833a48455d802c6a data/immersive_mechanical/recipe/landmine.json
+f2ff12aba133adc88cc56dc53e31f3b5ccf13413 data/immersive_mechanical/recipe/landmine.json
 55f9a0522815fae935be71cc8c9b42ffceeb5945 data/immersive_mechanical/recipe/large_battery_core.json
 7fe454a359b0d04f5cf71ef7a231cbf1fe4dabdf data/immersive_mechanical/recipe/metalpress/plate_chrome.json
 e4d76cf630d8dd98b2657fc2c39cafaaa4ecba4c data/immersive_mechanical/recipe/metalpress/plate_nichrome.json
