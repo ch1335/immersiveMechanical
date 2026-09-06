@@ -11,10 +11,7 @@ import com.chen1335.immersiveMechanical.client.models.callbacks.FlyWheelCallBack
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.LandmineCallBacks;
 import com.chen1335.immersiveMechanical.client.render.entity.LandmineRender;
-import com.chen1335.immersiveMechanical.client.render.tile.BearingRender;
-import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
-import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelRender;
-import com.chen1335.immersiveMechanical.client.render.tile.GreenHouseRender;
+import com.chen1335.immersiveMechanical.client.render.tile.*;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.modularFlywheel.FlywheelMaterial;
 import com.chen1335.immersiveMechanical.config.IMServerConfig;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
@@ -40,6 +37,7 @@ public class IMClient {
     }
 
     static {
+        IEApi.renderCacheClearers.add(LaserTurretRender::reset);
         IEApi.renderCacheClearers.add(GreenHouseRender::reset);
         IEApi.renderCacheClearers.add(FlyWheelCoilRender::reset);
         IEApi.renderCacheClearers.add(FlyWheelRender::reset);
@@ -76,5 +74,9 @@ public class IMClient {
             }
             return new Component[][]{};
         });
+    }
+
+    public static void submitTask(Runnable runnable) {
+        Minecraft.getInstance().submit(runnable);
     }
 }

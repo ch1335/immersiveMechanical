@@ -30,6 +30,7 @@ import java.awt.*;
 
 public class LaserTurretRender extends IEBlockEntityRenderer<TurretLaserBlockEntity> {
     public static final ModelResourceLocation MODEL_RESOURCE_LOCATION = new ModelResourceLocation(ImmersiveMechanical.id("dynamic/laser_turret"), "standalone");
+    private static BakedModel MODEL = null;
 
     public LaserTurretRender(BlockEntityRendererProvider.Context context) {
 
@@ -41,8 +42,9 @@ public class LaserTurretRender extends IEBlockEntityRenderer<TurretLaserBlockEnt
             return;
 
         BlockState state = tile.getBlockState();
-        BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getModelManager().getModel(MODEL_RESOURCE_LOCATION);
-
+        if (MODEL == null) {
+            MODEL = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getModelManager().getModel(MODEL_RESOURCE_LOCATION);
+        }
         poseStack.pushPose();
         poseStack.translate(.5, .5, .5);
 
@@ -55,7 +57,7 @@ public class LaserTurretRender extends IEBlockEntityRenderer<TurretLaserBlockEnt
 
         RenderSystem.setShaderTexture(0, ImmersiveMechanical.id("textures/misc/laser.png"));
 
-        TurretRenderer.renderModelPart(bufferSource, poseStack, tile.getLevelNonnull(), state, model, tile.getBlockPos(), true, packedLight, "gun");
+        TurretRenderer.renderModelPart(bufferSource, poseStack, tile.getLevelNonnull(), state, MODEL, tile.getBlockPos(), true, packedLight, "gun");
 
         ResourceLocation laser = ImmersiveMechanical.id("textures/misc/laser.png");
         if (tile.isActive) {
@@ -66,6 +68,10 @@ public class LaserTurretRender extends IEBlockEntityRenderer<TurretLaserBlockEnt
         }
 
         poseStack.popPose();
+    }
+
+    public static void reset() {
+        MODEL = null;
     }
 
     public static void renderBeam(

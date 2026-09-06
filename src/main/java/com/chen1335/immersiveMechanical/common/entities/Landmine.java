@@ -1,14 +1,17 @@
 package com.chen1335.immersiveMechanical.common.entities;
 
+import com.chen1335.immersiveMechanical.util.SimpleSchedule;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.phys.AABB;
 
 import java.util.List;
@@ -26,6 +29,8 @@ Landmine extends Entity {
         blocksBuilding = true;
     }
 
+    private boolean triggered = false;
+
     @Override
     public void tick() {
         super.tick();
@@ -38,21 +43,36 @@ Landmine extends Entity {
         }
         this.move(MoverType.SELF, this.getDeltaMovement());
 
-        if (!level().isClientSide) {
+        if (!triggered) {
             List<Entity> entities = level().getEntities(this, getFuseAABB(), entity -> {
+                if (entity.isSpectator()) {
+                    return false;
+                }
                 EntityDimensions dimensions = entity.getType().getDimensions();
                 return dimensions.width() * dimensions.height() > 1;
             });
+
             if (!entities.isEmpty()) {
-                this.level().explode(
-                        this,
-                        getX(),
-                        getY(),
-                        getZ(),
-                        3,
-                        Level.ExplosionInteraction.NONE);
-                this.discard();
+                triggered = true;
+                level().playSound(null, getX(), getY(), getZ(), BlockSetType.IRON.pressurePlateClickOff(), SoundSource.HOSTILE);
+                if (!level().isClientSide) {
+                    SimpleSchedule.addSchedule(level(), new SimpleSchedule.Wait(this::doExplode, 4));
+                }
             }
+        }
+
+    }
+
+    private void doExplode() {
+        if (!isRemoved()) {
+            this.level().explode(
+                    this,
+                    getX(),
+                    getY(),
+                    getZ(),
+                    3,
+                    Level.ExplosionInteraction.NONE);
+            this.discard();
         }
     }
 

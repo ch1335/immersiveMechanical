@@ -19,6 +19,7 @@ import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
 import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
