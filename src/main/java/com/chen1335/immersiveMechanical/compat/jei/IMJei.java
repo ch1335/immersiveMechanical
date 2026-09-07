@@ -13,19 +13,25 @@ import com.chen1335.immersiveMechanical.compat.jei.categories.GeneratorFuelCateg
 import com.chen1335.immersiveMechanical.compat.jei.categories.IndustrialFurnaceCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.MineralMixCategory;
 import com.chen1335.immersiveMechanical.compat.jei.categories.PyrolyseOvenCategory;
+import com.chen1335.immersiveMechanical.compat.jei.extensions.LandmineDisguiseCraftingExtension;
+import com.chen1335.immersiveMechanical.definitions.IMItems;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.immersiveMechanical.definitions.IMRecipe;
 import com.chen1335.immersiveMechanical.recipe.IndustrialFurnaceRecipe;
+import com.chen1335.immersiveMechanical.recipe.LandmineDisguiseRecipe;
 import com.chen1335.immersiveMechanical.recipe.PyrolyseOvenRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
+import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -47,6 +53,29 @@ public class IMJei implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
         return ID;
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        registration.registerSubtypeInterpreter(IMItems.LANDMINE.get(), new ISubtypeInterpreter<>() {
+            @Override
+            public Object getSubtypeData(ItemStack stack, UidContext context) {
+                return stack.getComponentsPatch();
+            }
+
+            @Override
+            public String getLegacyStringSubtypeInfo(ItemStack stack, UidContext context) {
+                return stack.getComponentsPatch().toString();
+            }
+        });
+    }
+
+    @Override
+    public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
+        registration.getCraftingCategory().addExtension(
+                LandmineDisguiseRecipe.class,
+                new LandmineDisguiseCraftingExtension(registration.getJeiHelpers().getIngredientManager().getAllItemStacks())
+        );
     }
 
     @Override

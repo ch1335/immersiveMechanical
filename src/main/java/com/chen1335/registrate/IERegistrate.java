@@ -143,6 +143,7 @@ public class IERegistrate extends AbstractRegistrate<IERegistrate> {
         return entry(name, callBack -> new RecipeBuilder<>(this, this, name, callBack, clazz, supplier));
     }
 
+
     public List<MultiblockHandler.IMultiblock> getMultiblocks() {
         return multiblocks;
     }
