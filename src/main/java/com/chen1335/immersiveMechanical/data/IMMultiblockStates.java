@@ -2,6 +2,7 @@ package com.chen1335.immersiveMechanical.data;
 
 import com.chen1335.immersiveMechanical.client.models.callbacks.CoilCallbacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.EndPointCallBacks;
+import com.chen1335.immersiveMechanical.client.models.callbacks.FlyWheelCallBacks;
 import com.chen1335.immersiveMechanical.client.models.callbacks.GreenHouseCallbacks;
 import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
 import com.chen1335.registrate.devData.IEMultiblockStatesProvider;
@@ -36,14 +37,6 @@ public class IMMultiblockStates {
                         .layer(solid())
                         .end(),
                 IMMultiblocks.COIL.multiblock()
-        );
-
-        provider.createDynamicMultiblock(
-                provider.ieObjBuilder("block/metal_multiblock/coil_vertical.obj.ie", provider.innerModels)
-                        .callback(CoilCallbacks.INSTANCE)
-                        .layer(solid())
-                        .end(),
-                IMMultiblocks.COIL_VERTICAL.multiblock()
         );
     }
 

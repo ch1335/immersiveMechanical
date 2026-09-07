@@ -2,6 +2,7 @@ package com.chen1335.immersiveMechanical.common.blocks.multiblocks.templateMulti
 
 import blusunrize.immersiveengineering.api.multiblocks.BlockMatcher;
 import blusunrize.immersiveengineering.api.multiblocks.blocks.MultiblockRegistration;
+import blusunrize.immersiveengineering.api.multiblocks.blocks.logic.IMultiblockBE;
 import blusunrize.immersiveengineering.api.utils.DirectionUtils;
 import com.chen1335.registrate.SimpleMultiblock;
 import com.google.common.collect.ImmutableList;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
@@ -48,6 +50,14 @@ public class TestAbleTemplateMultiblock extends SimpleMultiblock {
         return false;
     }
 
+    public BlockPos getMasterPose(Level level, BlockPos blockPos) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof IMultiblockBE<?> be) {
+            return be.getHelper().getContext().getLevel().toAbsolute(be.getHelper().getPositionInMB());
+        } else {
+            return blockPos;
+        }
+    }
 
     private List<Mirror> getPossibleMirrorStates() {
         if (canBeMirrored())

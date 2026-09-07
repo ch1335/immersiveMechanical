@@ -1,13 +1,18 @@
 package com.chen1335.immersiveMechanical.client;
 
 import com.chen1335.immersiveMechanical.ImmersiveMechanical;
+import com.chen1335.immersiveMechanical.client.models.model.FlyWheelParticleModel;
 import com.chen1335.immersiveMechanical.client.render.entity.LandmineRender;
 import com.chen1335.immersiveMechanical.client.render.tile.FlyWheelCoilRender;
 import com.chen1335.immersiveMechanical.client.render.tile.LaserTurretRender;
 import com.chen1335.immersiveMechanical.common.blocks.multiblocks.logic.coil.CoilInfo;
 import com.chen1335.immersiveMechanical.definitions.IMBlockEntityTypes;
+import com.chen1335.immersiveMechanical.definitions.IMMultiblocks;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -46,6 +51,21 @@ public class ClientEventHandler {
         @SubscribeEvent
         public static void ClientTickEvent(ClientTickEvent.Post event) {
             IMClient.TICKED++;
+        }
+
+        @SubscribeEvent
+        public static void ModifyBakingResult(ModelEvent.ModifyBakingResult event) {
+            Block flywheel = IMMultiblocks.FLYWHEEL.getBlock();
+
+            for (BlockState state : flywheel.getStateDefinition().getPossibleStates()) {
+                ModelResourceLocation location =
+                        BlockModelShaper.stateToModelLocation(state);
+
+                event.getModels().computeIfPresent(
+                        location,
+                        (key, original) -> new FlyWheelParticleModel(original)
+                );
+            }
         }
     }
 }
